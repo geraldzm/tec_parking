@@ -7,6 +7,7 @@ export class ParkingRep {
         // this.log = new Logger();
     }
 
+    
     public getAllSpacesByBuilding(building: string): Promise<any> {
 
         throw new Error('Method not implemented.');
@@ -18,9 +19,9 @@ export class ParkingRep {
 
     public getAllSpaces(): Promise<any> {
          
-        return db.collection('ParkingLots')
+        return db.collection('users')
         .get()
-        .then(rs => rs.docs);
-     }
+        .then(rs => rs.docs[0]);
+    }
 
 }
