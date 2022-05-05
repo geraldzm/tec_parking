@@ -13,7 +13,7 @@ export class ParkingRep {
         return db.collection('ParkingLots')
         .where ('building','==', building)
         .get()
-        .then(rs => rs.docs.map((doc)=> ({
+        .then((rs:any) => rs.docs.map((doc:any)=> ({
             id: doc.id,
             ...doc.data(),
         })));
@@ -23,7 +23,7 @@ export class ParkingRep {
         
         return db.collection('ParkingLots')
         .get()
-        .then(rs => rs.docs.map((doc)=> ({
+        .then((rs:any) => rs.docs.map((doc:any)=> ({
             id: doc.id,
             ...doc.data(),
         })));
@@ -33,7 +33,7 @@ export class ParkingRep {
 
         return db.collection('ParkingLots')
         .add(parkinglot)
-        .then(rs => rs);
+        .then((rs:any) => rs);
     }
 
     public updateParkingLot(parkinglot : any, idParking : any) : Promise <any>{
@@ -41,7 +41,7 @@ export class ParkingRep {
         return db.collection('ParkingLots')
         .doc(idParking)
         .update(parkinglot)
-        .then(rs => rs);
+        .then((rs:any) => rs);
     }
     
 
@@ -50,7 +50,7 @@ export class ParkingRep {
         return db.collection('ParkingLots')
         .doc(idParking)
         .update({active : false})
-        .then(rs => rs);
+        .then((rs:any) => rs);
     }
     
 }

@@ -1,0 +1,12 @@
+export const status = {
+    OK: 200,
+    CREATED: 201,
+    NO_CONTENT: 204,
+    UNAUTHORIZED: 401,
+    BAD_REQUEST: 400,
+    FORBIDDEN: 403,
+    NOT_FOUND: 404,
+    CONFLICT: 409,
+    INVALID_MEDIA_TYPE: 415,
+    INTERNAL_ERROR: 500,
+};

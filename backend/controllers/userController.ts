@@ -1,4 +1,5 @@
 import { UserRep } from '../repository';
+import { encrypt } from '../utils/auth'
 
 export class UserController {
     
@@ -16,26 +17,31 @@ export class UserController {
         return this.instance;
     }
 
-    public registerUser(user : any) : Promise<any> 
+    public login(email:string, password:string) : Promise<any> 
     {
+        console.log("here");
+        return new Promise(async (rs, rj) => {
+            
+            const user = await this.rep.getUserByEmail(email);
 
-        var email = user.email.split("@");
-        console.log(email);
-        
-        //Check the domain in the main email 
-        if (email[1] != "itcr.ac.cr" && email[1] != "tec.ac.cr"){
-            throw new Error('main email does not have the correct domain');
-        }
+            if(!user) {
+                rj("No user found"); // reject 
+            }
+            
+            // compare passwords
+            const encryptedPassword = encrypt(password);
+            if(encryptedPassword !== user.password) {
+                rj("Incorrect password"); // reject
+            }
 
-        //Validar
-        return this.rep.register(user);
+            // create token 
+            const authToken = 'my-example-token'; // temporary
+
+            // save token in DB 
+            this.rep.saveUserToken(user.id, authToken);
+
+            rs(authToken);
+        });
     }
 
-
-    //Definir mejor, es solo un adelanto
-    //data has email and password
-    public login (data : any) : Promise <any>
-    {
-        return this.rep.login(data);
-    }
 }

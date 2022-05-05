@@ -1,12 +1,11 @@
 import * as express from 'express';
-import * as morgan from 'morgan';
+import morgan = require("morgan");
 import Routes from './routes/routes'
 
 
 class App {
 
     public express: express.Application;
-    private saludos:string[];
 
     constructor() {
         this.express = express();

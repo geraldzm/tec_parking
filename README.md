@@ -31,7 +31,7 @@ requires token and admin role
 | `name`      | `string` | **Required**. |
 | `email`      | `string` | **Required**. |
 | `secondEmail`      | `string` | **Required**. |
-| `useSecondEmailAsFavorite`      | `string` | **Required**. |
+| `useSecondEmailAsFavorite`      | `bool` | **Required**. |
 | `phone`      | `int` | **Required**. |
 | `idNumber`      | `string` | **Required**. |
 | `area`      | `string` | **Required**. |

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { parkingRouter } from './parkingRouter';
-import { userRouter } from './userRouter';
+import { userAuthRouter } from './userAuthRouter';
 
 class Routes {
 
@@ -21,7 +21,7 @@ class Routes {
 
     private routes(): void {
         this.express.use('/parking', parkingRouter);
-        this.express.use('/user', userRouter);
+        this.express.use('/auth', userAuthRouter);
         // this.logger.info("route loaded");
     }
 }

@@ -1,31 +1,35 @@
-import db from '../firebase'
+// import db from '../firebase'
 
 export class UserRep {
-
-
+ 
     public constructor() {
         // this.log = new Logger();
     }
 
-    
-    public register(user : any) : Promise<any> {
 
-        return db.collection('Users')
-        .add(user)
-        .then(rs => rs);
+    saveUserToken(id: any, authToken: string) {
+        console.log(`save ${id}, ${authToken}`)
     }
 
 
-    public login(data : any) : Promise<any> {
-        
-        return db.collection('Users')
-        .where ('email','==', data.email)
-        .get()
-        .then(rs => rs.docs.map((doc)=> ({
-            id: doc.id,
-            ...doc.data(),
-        })));
+    getUserByEmail(email: string): Promise<any> {
+        return new Promise((rs, rj) => rs({email: "gerald@gmail.com", password: "R1ttI7iZ8LeuAHW8G7UfMp3RsJbPII5ugmdMUQCprg0="})); // example
     }
 
+    public getUserById(userId:string): Promise<any> {
+        throw new Error('Method not implemented.');
+    }
+
+    public saveUser(): Promise<any> {
+        throw new Error('Method not implemented.');
+    }
+
+    public deleteUser(userId:string): Promise<any> {
+        throw new Error('Method not implemented.');
+    }
+
+    public updateUserInfo(): Promise<any> {
+        throw new Error('Method not implemented.');
+    }
 
 }
