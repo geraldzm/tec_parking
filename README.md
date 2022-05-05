@@ -98,7 +98,7 @@ optional token and admin role
 | Request | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required**. |
-| `delete`      | `boolena` | **Required**. |
+| `delete`      | `boolean` | **Required**. |
 | `building`      | `string` | **Required**. |
 | `name`      | `string` | **Required**. |
 | `disabledSpaces`      | `int` | **Required**. |

@@ -10,18 +10,53 @@ export class ParkingRep {
     
     public getAllSpacesByBuilding(building: string): Promise<any> {
 
-        throw new Error('Method not implemented.');
-        // EN MONGO, no sé como es en firebase aun xd:
-        //    return db.collection('ParkingLots')
-        //    .find({ building: building })
-        //    .then(rs => rs.docs);
+        console.log(building);
+
+        return db.collection('ParkingLots')
+        .where ('building','==', building)
+        .get()
+        .then(rs => rs.docs.map((doc)=> ({
+            id: doc.id,
+            ...doc.data(),
+        })));
     }
 
     public getAllSpaces(): Promise<any> {
-         
-        return db.collection('users')
+        
+        return db.collection('ParkingLots')
         .get()
-        .then(rs => rs.docs[0]);
+        .then(rs => rs.docs.map((doc)=> ({
+            id: doc.id,
+            ...doc.data(),
+        })));
     }
 
+    public createParkingLot(parkinglot : any) : Promise <any>{
+
+        return db.collection('ParkingLots')
+        .add(parkinglot)
+        .then(rs => rs);
+    }
+
+    public updateParkingLot(parkinglot : any, idParking : any) : Promise <any>{
+
+
+        console.log(parkinglot);
+        console.log(idParking);
+       
+        return db.collection('ParkingLots')
+        .doc(idParking)
+        .update(parkinglot)
+        .then(rs => rs);
+    }
+    
+
+    public deleteParkingLot(idParking : any) : Promise <any>{
+
+        return db.collection('ParkingLots')
+        .doc(idParking)
+        .update({active : false})
+        .then(rs => rs);
+    }
+    
 }
