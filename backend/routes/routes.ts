@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { parkingRouter } from './parkingRouter';
+import { userRouter } from './userRouter';
 
 class Routes {
 
@@ -20,6 +21,7 @@ class Routes {
 
     private routes(): void {
         this.express.use('/parking', parkingRouter);
+        this.express.use('/user', userRouter);
         // this.logger.info("route loaded");
     }
 }

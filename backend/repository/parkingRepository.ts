@@ -10,8 +10,6 @@ export class ParkingRep {
     
     public getAllSpacesByBuilding(building: string): Promise<any> {
 
-        console.log(building);
-
         return db.collection('ParkingLots')
         .where ('building','==', building)
         .get()
@@ -39,10 +37,6 @@ export class ParkingRep {
     }
 
     public updateParkingLot(parkinglot : any, idParking : any) : Promise <any>{
-
-
-        console.log(parkinglot);
-        console.log(idParking);
        
         return db.collection('ParkingLots')
         .doc(idParking)
