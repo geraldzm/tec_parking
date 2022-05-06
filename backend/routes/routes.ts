@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { parkingRouter } from './parkingRouter';
 import { userAuthRouter } from './userAuthRouter';
+import { tokenMiddlewareValidation } from '../utils/middlewareAuth';
 
 class Routes {
 
@@ -20,7 +21,7 @@ class Routes {
     }
 
     private routes(): void {
-        this.express.use('/parking', parkingRouter);
+        this.express.use('/parking', tokenMiddlewareValidation, parkingRouter); // protected route
         this.express.use('/auth', userAuthRouter);
         // this.logger.info("route loaded");
     }

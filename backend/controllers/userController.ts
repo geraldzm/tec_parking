@@ -1,5 +1,5 @@
 import { UserRep } from '../repository';
-import { encrypt } from '../utils/auth'
+import { toSha256, createToken } from '../utils/auth'
 
 export class UserController {
     
@@ -19,28 +19,25 @@ export class UserController {
 
     public login(email:string, password:string) : Promise<any> 
     {
-        console.log("here");
         return new Promise(async (rs, rj) => {
             
             const user = await this.rep.getUserByEmail(email);
             console.log(user);
             if(!user) {
                 rj("No user found"); // reject 
-            }
-            
-            else{
+            } else {
 
                 // compare passwords
-                const encryptedPassword = encrypt(password);
+                const encryptedPassword = toSha256(password);
                 if(encryptedPassword !== user.password) {
                     rj("Incorrect password"); // reject
                 }
 
                 // create token 
-                const authToken = 'my-example-token'; // temporary
-                
+                const authToken = createToken({ sub: user.id, email: user.email, name: user.name });
+
                 // save token in DB 
-                this.rep.saveUserToken(user.id, authToken);
+                this.rep.saveUserToken(user.id, toSha256(authToken));
 
                 rs(authToken);
             }
@@ -65,7 +62,7 @@ export class UserController {
 
         
         //Encrypt the passcode and set the active field
-        user.password = encrypt(user.password);
+        user.password = toSha256(user.password);
         user.active = true;
 
         //Set by default a list of plates and schedule, both of them empty

@@ -9,11 +9,11 @@ const app = express();
 app.post("/register", (req, res, next) => {
     UserController.getInstance().registerUser(req.body["user"])
     .then((data : any)=>{
-        res.json(data);
+        res.sendStatus(status.OK);
     })
     .catch((err: any)=>{
         console.log(err);
-        res.sendStatus(500); // internal error
+        res.sendStatus(status.INTERNAL_ERROR); // internal error
     });
 });
 

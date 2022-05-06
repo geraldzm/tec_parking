@@ -6,12 +6,13 @@ export class UserRep {
         // this.log = new Logger();
     }
 
-
-
-    public saveUserToken(id: any, authToken: string) {
-        console.log(`save ${id}, ${authToken}`)
+    public saveUserToken(userId: string, authToken: string) {
+        return db.collection('Tokens')
+        .add({userId, authToken, exp:false})
+        .then((rs:any) => {
+            console.log('rs saveing token: ' + rs)
+        });
     }
-
 
     /**
     * Consult a user by email
@@ -44,16 +45,7 @@ export class UserRep {
         return db.collection('Users')
         .doc(userId)
         .get()
-        .then((doc : any) => {
-            if (doc.exists){
-                return {
-                    id : doc.id,
-                    ...doc.data()
-                }
-            }else{
-                return null;
-            }
-        });
+        .then((doc : any) => doc.exists ? { id : doc.id, ...doc.data()} : null);
     }
 
 
@@ -65,7 +57,9 @@ export class UserRep {
         
         return db.collection('Users')
         .add(user)
-        .then((rs:any) => rs);
+        .then((rs:any) => {
+            console.log('user saved: ' + rs);
+        });
     }
 
 
