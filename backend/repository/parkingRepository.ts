@@ -42,6 +42,18 @@ export class ParkingRep {
 
 
     /**
+    * Consult a parkinglot by Id
+    * @param {string} parkingId
+    */
+     public getParkingById(parkingId : string): Promise<any> {
+        return db.collection('ParkingLots')
+        .doc(parkingId)
+        .get()
+        .then((doc : any) => doc.exists ? { id : doc.id, ...doc.data()} : null);
+    }
+
+
+    /**
     * It must create a new Parkinglot
     * @param {Object} parkinglot { parkingLot }
     */

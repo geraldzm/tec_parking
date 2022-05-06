@@ -24,6 +24,30 @@ export class ReportController {
         return this.parkingRep.getAllSpaces();
     }
     
+
+    /**
+    * Get a parkinglot by Id
+    * @param {string} parkingId
+    */
+     public getParkingByID(parkingId : string) : Promise<any> 
+     {
+         return new Promise(async (rs, rj) => {
+ 
+             if (!parkingId || parkingId == ""){
+                 rj("Error Empty string"); //reject
+             }
+             else{
+                
+                const result = await this.parkingRep.getParkingById(parkingId);
+                
+                 if (!result){
+                     rj("No parkinglot found")
+                 }
+                 rs(result);
+             }
+         });
+     }
+
     //List all employees
     public listAllEmployees() : Promise<any> 
     {
@@ -32,7 +56,7 @@ export class ReportController {
 
 
     /**
-    * Get user info by Id
+    * Get user info by key from db
     * @param {string} employeeId
     */
     public getEmployeeByID(employeeId : string) : Promise<any> 
@@ -54,6 +78,30 @@ export class ReportController {
         });
     }
 
+
+    /**
+    * Get user info by idNumber
+    * @param {string} employeeIdNumber
+    */
+    public getEmployeeByIDNumber(employeeIdNumber : string) : Promise<any> 
+    {
+        return new Promise(async (rs, rj) => {
+
+            if (!employeeIdNumber || employeeIdNumber == ""){
+                rj("Error Empty string"); //reject
+            }
+            else{
+
+                const result = await this.userRep.getUserByIdNumber(employeeIdNumber);
+
+                if (!result){
+                    rj("No user found")
+                }
+                rs(result);
+            }
+        });
+    }   
+    
     
     //Get all users' time zones for the charts
     public getTimeZones() : Promise<any> 
