@@ -4,7 +4,7 @@ import { ParkingController } from '../controllers'
 const app = express();
 
 
-// endpoint: localhost:5000/api/parking/list
+// endpoint: localhost:port/api/parking/list
 app.get("/list", (req, res, next) => {
 
     ParkingController.getInstance().listAll()
@@ -18,7 +18,7 @@ app.get("/list", (req, res, next) => {
 });
 
 
-// endpoint: localhost:5000/api/parking/listbybuilding
+// endpoint: localhost:port/api/parking/listbybuilding
 app.post("/listbybuilding", (req, res, next) => {
 
     ParkingController.getInstance().listByBuilding(req.body["building"])
@@ -32,7 +32,7 @@ app.post("/listbybuilding", (req, res, next) => {
 });
 
 
-// endpoint: localhost:5000/api/parking/parkinglot
+// endpoint: localhost:port/api/parking/parkinglot
 app.post("/parkinglot", (req, res, next) => {
 
     ParkingController.getInstance().createParking(req.body["parkinglot"])
@@ -46,7 +46,7 @@ app.post("/parkinglot", (req, res, next) => {
 });
 
 
-// endpoint: localhost:5000/api/parking/delete
+// endpoint: localhost:port/api/parking/delete
 app.delete("/delete", (req, res, next) => {
 
     ParkingController.getInstance().deleteParking(req.body["idparking"])
@@ -60,7 +60,7 @@ app.delete("/delete", (req, res, next) => {
 });
 
 
-// endpoint: localhost:5000/api/parking/update
+// endpoint: localhost:port/api/parking/update
 app.post("/update", (req, res, next) => {
 
     ParkingController.getInstance().updateParking(req.body["parkinglot"])

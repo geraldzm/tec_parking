@@ -16,17 +16,41 @@ export class ParkingController {
         return this.instance;
     }
 
+    //List all parkinglots
     public listAll() : Promise<any> 
     {
         return this.rep.getAllSpaces();
     }
 
+
+    /**
+    * Consult a parkinglot by building
+    * @param {string} building
+    */
     public listByBuilding(building : string) : Promise<any> 
     {
-        return this.rep.getAllSpacesByBuilding(building);
+        return new Promise(async (rs, rj) => {
+            
+            if (!building){
+                rj("Error Empty string"); //reject
+            }
+            else{
+
+                const parking = await this.rep.getAllSpacesByBuilding(building);
+                
+                if(!parking) {
+                    rj("No parkinglot found"); // reject 
+                }
+                rs(parking);
+            }
+        });
     }
     
 
+    /**
+     * Controller Method to create a parkinglot
+     * @param {Object} parkinglot { parkinglot }
+     */
     public createParking(parkinglot : any) : Promise<any>
     {
         //validar
@@ -35,6 +59,10 @@ export class ParkingController {
     }
 
 
+    /**
+     * Controller Method to update a parkinglot
+     * @param {Object} parkinglot { parkinglot }
+     */
     public updateParking(parkinglot : any) : Promise<any>
     {
         //validar
@@ -46,9 +74,28 @@ export class ParkingController {
         return this.rep.updateParkingLot(parkinglot, idParking);
     }
 
-    public deleteParking(idParking : any) : Promise <any>
-    {
-        return this.rep.deleteParkingLot(idParking);
-    }
 
+    /**
+     * Controller Method to delete a parkinglot
+     * @param {string} idParking
+     */
+    public deleteParking(idParking : string) : Promise <any>
+    {   
+        return new Promise(async (rs, rj) => {
+            
+            if (!idParking || idParking == ""){
+                rj("Error Empty string"); //reject
+            }
+            else{
+
+                const result = await this.rep.deleteParkingLot(idParking);
+
+                if (result.code && result.code == 5){
+                    rj("No parkinglot found")
+                }
+
+                rs(result);
+            }
+        });
+    }
 }
