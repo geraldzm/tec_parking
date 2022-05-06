@@ -34,9 +34,9 @@ requires token and admin role
 | `useSecondEmailAsFavorite`      | `bool` | **Required**. |
 | `phone`      | `int` | **Required**. |
 | `idNumber`      | `string` | **Required**. |
-| `area`      | `string` | **Required**. |
+| `area`      | `{code : COM, name : Computación}` | **Required**. |
 | `password`      | `string` | **Required**. |
-
+| `role`      | `string` | **Required**. | 
 
 #### Post update
 ```
