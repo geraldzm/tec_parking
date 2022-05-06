@@ -14,13 +14,24 @@ export class UserRep {
         });
     }
 
+    //List all users from 'Users' collection in firebase db
+    public getAllUsers(): Promise<any> {
+
+        return db.collection('Users')
+            .get()
+            .then((rs: any) => rs.docs.map((doc: any) => ({
+                id: doc.id,
+                
+                ...doc.data(),
+            })));
+    }
+
     /**
-    * Consult a user by email
+    * Consult an user by email
     * @param {string} email
     */
     public getUserByEmail(email: string): Promise<any> {
-        //return new Promise((rs, rj) => rs({email: "gerald@gmail.com", password: "R1ttI7iZ8LeuAHW8G7UfMp3RsJbPII5ugmdMUQCprg0="})); // example
-
+        
         return db.collection('Users')
         .where('email', '==', email)
         .get()
@@ -38,7 +49,7 @@ export class UserRep {
 
 
     /**
-    * Consult a user by Id
+    * Consult an user by Id
     * @param {string} userId
     */
     public getUserById(userId : string): Promise<any> {
@@ -47,7 +58,6 @@ export class UserRep {
         .get()
         .then((doc : any) => doc.exists ? { id : doc.id, ...doc.data()} : null);
     }
-
 
     /**
     * Register a new User
@@ -95,6 +105,18 @@ export class UserRep {
         })
         .then((rs:any) => rs)
         .catch((error : any) => error);	
+    }
+
+
+    //Get only the time zones of currently active users
+    public listTimeZones() : Promise <any>{
+
+        return db.collection('Users')
+        .where('active', '==', true)
+        .get()
+        .then((rs: any) => rs.docs.map((doc: any) => ({
+            ...doc.data().schedule,
+        })));
     }
 
 }
