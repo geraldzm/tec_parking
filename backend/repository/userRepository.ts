@@ -60,13 +60,48 @@ export class UserRep {
     }
 
     /**
+    * Consult an user by IdNumber
+    * @param {string} userIdNumber
+    */
+     public getUserByIdNumber(userIdNumber : string): Promise<any> {
+        
+        return db.collection('Users')
+        .where('idNumber', '==', userIdNumber)
+        .get()
+        .then((rs:any) => {
+            if (rs.docs[0]){
+                return {
+                    id : rs.docs[0].id,
+                    ...rs.docs[0].data()
+                }
+            }else{
+                return null;
+            }
+        });
+    }
+    
+
+    /**
     * Register a new User
     * @param {Object} user { user }
     */
     public saveUser(user : any): Promise<any> {
         
         return db.collection('Users')
-        .add(user)
+        .add({
+            name: user.name,
+            email: user.email,
+            secondEmail: user.secondEmail, 
+            phone: user.phone,
+            idNumber: user.idNumber,
+            useSecondEmailAsFavorite: user.useSecondEmailAsFavorite,
+            area: user.area,
+            password: user.password,
+            role: user.role,
+            active: user.active,
+            schedule: user.schedule,
+            plates: user.plates
+        })
         .then((rs:any) => {
             console.log('user saved: ' + rs);
         });

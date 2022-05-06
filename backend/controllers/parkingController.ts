@@ -31,7 +31,7 @@ export class ParkingController {
     {
         return new Promise(async (rs, rj) => {
             
-            if (!building){
+            if (!building || building == ""){
                 rj("Error Empty string"); //reject
             }
             else{

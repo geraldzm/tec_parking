@@ -52,24 +52,64 @@ export class UserController {
     public registerUser(user : any) : Promise<any>
     {
 
-        /*
-        var email = user.email.split("@");
-        
-        //Check the domain in the main email 
-        if (email[1] != "itcr.ac.cr" && email[1] != "tec.ac.cr"){
-            throw new Error('main email does not have the correct domain');
-        }*/
+        return new Promise(async (rs, rj) => {
+            
+            //Verify that has all the necessary data
+            if (!user.name || !user.email  || !user.secondEmail  || !user.phone || !user.idNumber
+                || user.useSecondEmailAsFavorite == undefined  || !user.area || !user.password 
+                || !user.role){
+                rj("It does not have all the data"); //reject
+            }
 
-        
-        //Encrypt the passcode and set the active field
-        user.password = toSha256(user.password);
-        user.active = true;
+            //verify types
+            else if (typeof(user.name) != 'string' || typeof(user.email) != 'string'  
+                || typeof(user.secondEmail) != 'string' || typeof(user.phone) != 'number' 
+                || typeof(user.idNumber) != 'string'|| typeof(user.useSecondEmailAsFavorite) != 'boolean' 
+                || typeof(user.area) != 'object' || typeof(user.password) != 'string'
+                || typeof(user.role) != 'string'){
 
-        //Set by default a list of plates and schedule, both of them empty
-        user.schedule = {}
-        user.plates = []
+                rj ("A field is incorrect")
+            }
 
-        return this.rep.saveUser(user);
+            //Verify area
+            else if (!user.area.code || !user.area.name){
+                rj("the area requires code and name");
+            }
+
+            //verify role?
+            else if (user.role != "Admin" && user.role != "Docente" && user.role != "Jefatura"){
+                rj("Role incorrect");
+            }
+
+            //Verify emails structures
+            else if (!user.email.includes('@') || !user.secondEmail.includes('@')){
+                rj("Malformed email structure");
+            }
+
+            //Verify institutional email
+            else if (user.email.split("@")[1] != "itcr.ac.cr" && user.email.split("@")[1] != "tec.ac.cr") {
+                rj("Need an institutional email for the main email");
+            }
+
+            //Verify if it's a new account
+            else if (await this.rep.getUserByEmail(user.email)){
+                rj("The email has already been registered previously");
+            }
+
+            //Insert new user
+            else{
+                
+                //Encrypt the passcode and set the active field
+                user.password = toSha256(user.password);
+                user.active = true;
+
+                //Set by default a list of plates and schedule, both of them empty
+                user.schedule = {}
+                user.plates = []
+            
+                rs(this.rep.saveUser(user));   
+            }            
+        });
     }
 
 
@@ -82,7 +122,7 @@ export class UserController {
 
         return new Promise(async (rs, rj) => {
             
-            if (!userId){
+            if (!userId || userId == ""){
                 rj("Error Empty string"); //reject
             }
             else{
@@ -108,7 +148,7 @@ export class UserController {
         
         return new Promise(async (rs, rj) => {
             
-            if (!userId || !user){
+            if (!userId || userId == ""){
                 rj("Error Empty parameter"); //reject
             }
             else{
