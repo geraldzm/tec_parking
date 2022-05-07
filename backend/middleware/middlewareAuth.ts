@@ -1,6 +1,6 @@
 import { NextFunction } from "express";
-import { status } from "./http";
-import { createSignature, fromBase64, alg, typ } from "./auth";
+import { status } from "../utils/http";
+import { createSignature, fromBase64, alg, typ } from "../utils/auth";
 
 function isValid(m: string ) : boolean {
     return m !== undefined && m !== null && typeof m === "string" && m !== "";
@@ -30,6 +30,9 @@ export const tokenMiddlewareValidation = async (req: any, rs: any, next: NextFun
         if(!body.exp)  
             throw new Error("No expiration time provided");
 
+        if(!isValid(body.sub) || !isValid(body.name) || !isValid(body.email))  
+            throw new Error("No user info provided");
+
         // validate signature 
         const validSignature = createSignature(tokenParts[0] + '.' + tokenParts[1]);
 
@@ -43,6 +46,12 @@ export const tokenMiddlewareValidation = async (req: any, rs: any, next: NextFun
            throw new Error("Token expired");
         }
         
+
+        req.userId = body.sub;
+        req.userName = body.name;
+        req.userEmail = body.email;
+        req.scopes = body.scopes || [];
+
         next();
         return;
     } catch (error: any) {

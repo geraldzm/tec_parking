@@ -8,6 +8,8 @@ const app = express();
 // endpoint: localhost:port/api/report/parkinglots
 app.get("/parkinglots", (req, res, next) => {
 
+    console.log("hit /parkinglots");
+    
     ReportController.getInstance().listAllParkings()
     .then((data : any)=>{
         res.json(data);

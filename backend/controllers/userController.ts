@@ -34,12 +34,13 @@ export class UserController {
                 }
 
                 // create token 
-                const authToken = createToken({ sub: user.id, email: user.email, name: user.name });
+                const scopes = [];
+                if(user.role && user.role.toLowerCase() === 'admin')
+                    scopes.push("reports");
 
-                // save token in DB 
-                this.rep.saveUserToken(user.id, toSha256(authToken));
+                const authToken = createToken({ sub: user.id, email: user.email, name: user.name, scopes: scopes });
 
-                rs(authToken);
+                rs( { token: authToken } );
             }
         });
     }

@@ -6,14 +6,6 @@ export class UserRep {
         // this.log = new Logger();
     }
 
-    public saveUserToken(userId: string, authToken: string) {
-        return db.collection('Tokens')
-        .add({userId, authToken, exp:false})
-        .then((rs:any) => {
-            console.log('rs saveing token: ' + rs)
-        });
-    }
-
     //List all users from 'Users' collection in firebase db
     public getAllUsers(): Promise<any> {
 
