@@ -4,6 +4,7 @@ import { userAuthRouter } from './userAuthRouter';
 import { tokenMiddlewareValidation } from '../middleware/middlewareAuth';
 import { middlewareValidateScopes, reportsScopes } from '../middleware/middlewareScopes';
 import { reportRouter } from './reportRouter';
+const cors = require('cors');
 
 class Routes {
 
@@ -18,6 +19,7 @@ class Routes {
 
     // Configure Express middleware.
     private middleware(): void {
+        this.express.use(cors());
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
     }

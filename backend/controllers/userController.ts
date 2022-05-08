@@ -21,6 +21,8 @@ export class UserController {
     {
         return new Promise(async (rs, rj) => {
             
+            // validate 
+            
             const user = await this.rep.getUserByEmail(email);
             console.log(user);
             if(!user) {
