@@ -1,0 +1,42 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+</html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>ParTec</h1> 
+</div>>
+<div class= "container">
+    <div class="card text-center">
+      <div class="card-header">
+        <b>Registro</b> 
+      </div>
+      <router-outlet></router-outlet>
+      <div class="card-body p-4">
+  
+        <label style="float: left;">Nombre Completo</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del estacionamiento"[(ngModel)]="estacionamiento.Nombre">
+  
+        <label style="float: left;">Ubicacion</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese la ubicacion"[(ngModel)]="estacionamiento.Ubicacion">
+
+        <label style="float: left;">Fecha de Registro</label>
+        <input class="form-control m-2" type="date" placeholder="Ingrese su fecha de registro"[(ngModel)]="estacionamiento.FechaRegistro">
+
+        <label style="float: left;">Espacios</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese lso espacios totales"[(ngModel)]="estacionamiento.Espacios">
+
+        <label style="float: left;">Discapacitados</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados">  
+  
+        <button class="btn btn-primary btn-block m-4" > Registrar</button>
+
+        <label>Volver al menú de Inicio <a [routerLink]="['/home']">Inicio</a></label>
+      </div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>
+

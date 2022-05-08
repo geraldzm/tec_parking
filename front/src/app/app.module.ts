@@ -1,0 +1,49 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './home/home.component';
+import { StatsComponent } from './stats/stats.component';
+import { ReserveComponent } from './reserve/reserve.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { DataTablesModule } from "angular-datatables";
+import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
+import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-estacionamientos.component';
+import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
+import { HttpClientModule } from '@angular/common/http';
+import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamiento/stats-crear-estacionamiento.component';
+
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    StatsComponent,
+    ReserveComponent,
+    PayrollComponent,
+    StatsFranjaComponent,
+    StatsEstacionamientosComponent,
+    StatsFuncionariosComponent,
+    StatsCrearEstacionamientoComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    DataTablesModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

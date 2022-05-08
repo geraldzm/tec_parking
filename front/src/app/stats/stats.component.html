@@ -1,0 +1,28 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html>
+</html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>Bienvenido a ParTec</h1> 
+</div>>
+
+    <div class="card text-center">
+      <div class="card-header">
+        <b>Seleccione una opción</b> 
+      </div>
+      <div class="card-body p-4">
+  
+        <button class="btn btn-primary btn-lg m-4" (click) = Estacionamiento()> Estacionamientos</button>
+        <button class="btn btn-primary btn-lg m-4" (click) = Funcionario()> Funcionarios </button>
+        <button class="btn btn-primary btn-lg m-4" (click) = FranjaHoraria()> Franja Horaria </button>
+        <button class="btn btn-primary btn-lg m-4" (click) = FuncionarioDetalle()> Funcionario Detalle </button>
+  
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+
+    <div class= "container">
+        <button class="btn btn-primary btn-lg m-4" (click) = Volver()> Volver</button>
+    </div>
+
