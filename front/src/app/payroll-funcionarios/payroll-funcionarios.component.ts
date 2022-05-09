@@ -1,14 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-stats-estacionamientos',
-  templateUrl: './stats-estacionamientos.component.html',
-  styleUrls: ['./stats-estacionamientos.component.css']
+  selector: 'app-payroll-funcionarios',
+  templateUrl: './payroll-funcionarios.component.html',
+  styleUrls: ['./payroll-funcionarios.component.css']
 })
-export class StatsEstacionamientosComponent implements OnDestroy,OnInit {
+export class PayrollFuncionariosComponent implements OnDestroy,OnInit {
 
 //Dan formato a la tabla
 dtOptions: DataTables.Settings = {};

@@ -9,6 +9,13 @@ export class ReserveComponent implements OnInit {
 
   constructor() { }
 
+  reserva = {
+
+    Edificio: '',
+    Correo: '',
+    FechaRegistro: '',
+  }
+
   ngOnInit(): void {
   }
 

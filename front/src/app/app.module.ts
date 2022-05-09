@@ -18,6 +18,8 @@ import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-e
 import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamiento/stats-crear-estacionamiento.component';
+import { PayrollEstacionamientosComponent } from './payroll-estacionamientos/payroll-estacionamientos.component';
+import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-funcionarios.component';
 
 
 
@@ -32,7 +34,9 @@ import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamient
     StatsFranjaComponent,
     StatsEstacionamientosComponent,
     StatsFuncionariosComponent,
-    StatsCrearEstacionamientoComponent
+    StatsCrearEstacionamientoComponent,
+    PayrollEstacionamientosComponent,
+    PayrollFuncionariosComponent
   ],
   imports: [
     BrowserModule,

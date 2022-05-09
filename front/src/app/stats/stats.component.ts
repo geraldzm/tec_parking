@@ -14,7 +14,7 @@ export class StatsComponent implements OnInit {
   }
 
   Estacionamiento(){
-    this.router.navigate(['/stats']);
+    this.router.navigate(['/statsEstacionamientos']);
   }
 
   Funcionario(){
@@ -23,10 +23,6 @@ export class StatsComponent implements OnInit {
 
   FranjaHoraria(){
     this.router.navigate(['/statsFranja']);
-  }
-
-  FuncionarioDetalle(){
-    this.router.navigate(['/payroll']);
   }
 
   Volver(){

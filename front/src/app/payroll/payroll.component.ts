@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payroll',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayrollComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  Estacionamiento(){
+    this.router.navigate(['/payrollEstacionamientos']);
+  }
+
+  Funcionario(){
+    this.router.navigate(['/payrollFuncionarios']);
+  }
+
+  Volver(){
+    this.router.navigate(['/home']);
   }
 
 }

@@ -10,6 +10,7 @@ export class StatsFranjaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

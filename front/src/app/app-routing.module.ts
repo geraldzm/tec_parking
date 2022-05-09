@@ -9,6 +9,8 @@ import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
 import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-estacionamientos.component';
 import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
 import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamiento/stats-crear-estacionamiento.component';
+import { PayrollEstacionamientosComponent } from './payroll-estacionamientos/payroll-estacionamientos.component';
+import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-funcionarios.component';
 
 const routes: Routes = [
 {path: 'login', component: LoginComponent, pathMatch: 'full'},
@@ -20,6 +22,8 @@ const routes: Routes = [
 {path: 'statsEstacionamientos', component: StatsEstacionamientosComponent, pathMatch: 'full'},
 {path: 'statsFuncionarios', component: StatsFuncionariosComponent, pathMatch: 'full'},
 {path: 'statsCrearEstacionamientos', component: StatsCrearEstacionamientoComponent, pathMatch: 'full'},
+{path: 'payrollEstacionamientos', component: PayrollEstacionamientosComponent, pathMatch: 'full'},
+{path: 'payrollFuncionarios', component: PayrollFuncionariosComponent, pathMatch: 'full'},
 ];
 
 export const app_routing = RouterModule.forRoot(routes);

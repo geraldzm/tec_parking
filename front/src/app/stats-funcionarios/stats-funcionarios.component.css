@@ -1,10 +1,18 @@
 /*Esto centra en la pantalla el contenido de login*/
 .container{
-    display: flex;
+    display: center;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+}
+
+.back-Button{
+  display: center;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 /*Esto le da el estilo al header*/
@@ -42,3 +50,4 @@ ul {
   li a:hover {
     background-color: #111;
   }
+

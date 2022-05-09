@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  VerEstadisticas(){
+  Consultar(){
     this.router.navigate(['/stats']);
   }
 
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   Planilla(){
-    this.router.navigate(['/statsFuncionarios']);
+    this.router.navigate(['/payroll']);
   }
 
 

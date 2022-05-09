@@ -1,6 +1,6 @@
 /*Esto centra en la pantalla el contenido*/
 .container{
-    display: flex;
+    display: center;
     justify-content: center;
     align-items: center;
     width: 100vw;

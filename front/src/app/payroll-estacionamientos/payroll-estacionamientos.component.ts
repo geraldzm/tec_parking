@@ -1,14 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-stats-estacionamientos',
-  templateUrl: './stats-estacionamientos.component.html',
-  styleUrls: ['./stats-estacionamientos.component.css']
+  selector: 'app-payroll-estacionamientos',
+  templateUrl: './payroll-estacionamientos.component.html',
+  styleUrls: ['./payroll-estacionamientos.component.css']
 })
-export class StatsEstacionamientosComponent implements OnDestroy,OnInit {
+export class PayrollEstacionamientosComponent implements OnDestroy,OnInit {
 
 //Dan formato a la tabla
 dtOptions: DataTables.Settings = {};
@@ -41,5 +41,17 @@ ngOnInit(): void {
 ngOnDestroy(): void {
   this.dtTrigger.unsubscribe();
 }
+
+Agregar(){
+  this.router.navigate(['/statsCrearEstacionamientos']);
+}
+Editar(){
+  console.log("Hola");
+}
+
+Eliminar(){
+  console.log("Adios");
+}
+
 
 }

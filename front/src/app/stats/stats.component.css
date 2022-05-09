@@ -1,10 +1,18 @@
 /*Esto centra en la pantalla el contenido*/
 .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+  display: center;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+}
+
+.container2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
 }
 
 /*Esto le da el estilo al header*/

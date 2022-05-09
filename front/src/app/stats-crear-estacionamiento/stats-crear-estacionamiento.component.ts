@@ -19,6 +19,7 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.estacionamiento.Nombre = 'Luis';
   }
 
 }
