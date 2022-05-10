@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  async ngOnInit()  {}
+  async ngOnInit()  {
+  
+  }
 
   async Ingresar(){
     console.log(this.usuario);

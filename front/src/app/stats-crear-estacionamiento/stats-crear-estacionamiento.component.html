@@ -7,27 +7,45 @@
 <div class= "container">
     <div class="card text-center">
       <div class="card-header">
-        <b>Registro</b> 
+        <b>Registrar Estacionamiento</b> 
       </div>
       <router-outlet></router-outlet>
       <div class="card-body p-4">
   
-        <label style="float: left;">Nombre Completo</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del estacionamiento"[(ngModel)]="estacionamiento.Nombre">
+        <label style="float: left;">Edificio</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del edificio"[(ngModel)]="estacionamiento.Edificio" required>
   
-        <label style="float: left;">Ubicacion</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese la ubicacion"[(ngModel)]="estacionamiento.Ubicacion">
+        <label style="float: left;">Nombre</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre"[(ngModel)]="estacionamiento.Nombre">
 
-        <label style="float: left;">Fecha de Registro</label>
-        <input class="form-control m-2" type="date" placeholder="Ingrese su fecha de registro"[(ngModel)]="estacionamiento.FechaRegistro">
+        <label style="float: left;">Espacios discapacitados</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados">
 
-        <label style="float: left;">Espacios</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese lso espacios totales"[(ngModel)]="estacionamiento.Espacios">
+        <label style="float: left;">Espacios vehiculos Tec</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"[(ngModel)]="estacionamiento.Vehiculos">
 
-        <label style="float: left;">Discapacitados</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados">  
+        <label style="float: left;">Espacios administrativos</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios administrativos"[(ngModel)]="estacionamiento.Administrativos">
+        
+        <label style="float: left;">Otros espacios</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese la cantidad de otros espacios"[(ngModel)]="estacionamiento.Otros">
+
+        <label style="float: left;">Tipo</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el tipo de estacionamiento"[(ngModel)]="estacionamiento.Tipo">
+
+        <label style="float: left;">Número</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el número del estacionamiento"[(ngModel)]="estacionamiento.Numero">
+
+        <label style="float: left;">Propietario</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el nombre del propietario"[(ngModel)]="estacionamiento.Propietario">
+
+        <label style="float: left;">Inicio de Contrato</label>
+        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de inicio del contrato"[(ngModel)]="estacionamiento.InicioContrato">
+
+        <label style="float: left;">Fin de Contrato</label>
+        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de fin del contrato"[(ngModel)]="estacionamiento.FinContrato">
   
-        <button class="btn btn-primary btn-block m-4" > Registrar</button>
+        <button class="btn btn-primary btn-block m-4"(click) = Registrar()> Crear Estacionamiento </button>
 
         <label>Volver al menú de Inicio <a [routerLink]="['/home']">Inicio</a></label>
       </div>

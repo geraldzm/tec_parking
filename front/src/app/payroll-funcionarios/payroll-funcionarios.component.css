@@ -7,6 +7,14 @@
     height: 100vh;
 }
 
+.container2{
+  display: center;
+  justify-content: center;
+  align-items: center;
+  width: 10vw;
+  height: 10vh;
+}
+
 .back-Button{
   display: center;
   justify-content: center;

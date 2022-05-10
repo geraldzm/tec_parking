@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamiento/stats-crear-estacionamiento.component';
 import { PayrollEstacionamientosComponent } from './payroll-estacionamientos/payroll-estacionamientos.component';
 import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-funcionarios.component';
+import { PayrollCrearFuncionarioComponent } from './payroll-crear-funcionario/payroll-crear-funcionario.component';
 
 
 
@@ -36,7 +37,8 @@ import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-fun
     StatsFuncionariosComponent,
     StatsCrearEstacionamientoComponent,
     PayrollEstacionamientosComponent,
-    PayrollFuncionariosComponent
+    PayrollFuncionariosComponent,
+    PayrollCrearFuncionarioComponent
   ],
   imports: [
     BrowserModule,

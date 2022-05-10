@@ -1,6 +1,6 @@
 /*Esto centra en la pantalla el contenido*/
 .container{
-    display: center;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -42,29 +42,3 @@ ul {
   li a:hover {
     background-color: #111;
   }
-
-
-body{
-    background-color: gray;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-}
-.grid-container {
-    padding-top: 20px;
-    padding-left: 25%;
-    grid-gap: 0 10px;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-    max-width: 50%;
-}
-
-.grid-item {
-    background-color: rebeccapurple;
-    border: 1px solid black;
-    text-align: center;
-}
-
-#day {
-    text-align: center;
-}

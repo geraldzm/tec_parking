@@ -42,4 +42,16 @@ ngOnDestroy(): void {
   this.dtTrigger.unsubscribe();
 }
 
+Agregar(){
+  this.router.navigate(['/payrollCrearFuncionario']);
+}
+
+Editar(){
+  this.router.navigate(['/payrollCrearFuncionario']);
+}
+
+Eliminar(){
+  this.router.navigate(['/payrollCrearFuncionario']);
+}
+
 }

@@ -11,15 +11,25 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
 
   estacionamiento = {
 
+    Edificio: '',
     Nombre: '',
-    Ubicacion: '',
-    FechaRegistro: '',
-    Espacios: '',
     Discapacitados: '',
+    Vehiculos: '',
+    Administrativos: '',
+    Otros: '',
+    Tipo: '',
+    Numero: '',
+    Propietario: '',
+    InicioContrato: '',
+    FinContrato: '',
   }
 
   ngOnInit(): void {
-    this.estacionamiento.Nombre = 'Luis';
+    //this.estacionamiento.Nombre = '';
+  }
+
+  Registrar(){
+    console.log(this.estacionamiento.Edificio);
   }
 
 }

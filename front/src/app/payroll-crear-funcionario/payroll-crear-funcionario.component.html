@@ -1,0 +1,52 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>ParTec</h1> 
+</div>>
+<div class= "container">
+    <div class="card text-center">
+      <div class="card-header">
+        <b>Registrar Estacionamiento</b> 
+      </div>
+      <router-outlet></router-outlet>
+      <div class="card-body p-4">
+  
+        <label style="float: left;">Número Id</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el Id del funcionario"[(ngModel)]="funcionario.idNumber" required>
+  
+        <label style="float: left;">Rol</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese rol del funcionario"[(ngModel)]="funcionario.role"  required>
+
+        <label style="float: left;">Nombre del area</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del area"[(ngModel)]="funcionario.areaName" required>
+
+        <label style="float: left;">Codigo del area</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el codigo del area"[(ngModel)]="funcionario.areaCode" required>
+
+        <label style="float: left;">Teléfono</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el teléfono del fncionario"[(ngModel)]="funcionario.phone" required>
+        
+        <label style="float: left;">Contraseña</label>
+        <input class="form-control m-2" type="password" placeholder="Ingrese la contraseña"[(ngModel)]="funcionario.password" required>
+
+        <label style="float: left;">Correo secundario</label>
+        <input class="form-control m-2" type="email" placeholder="Ingrese el correo secundario"[(ngModel)]="funcionario.secondEmail" required>
+
+        <label style="float: left;">Correo</label>
+        <input class="form-control m-2" type="email" placeholder="Ingrese el correo principal"[(ngModel)]="funcionario.email" required>
+
+        <label style="float: left;">Nombre</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del funcionario"[(ngModel)]="funcionario.name" required>
+
+        <label style="float: left;">Usar el correo secundario como favorito</label>
+        <input class="form-control m-2" type="text" placeholder="Correo secundario como favorito"[(ngModel)]="funcionario.useSecondEmailAsFavorite" required>
+  
+        <button class="btn btn-primary btn-block m-4" (click) = Registrar() > Registrar Funcionario</button>
+
+        <label>Volver al menú de Inicio <a [routerLink]="['/payroll']">Inicio</a></label>
+      </div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>
