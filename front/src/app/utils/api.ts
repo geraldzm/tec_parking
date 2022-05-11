@@ -68,7 +68,14 @@ export class CallAPI  {
                 throw new Error("Invalid token"); 
             }
 
-            return {response: response.bodyUsed ? await response.json(): null, status: response.status};
+            if (response.ok) {
+                return response.json()
+                .then(json => Promise.resolve({response: json, status: response.status}))// the status was ok and there is a json body
+                .catch(err => Promise.resolve({response: null, status: response.status})); // the status was ok but there is no json body
+            }
+         
+            return {response: null, status: response.status};
+
         } catch (e) {
             console.log(e);
             return {response: null, status: 401};

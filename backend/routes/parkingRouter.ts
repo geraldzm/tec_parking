@@ -7,12 +7,6 @@ const app = express();
 // endpoint: localhost:port/api/parking/list
 app.get("/list", (req:any, res, next) => {
 
-    console.log("here");
-    console.log(req.userId);
-    console.log(req.userName);
-    console.log(req.userEmail);
-    console.log(req.scopes);
-
     ParkingController.getInstance().listAll()
     .then((data : any)=>{
         res.json(data);

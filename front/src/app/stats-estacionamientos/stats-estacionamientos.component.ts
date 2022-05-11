@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { CallAPI } from '../utils/api'
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-stats-estacionamientos',
@@ -29,13 +31,16 @@ ngOnInit(): void {
     processing: true
   };
 
-  this.http.get('https://dummy.restapiexample.com/api/v1/employees').subscribe(console.log);
-  
-  this.http.get('https://dummy.restapiexample.com/api/v1/employees')
-  .subscribe((res: any) =>{
-    this.data = res.data;
-    this.dtTrigger.next(res.data);
+
+  const api = new CallAPI(this.router);
+  api.callAPI({ url:environment.allParkinLots }).then((data) => {
+    
+    console.log("Parkinglot data");
+    console.log(data.response);
   });
+
+
+  
 }
 
 ngOnDestroy(): void {

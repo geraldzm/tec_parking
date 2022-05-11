@@ -2,16 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { CallAPI } from '../utils/api'
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-stats-funcionarios',
   templateUrl: './stats-funcionarios.component.html',
   styleUrls: ['./stats-funcionarios.component.css']
 })
-
-
-
-
 export class StatsFuncionariosComponent implements  OnDestroy, OnInit {
 
 //Dan formato a la tabla
@@ -33,13 +31,14 @@ export class StatsFuncionariosComponent implements  OnDestroy, OnInit {
       processing: true
     };
 
-    this.http.get('https://dummy.restapiexample.com/api/v1/employees').subscribe(console.log);
-    
-    this.http.get('https://dummy.restapiexample.com/api/v1/employees')
-    .subscribe((res: any) =>{
-      this.data = res.data;
-      this.dtTrigger.next(res.data);
+    const api = new CallAPI(this.router);
+    api.callAPI({ url:environment.employees }).then((data) => {
+      
+      console.log("Funcionarios");
+      console.log(data.response);
+      
     });
+  
   }
 
   ngOnDestroy(): void {

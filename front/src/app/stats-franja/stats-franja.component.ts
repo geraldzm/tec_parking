@@ -30,6 +30,7 @@ export class StatsFranjaComponent implements OnInit {
 
     if(data.status !== 200) return;
 
+    console.log("franja horaria");
     console.log(data);
 
     // // reportWeek

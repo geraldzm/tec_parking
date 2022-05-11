@@ -10,6 +10,8 @@ export const environment = {
   register: "auth/register",
   reportWeek: "report/timezones",
   createParkingLot: "parkingAdmin/parkinglot",
+  allParkinLots: "parking/list",
+  employees: "report/employees",
 };
 
 /*
