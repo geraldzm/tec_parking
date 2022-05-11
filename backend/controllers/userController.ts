@@ -37,8 +37,11 @@ export class UserController {
 
                 // create token 
                 const scopes = [];
-                if(user.role && user.role.toLowerCase() === 'admin')
+                if(user.role && user.role.toLowerCase() === 'admin') {
                     scopes.push("reports");
+                    scopes.push("parkinglots");
+                }
+
 
                 const authToken = createToken({ sub: user.id, email: user.email, name: user.name, scopes: scopes });
 
