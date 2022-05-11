@@ -10,7 +10,7 @@
 
 <body>
   <div class="container2 mt - 2">
-    <button class="btn btn-success btn-lg m-5" (click)=Agregar()> Agregar Estacionamiento </button>
+    <button class="btn btn-success btn-lg m-5" (click)=Agregar()> Agregar Funcionario </button>
   </div>
   <div class="container mt - 2">
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
@@ -32,7 +32,7 @@
       <tbody>
         <!--Aqui van los datos que van dentro de la columna de arriba, en el orden de arriba-->
         <tr *ngFor="let e of data">
-          <td>{{e.employee_name}}</td>
+          <td>{{e.employee_name}} </td>
           <td>{{e.employee_salary}}</td>
           <td>{{e.employee_age}}</td>
           <td>{{e.employee_age}}</td>
@@ -40,7 +40,7 @@
           <td>{{e.employee_age}}</td>
           <td>{{e.employee_age}}</td>
           <td>{{e.employee_age}}</td>
-          <td><button class="btn btn-warning btn-sm m-4" (click)=Editar()> Editar </button></td>
+          <td><button class="btn btn-warning btn-sm m-4" (click)=Editar() value="francisco" id="Francisco"> Editar </button></td>
           <td><button class="btn btn-danger btn-sm m-4" (click)=Eliminar()> Eliminar </button></td>
         </tr>
       </tbody>

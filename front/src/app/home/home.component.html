@@ -15,9 +15,9 @@
       </div>
       <div class="card-body p-4">
   
-        <button class="btn btn-primary btn-lg m-4" (click) = Consultar()> Consultas</button>
+        <button class="btn btn-primary btn-lg m-4" *ngIf="this.isButtonVisible" (click) = Consultar()> Consultas</button>
         <button class="btn btn-primary btn-lg m-4" (click) = Reservar()> Reservar </button>
-        <button class="btn btn-primary btn-lg m-4" (click) = Planilla()> Planilla </button>
+        <button class="btn btn-primary btn-lg m-4" *ngIf="this.isButtonVisible" (click) = Planilla()> Planilla </button>
   
       </div>
     </div>

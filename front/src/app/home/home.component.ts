@@ -8,10 +8,18 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+
+
   constructor(private router: Router) { }
 
+  //Ahora esta en true para poder ver los botones, pero en caso de no ser admi seria false
+  public isButtonVisible = true;
 
   ngOnInit(): void {
+  //Aqui es donde verificamos si el usuario puede ver o no ver los botones
+  /*if(user.role == 'Admi'){
+    public isButtonVisible = true;
+  }*/
   }
 
   Consultar(){

@@ -46,6 +46,7 @@ Agregar(){
   this.router.navigate(['/statsCrearEstacionamientos']);
 }
 Editar(){
+  this.router.navigate(['/statsEditarEstacionamientos']);
   console.log("Hola");
 }
 

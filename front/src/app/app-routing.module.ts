@@ -9,9 +9,11 @@ import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
 import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-estacionamientos.component';
 import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
 import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamiento/stats-crear-estacionamiento.component';
+import { StatsEditarEstacionamientoComponent } from './stats-editar-estacionamiento/stats-editar-estacionamiento.component';
 import { PayrollEstacionamientosComponent } from './payroll-estacionamientos/payroll-estacionamientos.component';
 import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-funcionarios.component';
 import { PayrollCrearFuncionarioComponent } from './payroll-crear-funcionario/payroll-crear-funcionario.component';
+import { PayrollEditarFuncionarioComponent } from './payroll-editar-funcionario/payroll-editar-funcionario.component';
 
 const routes: Routes = [
 {path: 'login', component: LoginComponent, pathMatch: 'full'},
@@ -23,9 +25,11 @@ const routes: Routes = [
 {path: 'statsEstacionamientos', component: StatsEstacionamientosComponent, pathMatch: 'full'},
 {path: 'statsFuncionarios', component: StatsFuncionariosComponent, pathMatch: 'full'},
 {path: 'statsCrearEstacionamientos', component: StatsCrearEstacionamientoComponent, pathMatch: 'full'},
+{path: 'statsEditarEstacionamientos', component: StatsEditarEstacionamientoComponent, pathMatch: 'full'},
 {path: 'payrollEstacionamientos', component: PayrollEstacionamientosComponent, pathMatch: 'full'},
 {path: 'payrollFuncionarios', component: PayrollFuncionariosComponent, pathMatch: 'full'},
 {path: 'payrollCrearFuncionario', component: PayrollCrearFuncionarioComponent, pathMatch: 'full'},
+{path: 'payrollEditarFuncionario', component: PayrollEditarFuncionarioComponent, pathMatch: 'full'},
 ];
 
 export const app_routing = RouterModule.forRoot(routes);

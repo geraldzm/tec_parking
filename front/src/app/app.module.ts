@@ -21,6 +21,8 @@ import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamient
 import { PayrollEstacionamientosComponent } from './payroll-estacionamientos/payroll-estacionamientos.component';
 import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-funcionarios.component';
 import { PayrollCrearFuncionarioComponent } from './payroll-crear-funcionario/payroll-crear-funcionario.component';
+import { PayrollEditarFuncionarioComponent } from './payroll-editar-funcionario/payroll-editar-funcionario.component';
+import { StatsEditarEstacionamientoComponent } from './stats-editar-estacionamiento/stats-editar-estacionamiento.component';
 
 
 
@@ -38,7 +40,9 @@ import { PayrollCrearFuncionarioComponent } from './payroll-crear-funcionario/pa
     StatsCrearEstacionamientoComponent,
     PayrollEstacionamientosComponent,
     PayrollFuncionariosComponent,
-    PayrollCrearFuncionarioComponent
+    PayrollCrearFuncionarioComponent,
+    PayrollEditarFuncionarioComponent,
+    StatsEditarEstacionamientoComponent
   ],
   imports: [
     BrowserModule,

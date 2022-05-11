@@ -47,7 +47,7 @@ Agregar(){
 }
 
 Editar(){
-  this.router.navigate(['/payrollCrearFuncionario']);
+  this.router.navigate(['/payrollEditarFuncionario']);
 }
 
 Eliminar(){
