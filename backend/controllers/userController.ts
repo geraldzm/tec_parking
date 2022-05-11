@@ -22,7 +22,11 @@ export class UserController {
         return new Promise(async (rs, rj) => {
             
             // validate 
-            
+            if (!email){
+                rj("email is empty");
+                return;
+            }
+
             const user = await this.rep.getUserByEmail(email);
             console.log(user);
             if(!user) {

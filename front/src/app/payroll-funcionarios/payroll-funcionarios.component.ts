@@ -46,11 +46,14 @@ Agregar(){
   this.router.navigate(['/payrollCrearFuncionario']);
 }
 
-Editar(){
-  this.router.navigate(['/payrollCrearFuncionario']);
+Editar(id : any){
+
+  console.log(id);
+  this.router.navigate(['/payrollEditarFuncionario']);
 }
 
-Eliminar(){
+Eliminar(id : any){
+  console.log(id);
   this.router.navigate(['/payrollCrearFuncionario']);
 }
 

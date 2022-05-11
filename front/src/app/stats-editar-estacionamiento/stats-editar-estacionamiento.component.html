@@ -7,45 +7,45 @@
 <div class= "container">
     <div class="card text-center">
       <div class="card-header">
-        <b>Registrar Estacionamiento</b> 
+        <b>Editar Estacionamiento</b> 
       </div>
       <router-outlet></router-outlet>
       <div class="card-body p-4">
   
         <label style="float: left;">Edificio</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del edificio"[(ngModel)]="estacionamiento.Edificio" required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del edificio"[(ngModel)]="estacionamiento.Edificio">
   
         <label style="float: left;">Nombre</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre"[(ngModel)]="estacionamiento.Nombre" required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre"[(ngModel)]="estacionamiento.Nombre">
 
         <label style="float: left;">Espacios discapacitados</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados"required>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados">
 
         <label style="float: left;">Espacios vehiculos Tec</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"[(ngModel)]="estacionamiento.Vehiculos"required>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"[(ngModel)]="estacionamiento.Vehiculos">
 
         <label style="float: left;">Espacios administrativos</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios administrativos"[(ngModel)]="estacionamiento.Administrativos"required>
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios administrativos"[(ngModel)]="estacionamiento.Administrativos">
         
         <label style="float: left;">Otros espacios</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese la cantidad de otros espacios"[(ngModel)]="estacionamiento.Otros"required>
+        <input class="form-control m-2" type="number" placeholder="Ingrese la cantidad de otros espacios"[(ngModel)]="estacionamiento.Otros">
 
         <label style="float: left;">Tipo</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el tipo de estacionamiento"[(ngModel)]="estacionamiento.Tipo"required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el tipo de estacionamiento"[(ngModel)]="estacionamiento.Tipo">
 
-        <label style="float: left;">Número de telefono (opcional)</label>
+        <label style="float: left;">Número</label>
         <input class="form-control m-2" type="number" placeholder="Ingrese el número del estacionamiento"[(ngModel)]="estacionamiento.Numero">
 
-        <label style="float: left;">Nombre del propietario (opcional)</label>
+        <label style="float: left;">Propietario</label>
         <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del propietario"[(ngModel)]="estacionamiento.Propietario">
 
-        <label style="float: left;">Inicio de Contrato (opcional)</label>
+        <label style="float: left;">Inicio de Contrato</label>
         <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de inicio del contrato"[(ngModel)]="estacionamiento.InicioContrato">
 
-        <label style="float: left;">Fin de Contrato (opcional)</label>
+        <label style="float: left;">Fin de Contrato</label>
         <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de fin del contrato"[(ngModel)]="estacionamiento.FinContrato">
   
-        <button class="btn btn-primary btn-block m-4"(click) = Registrar()> Crear Estacionamiento </button>
+        <button class="btn btn-primary btn-block m-4"(click) = Editar()> Editar Estacionamiento </button>
 
         <label>Volver al menú de Inicio <a [routerLink]="['/home']">Inicio</a></label>
       </div>
@@ -53,4 +53,3 @@
   
     <router-outlet></router-outlet>
   </div>
-

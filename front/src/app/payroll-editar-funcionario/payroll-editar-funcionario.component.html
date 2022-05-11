@@ -7,7 +7,7 @@
 <div class= "container">
     <div class="card text-center">
       <div class="card-header">
-        <b>Registrar Funcionario</b> 
+        <b>Editar Funcionario</b> 
       </div>
       <router-outlet></router-outlet>
       <div class="card-body p-4">
@@ -42,7 +42,7 @@
         <label style="float: left;">Usar el correo secundario como favorito</label>
         <input class="form-control m-2" type="text" placeholder="Correo secundario como favorito"[(ngModel)]="funcionario.useSecondEmailAsFavorite" required>
   
-        <button class="btn btn-primary btn-block m-4" (click) = Registrar() > Registrar Funcionario</button>
+        <button class="btn btn-primary btn-block m-4" (click) = Editar() > Editar Funcionario</button>
 
         <label>Volver al menú de Inicio <a [routerLink]="['/payroll']">Inicio</a></label>
       </div>

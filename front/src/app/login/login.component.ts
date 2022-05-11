@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
       return;
     } 
-    
     console.log("wrong password or email");
   }
   
