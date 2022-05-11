@@ -10,6 +10,7 @@ export class UserRep {
     public getAllUsers(): Promise<any> {
 
         return db.collection('Users')
+            .where('active', '==', true)
             .get()
             .then((rs: any) => rs.docs.map((doc: any) => ({
                 id: doc.id,
@@ -26,6 +27,7 @@ export class UserRep {
         
         return db.collection('Users')
         .where('email', '==', email)
+        .where('active', '==', true)
         .get()
         .then((rs:any) => {
             if (rs.docs[0]){
@@ -59,6 +61,7 @@ export class UserRep {
         
         return db.collection('Users')
         .where('idNumber', '==', userIdNumber)
+        .where('active', '==', true)
         .get()
         .then((rs:any) => {
             if (rs.docs[0]){

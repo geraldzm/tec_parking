@@ -15,6 +15,7 @@ export class ParkingRep {
 
         return db.collection('ParkingLots')
             .where('building', '==', building)
+            .where('active', '==', true)
             .get()
             .then((rs: any) => {
                 if (rs.docs[0]) {
@@ -33,6 +34,7 @@ export class ParkingRep {
     public getAllSpaces(): Promise<any> {
 
         return db.collection('ParkingLots')
+            .where('active', '==', true)
             .get()
             .then((rs: any) => rs.docs.map((doc: any) => ({
                 id: doc.id,

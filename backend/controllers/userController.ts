@@ -79,8 +79,8 @@ export class UserController {
                 rj("the area requires code and name");
             }
 
-            //verify role?
-            else if (user.role != "Admin" && user.role != "Docente" && user.role != "Jefatura"){
+            //verify role
+            else if (user.role != "Admin" && user.role != "Funcionario"){
                 rj("Role incorrect");
             }
 
