@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { CallAPI } from '../utils/api'
+import { CallAPI, getUser } from '../utils/api'
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -30,7 +30,6 @@ ngOnInit(): void {
     lengthMenu: [5,15,25],
     processing: true
   };
-
   const api = new CallAPI(this.router);
   api.callAPI({ url:environment.employees }).then((data) => {
     
@@ -39,7 +38,8 @@ ngOnInit(): void {
     
   });
 
-  
+  const user = getUser();
+  console.log("user: " + user.email + " " + user.name + " " + user.role);  
 
 }
 

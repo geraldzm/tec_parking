@@ -49,7 +49,7 @@ export class UserController {
 
                 const authToken = createToken({ sub: user.id, email: user.email, name: user.name, scopes: scopes });
 
-                rs( { token: authToken } );
+                rs( { token: authToken, user: { email: user.email, name: user.name, role: user.role  } } );
             }
         });
     }

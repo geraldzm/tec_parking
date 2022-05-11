@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     const data = await api.callAPI({ url:environment.login, method: "POST", body: this.usuario, withAuth:false});
 
     if(data.status === 200) {
-      saveToken(data.response.token);
+      saveToken(data.response.token, data.response.user);
       this.router.navigate(['/home']);
       return;
     } 

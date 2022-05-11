@@ -15,8 +15,16 @@ export async function removeAuthToken() {
     window.localStorage.setItem("authToken", '');
 }
   
-export async function saveToken(authToken:string) {
+export function getUser():any {
+    const user = window.localStorage.getItem("user");
+    if(!user) return '';
+
+    return JSON.parse(user);
+}
+
+export async function saveToken(authToken:string, user:any) {
     window.localStorage.setItem("authToken", authToken);
+    window.localStorage.setItem("user", JSON.stringify(user));
     token = authToken;
 }
 
