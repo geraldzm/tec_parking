@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { CallAPI } from '../utils/api'
 
 @Component({
   selector: 'app-stats-crear-estacionamiento',
@@ -7,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatsCrearEstacionamientoComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private router: Router) { }
+
 
   estacionamiento = {
 
@@ -28,8 +33,15 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
     //this.estacionamiento.Nombre = '';
   }
 
-  Registrar(){
-    console.log(this.estacionamiento.Edificio);
+  async Registrar() {
+    
+    const api = new CallAPI(this.router);
+    const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.estacionamiento}});
+
+    if(data.status === 200 ) {
+      console.log("parkinglot created");
+    } 
+
   }
 
 }

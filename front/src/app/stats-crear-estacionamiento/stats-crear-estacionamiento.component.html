@@ -33,16 +33,16 @@
         <label style="float: left;">Tipo</label>
         <input class="form-control m-2" type="text" placeholder="Ingrese el tipo de estacionamiento"[(ngModel)]="estacionamiento.Tipo">
 
-        <label style="float: left;">Número</label>
+        <label style="float: left;">Número de telefono (opcional)</label>
         <input class="form-control m-2" type="number" placeholder="Ingrese el número del estacionamiento"[(ngModel)]="estacionamiento.Numero">
 
-        <label style="float: left;">Propietario</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el nombre del propietario"[(ngModel)]="estacionamiento.Propietario">
+        <label style="float: left;">Nombre del propietario (opcional)</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del propietario"[(ngModel)]="estacionamiento.Propietario">
 
-        <label style="float: left;">Inicio de Contrato</label>
+        <label style="float: left;">Inicio de Contrato (opcional)</label>
         <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de inicio del contrato"[(ngModel)]="estacionamiento.InicioContrato">
 
-        <label style="float: left;">Fin de Contrato</label>
+        <label style="float: left;">Fin de Contrato (opcional)</label>
         <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de fin del contrato"[(ngModel)]="estacionamiento.FinContrato">
   
         <button class="btn btn-primary btn-block m-4"(click) = Registrar()> Crear Estacionamiento </button>

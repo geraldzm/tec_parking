@@ -1,4 +1,5 @@
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 var token: string;
 
@@ -10,7 +11,7 @@ function getToken():string {
     return token;
 }
   
-function removeAuthToken() {
+export async function removeAuthToken() {
     window.localStorage.setItem("authToken", '');
 }
   
@@ -19,8 +20,12 @@ export async function saveToken(authToken:string) {
     token = authToken;
 }
 
-// 
-export async function callAPI({
+export class CallAPI  {
+
+    constructor(private router: Router) { }
+    
+
+    public async callAPI({
         url = '',
         method = 'GET',
         headers = {},
@@ -28,42 +33,46 @@ export async function callAPI({
         withAuth = true
     }):Promise<any> {
 
-    try {
+        try {
 
-        // if requires auth, then find token
-        if(withAuth) {
+            // if requires auth, then find token
+            if(withAuth) {
 
-            if(!token || token === '') token = getToken();
-            if(token === '') throw new Error("Error getting token on local storaged"); 
+                if(!token || token === '') token = getToken();
+                if(token === '') {
+                    this.router.navigate(['/login']);
+                    throw new Error("Error getting token on local storaged"); 
+                }
 
-            // add bare token to headers
-            headers = {...headers, 'Authorization': `Bearer ${token}`};
+                // add bare token to headers
+                headers = {...headers, 'Authorization': `Bearer ${token}`};
+            }
+
+            // call API
+            let options:any =  {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...headers
+                },
+            };
+
+            if(method !== 'GET') options.body = JSON.stringify(body);
+
+            const response = await fetch( `${environment.apiURL}/` + url, options);
+            
+            if(response.status === 401) {
+                // UNAUTHORIZED
+                removeAuthToken();
+                this.router.navigate(['/login']);
+                throw new Error("Invalid token"); 
+            }
+
+            return {response: response.bodyUsed ? await response.json(): null, status: response.status};
+        } catch (e) {
+            console.log(e);
+            return {response: null, status: 401};
         }
 
-        // call API
-        const options =  {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-                ...headers
-            },
-            body: JSON.stringify(body)
-        };
-
-        console.log( `${environment.apiURL}/` + url);
-
-        const response = await fetch( `${environment.apiURL}/` + url, options);
-        
-        if(response.status === 401) // UNAUTHORIZED
-            throw new Error("Invalid token");
-
-        return {response: await response.json(), status: response.status};
-    } catch (e) {
-        console.error(e);
-        
-        removeAuthToken();
-     //   window.location.replace("www.youtube.com"); // redirect to login
-        return null;
     }
-
 }

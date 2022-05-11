@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { callAPI, saveToken } from '../utils/api'
+import { CallAPI, saveToken, removeAuthToken} from '../utils/api'
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -19,16 +19,16 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router) { }
 
   async ngOnInit()  {
-  
+    removeAuthToken();
   }
 
   async Ingresar(){
     console.log(this.usuario);
 
-    const data = await callAPI({ url:environment.login, method: "POST", body: this.usuario, withAuth:false});
+    const api = new CallAPI(this.router);
+    const data = await api.callAPI({ url:environment.login, method: "POST", body: this.usuario, withAuth:false});
 
     if(data.status === 200) {
-      console.log("data: " + JSON.stringify(data))
       saveToken(data.response.token);
       this.router.navigate(['/home']);
       return;
