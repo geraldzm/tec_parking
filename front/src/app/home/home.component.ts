@@ -13,12 +13,14 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   //Ahora esta en true para poder ver los botones, pero en caso de no ser admi seria false
-  public isButtonVisible = true;
+  public isAdmin = true;
+  public isUser = false;
 
   ngOnInit(): void {
   //Aqui es donde verificamos si el usuario puede ver o no ver los botones
   /*if(user.role == 'Admi'){
-    public isButtonVisible = true;
+    this.isAdmin = true;
+    this.isUser = false;
   }*/
   }
 
@@ -32,6 +34,10 @@ export class HomeComponent implements OnInit {
 
   Planilla(){
     this.router.navigate(['/payroll']);
+  }
+
+  Perfil(){
+    this.router.navigate(['/perfil']);
   }
 
 

@@ -23,6 +23,7 @@ import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-fun
 import { PayrollCrearFuncionarioComponent } from './payroll-crear-funcionario/payroll-crear-funcionario.component';
 import { PayrollEditarFuncionarioComponent } from './payroll-editar-funcionario/payroll-editar-funcionario.component';
 import { StatsEditarEstacionamientoComponent } from './stats-editar-estacionamiento/stats-editar-estacionamiento.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -42,7 +43,8 @@ import { StatsEditarEstacionamientoComponent } from './stats-editar-estacionamie
     PayrollFuncionariosComponent,
     PayrollCrearFuncionarioComponent,
     PayrollEditarFuncionarioComponent,
-    StatsEditarEstacionamientoComponent
+    StatsEditarEstacionamientoComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>ParTec</h1> 
+</div>>
+<div class= "container">
+    <div class="card text-center">
+      <div class="card-header">
+        <b>Editar</b> 
+      </div>
+      <router-outlet></router-outlet>
+      <div class="card-body p-4">
+  
+        <label style="float: left;">Número Id</label>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el Id del funcionario"[(ngModel)]="perfil.id">
+  
+        <label style="float: left;">Placa(s)</label>
+        <input class="form-control m-2" type="text" placeholder="Ingrese sus placas separadas por comas"[(ngModel)]="perfil.plates">
+
+        <label style="float: left;">Correo secundario</label>
+        <input class="form-control m-2" type="email" placeholder="Ingrese el correo secundario"[(ngModel)]="perfil.secondEmail">
+
+        <label style="float: left;">Inicio de horario</label>
+        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese el inicio de su horario"[(ngModel)]="perfil.scheduleStart">
+
+        <label style="float: left;">Fin de horario</label>
+        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese el fin de su horario"[(ngModel)]="perfil.scheduleEnd">
+  
+        <button class="btn btn-primary btn-block m-4" (click) = Update() > Actualizar perfil</button>
+
+        <label>Volver al menú de Inicio <a [routerLink]="['/payroll']">Inicio</a></label>
+      </div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>
