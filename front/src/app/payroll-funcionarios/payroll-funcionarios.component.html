@@ -40,8 +40,8 @@
           <td>{{e.employee_age}}</td>
           <td>{{e.employee_age}}</td>
           <td>{{e.employee_age}}</td>
-          <td><button class="btn btn-warning btn-sm m-4" (click)=Editar() value="francisco" id="Francisco"> Editar </button></td>
-          <td><button class="btn btn-danger btn-sm m-4" (click)=Eliminar()> Eliminar </button></td>
+          <td><button class="btn btn-warning btn-sm m-4" (click)="Editar(e.employee_name)"> Editar </button></td>
+          <td><button class="btn btn-danger btn-sm m-4" (click)="Eliminar(e.employee_name)"> Eliminar </button></td>
         </tr>
       </tbody>
     </table>

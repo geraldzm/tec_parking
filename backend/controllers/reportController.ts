@@ -225,7 +225,7 @@ export class ReportController {
      * @param end 
      */
     private validateHour(time : any, beginRange : Date, start : Date, end : Date){
-        
+
         //Upper limit range
         var endRange = new Date(beginRange.getTime() + 30*60000);
        
