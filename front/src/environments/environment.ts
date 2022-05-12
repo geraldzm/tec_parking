@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://localhost:64689/api",
+  apiURL: "http://localhost:65070/api",
   login: "auth/login",
   logout: "auth/logout",
   register: "auth/register",
   deleteUser : "auth/delete",
   reportWeek: "report/timezones",
   deleteParking: "parkingAdmin/delete",
+  updateParking: "parkingAdmin/update",
   createParkingLot: "parkingAdmin/parkinglot",
   allParkinLots: "parking/list",
   employees: "report/employees",

@@ -58,8 +58,8 @@ Agregar(){
 }
 
 
-Editar(){
-  this.router.navigate(['/statsEditarEstacionamientos']);
+Editar(id: any){
+  this.router.navigate(['/statsEditarEstacionamientos/' + JSON.stringify(id)]);
   console.log("Hola");
 }
 
@@ -72,10 +72,8 @@ async Eliminar(id: any){
   const data = await api.callAPI({ url:environment.deleteParking, method: "DELETE", body: this.delete});
 
   if(data.status === 200) {
-    return;
+    window.location.reload();
   } 
-  console.log("wrong password or email");
-  console.log("Adios");
 }
 
 

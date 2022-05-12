@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CallAPI } from '../utils/api';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-payroll-editar-funcionario',
@@ -7,14 +13,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayrollEditarFuncionarioComponent implements OnInit {
 
-  constructor() { }
+  private id: string | undefined;
 
-  funcionario = {
+  constructor(private _Activatedroute: ActivatedRoute, private router: Router) { }
+
+  user = {
 
     idNumber: '',
     role: '',
-    areaName: '',
-    areaCode: '',
+    area: {
+      name: '',
+      code: ''
+    },
     phone: '',
     password: '',
     secondEmail: '',
@@ -24,22 +34,43 @@ export class PayrollEditarFuncionarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //Aqui hay que poner los datos cargados para que el usuario pueda verlos y modificarlos
-    this.funcionario.idNumber = '117800854';
-    this.funcionario.role = 'Admin';
-    this.funcionario.areaName = 'Computacion';
-    this.funcionario.areaCode = 'Com';
-    this.funcionario.phone = '70540001';
-    this.funcionario.password = 'Francisco';
-    this.funcionario.secondEmail = 'frajavierchava06@gmail.com';
-    this.funcionario.email = 'frajavierchava06@itcr.ac.cr';
-    this.funcionario.name = 'Francisco Chavarro';
-    this.funcionario.useSecondEmailAsFavorite = 'True';
+    this._Activatedroute.paramMap.subscribe(params => {
+      const rs = params.get('id');
+      if (!rs) {
+        return;
+      }
+      //Aqui hay que poner los datos cargados para que el usuario pueda verlos y modificarlos
+      this.user.idNumber = '117800854';
+      this.user.role = 'Admin';
+      this.user.area.name = 'Computacion';
+      this.user.area.code = 'Com';
+      this.user.phone = '70540001';
+      this.user.password = 'Francisco';
+      this.user.secondEmail = 'frajavierchava06@gmail.com';
+      this.user.email = 'frajavierchava06@itcr.ac.cr';
+      this.user.name = 'Francisco Chavarro';
+      this.user.useSecondEmailAsFavorite = 'True';
+    });
+
   }
 
-  Editar(){
+  async Editar() {
+    /*
+      const body = {
+        user: {
+          id: this.id, ...this.user
+  
+        }
+      }
+  
+      const api = new CallAPI(this.router);
+      const data = await api.callAPI({ url: environment.updateUser, method: "POST", body: body });
+  
+      if (data.status === 200) {
+        this.router.navigate(['/payrollFuncionarios']);
+      }
+    }
+    */
 
-    console.log(this.funcionario.name);
   }
-
 }

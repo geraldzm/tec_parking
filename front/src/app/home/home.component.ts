@@ -21,17 +21,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-  const api = new CallAPI(this.router);
-  api.callAPI({ url:environment.employees }).then((data) => {
-    
-    console.log("Funcionarios");
-    console.log(data.response);
-    
-  });
-
   const user = getUser();
   //Aqui es donde verificamos si el usuario puede ver o no ver los botones
-  if(user.role == 'admin'){
+  if(user.role == 'admin' || user.role == 'Admin'){
     this.isAdmin = true;
   }
   console.log("user: " + user.email + " " + user.name + " " + user.role);  

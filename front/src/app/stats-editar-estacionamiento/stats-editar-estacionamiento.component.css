@@ -1,10 +1,11 @@
 /*Esto centra en la pantalla el contenido*/
 .container{
-    display: center;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+    margin-top: 5%;
 }
 
 /*Esto le da el estilo al header*/
