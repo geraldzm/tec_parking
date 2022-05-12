@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   const user = getUser();
   //Aqui es donde verificamos si el usuario puede ver o no ver los botones
-  if(user.role == 'Admin'){
+  if(user.role == 'admin'){
     this.isAdmin = true;
   }
   console.log("user: " + user.email + " " + user.name + " " + user.role);  

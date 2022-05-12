@@ -54,8 +54,55 @@ export class ParkingController {
     public createParking(parkinglot : any) : Promise<any>
     {
         
-        parkinglot.active = true;
-        return this.rep.createParkingLot(parkinglot);
+        return new Promise(async (rs, rj) => {
+            
+            //Verify that has all the necessary data
+            if (!parkinglot.building || !parkinglot.name || !parkinglot.disabledSpaces || 
+                !parkinglot.vehiclesSpaces || !parkinglot.administrativeSpaces || !parkinglot.othersSpaces ||
+                !parkinglot.type || !parkinglot.schedule){
+                rj("It does not have all the data"); //reject
+            }
+
+            //verify types
+            else if (typeof(parkinglot.building) != 'string' || typeof(parkinglot.name) != 'string'  
+                || typeof(parkinglot.disabledSpaces) != 'number' || typeof(parkinglot.vehiclesSpaces) != 'number' 
+                || typeof(parkinglot.administrativeSpaces) != 'number'|| typeof(parkinglot.othersSpaces) != 'number' 
+                || typeof(parkinglot.type) != 'string' || typeof(parkinglot.schedule) != 'object'){
+
+                rj ("A field is incorrect")
+            }
+
+            //verify type
+            else if (parkinglot.type != "Propio" && parkinglot.type != "Alquilado"){
+                rj("Incorrect type");
+            }
+
+            //Verify if it's a new parkinglot
+            else if (await this.rep.getAllSpacesByBuilding(parkinglot.building)){
+                rj("The building has already been registered previously");
+            }
+
+            //Insert new parkinglot
+            else{
+                
+                if (parkinglot.type == "Alquilado"){
+
+                    if (!parkinglot.phone || !parkinglot.ownerName || !parkinglot.startContract || !parkinglot.endContract){
+                        rj("It does not have all the data"); //reject
+                        return;
+                    }
+
+                    else if (typeof(parkinglot.phone) != 'number' || typeof(parkinglot.ownerName) != 'string'
+                            || !(parkinglot.startContract instanceof Date) || !(parkinglot.endContract instanceof Date)){
+                        rj("A field is incorrect"); //reject
+                        return;
+                    }
+
+                }
+                parkinglot.active = true;
+                rs(this.rep.createParkingLot(parkinglot));   
+            }            
+        });
     }
 
 

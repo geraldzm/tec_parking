@@ -16,19 +16,22 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
   public created = false;
 
 
-  estacionamiento = {
-
-    Edificio: '',
-    Nombre: '',
-    Discapacitados: '',
-    Vehiculos: '',
-    Administrativos: '',
-    Otros: '',
-    Tipo: '',
-    Numero: '',
-    Propietario: '',
-    InicioContrato: '',
-    FinContrato: '',
+  parkinglot = {
+    building: '',
+    name: '',
+    disabledSpaces: '',
+    vehiclesSpaces: '',
+    administrativeSpaces: '',
+    othersSpaces: '',
+    schedule: {
+      startHour:'',
+      endHour:''
+    },
+    type: '',
+    phone: '',
+    ownerName: '',
+    startContract: '',
+    endContract: '',
   }
 
   ngOnInit(): void {
@@ -37,10 +40,10 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
 
   async Registrar() {
     
-    console.log(this.estacionamiento);
+    console.log(this.parkinglot);
     
     const api = new CallAPI(this.router);
-    const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.estacionamiento}});
+    const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.parkinglot}});
 
     if(data.status === 200 ) {
       console.log("parkinglot created");
