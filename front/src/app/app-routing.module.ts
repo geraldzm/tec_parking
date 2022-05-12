@@ -10,6 +10,7 @@ import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-e
 import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
 import { StatsCrearEstacionamientoComponent } from './stats-crear-estacionamiento/stats-crear-estacionamiento.component';
 import { StatsEditarEstacionamientoComponent } from './stats-editar-estacionamiento/stats-editar-estacionamiento.component';
+import { StatsFuncionarioDetalleComponent } from './stats-funcionario-detalle/stats-funcionario-detalle.component';
 import { PayrollEstacionamientosComponent } from './payroll-estacionamientos/payroll-estacionamientos.component';
 import { PayrollFuncionariosComponent } from './payroll-funcionarios/payroll-funcionarios.component';
 import { PayrollCrearFuncionarioComponent } from './payroll-crear-funcionario/payroll-crear-funcionario.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
 {path: 'statsFuncionarios', component: StatsFuncionariosComponent, pathMatch: 'full'},
 {path: 'statsCrearEstacionamientos', component: StatsCrearEstacionamientoComponent, pathMatch: 'full'},
 {path: 'statsEditarEstacionamientos/:id', component: StatsEditarEstacionamientoComponent, pathMatch: 'full'},
+{path: 'statsFuncionarioDetalle/:id', component: StatsFuncionarioDetalleComponent, pathMatch: 'full'},
 {path: 'payrollEstacionamientos', component: PayrollEstacionamientosComponent, pathMatch: 'full'},
 {path: 'payrollFuncionarios', component: PayrollFuncionariosComponent, pathMatch: 'full'},
 {path: 'payrollCrearFuncionario', component: PayrollCrearFuncionarioComponent, pathMatch: 'full'},

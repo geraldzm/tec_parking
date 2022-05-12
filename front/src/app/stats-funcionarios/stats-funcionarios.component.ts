@@ -50,5 +50,9 @@ export class StatsFuncionariosComponent implements  OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
   }
 
+  Detalle(id: any){
+    this.router.navigate(['/statsFuncionarioDetalle/' + JSON.stringify(id)]);
+  }
+
 
 }

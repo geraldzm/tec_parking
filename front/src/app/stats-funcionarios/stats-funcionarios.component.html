@@ -19,12 +19,13 @@
         <th>Id</th>
         <th>Area</th>
         <th>Placas</th>
+        <th>Detalle</th>
       </tr>
     </thead>
     <tbody>
       <!--Aqui van los datos que van dentro de la columna de arriba, en el orden de arriba-->
       <tr *ngFor="let e of data">
-        <td>{{e.name}} </td>
+        <td> {{e.name}}</td>
         <td>{{e.email}}</td>
         <td>{{e.secondEmail}}</td>
         <td>{{e.phone}}</td>
@@ -35,6 +36,7 @@
             {{p}}
           </tr>
         </td>
+        <td><button class="btn btn-normal btn-sm m-4" (click)=Detalle(e)> Ver Detalles </button></td>
       </tr>
     </tbody>
   </table>
