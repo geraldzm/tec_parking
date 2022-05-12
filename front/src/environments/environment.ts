@@ -8,6 +8,7 @@ export const environment = {
   login: "auth/login",
   logout: "auth/logout",
   register: "auth/register",
+  deleteUser : "auth/delete",
   reportWeek: "report/timezones",
   deleteParking: "parkingAdmin/delete",
   createParkingLot: "parkingAdmin/parkinglot",

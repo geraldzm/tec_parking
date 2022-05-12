@@ -13,8 +13,10 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
 
     idNumber: '',
     role: '',
-    areaName: '',
-    areaCode: '',
+    area: {
+      name: '',
+      code: ''
+    },
     phone: '',
     password: '',
     secondEmail: '',

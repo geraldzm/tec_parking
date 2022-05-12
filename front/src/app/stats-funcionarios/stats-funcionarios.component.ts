@@ -38,19 +38,10 @@ export class StatsFuncionariosComponent implements  OnDestroy, OnInit {
     
     const api = new CallAPI(this.router);
     api.callAPI({ url:environment.employees }).then((data) => {
-      
-      console.log("Funcionarios");
-      console.log(data.response);
 
-
-    /*
-    this.http.get('https://dummy.restapiexample.com/api/v1/employees').subscribe(console.log);
-  
-   this.http.get('https://dummy.restapiexample.com/api/v1/employees')
-   .subscribe((res: any) =>{
-    this.data = res.data;
-    this.dtTrigger.next(res.data);
-    */
+    this.data = data.response;
+    this.dtTrigger.next(data.response);
+    
     });
   
   }
