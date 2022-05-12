@@ -53,7 +53,7 @@ export class ParkingController {
      */
     public createParking(parkinglot : any) : Promise<any>
     {
-        //validar
+        
         parkinglot.active = true;
         return this.rep.createParkingLot(parkinglot);
     }

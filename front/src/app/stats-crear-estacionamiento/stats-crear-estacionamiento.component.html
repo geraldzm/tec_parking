@@ -2,55 +2,78 @@
 <!DOCTYPE html>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="header">
-    <h1>ParTec</h1> 
-</div>>
-<div class= "container">
+  <h1>ParTec</h1>
+</div>
+<a [routerLink]="['/home']">Inicio</a>
+<body>
+  <div class="container">
     <div class="card text-center">
       <div class="card-header">
-        <b>Registrar Estacionamiento</b> 
+        <b>Registrar Estacionamiento</b>
       </div>
       <router-outlet></router-outlet>
       <div class="card-body p-4">
-  
-        <label style="float: left;">Edificio</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del edificio"[(ngModel)]="estacionamiento.Edificio" required>
-  
-        <label style="float: left;">Nombre</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre"[(ngModel)]="estacionamiento.Nombre" required>
-
-        <label style="float: left;">Espacios discapacitados</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados"required>
-
-        <label style="float: left;">Espacios vehiculos Tec</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"[(ngModel)]="estacionamiento.Vehiculos"required>
-
-        <label style="float: left;">Espacios administrativos</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios administrativos"[(ngModel)]="estacionamiento.Administrativos"required>
-        
-        <label style="float: left;">Otros espacios</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese la cantidad de otros espacios"[(ngModel)]="estacionamiento.Otros"required>
-
-        <label style="float: left;">Tipo</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el tipo de estacionamiento"[(ngModel)]="estacionamiento.Tipo"required>
-
-        <label style="float: left;">Número de telefono (opcional)</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el número del estacionamiento"[(ngModel)]="estacionamiento.Numero">
-
-        <label style="float: left;">Nombre del propietario (opcional)</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del propietario"[(ngModel)]="estacionamiento.Propietario">
-
-        <label style="float: left;">Inicio de Contrato (opcional)</label>
-        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de inicio del contrato"[(ngModel)]="estacionamiento.InicioContrato">
-
-        <label style="float: left;">Fin de Contrato (opcional)</label>
-        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de fin del contrato"[(ngModel)]="estacionamiento.FinContrato">
-  
-        <button class="btn btn-primary btn-block m-4"(click) = Registrar()> Crear Estacionamiento </button>
-
-        <label>Volver al menú de Inicio <a [routerLink]="['/home']">Inicio</a></label>
+          <div class="row">
+            <label style="float: left;">Edificio</label>
+            <input class="form-control m-1" type="text" placeholder="Ingrese el nombre del edificio"
+              [(ngModel)]="estacionamiento.Edificio" required>
+          </div>
+          <div class="row">
+            <label style="float: left;">Nombre</label>
+            <input class="form-control m-1" type="text" placeholder="Ingrese el nombre"
+              [(ngModel)]="estacionamiento.Nombre" required>
+          </div>
+          <div class="row">
+            <label style="float: left;">Espacios discapacitados</label>
+            <input class="form-control m-1" type="number" placeholder="Ingrese los espacios de discapacitados"
+              [(ngModel)]="estacionamiento.Discapacitados" required>
+          </div>
+          <div class="row">
+            <label style="float: left;">Espacios vehiculos Tec</label>
+            <input class="form-control m-1" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"
+              [(ngModel)]="estacionamiento.Vehiculos" required>
+          </div>
+          <div class="row">
+            <label style="float: left;">Espacios administrativos</label>
+            <input class="form-control m-1" type="number" placeholder="Ingrese los espacios administrativos"
+              [(ngModel)]="estacionamiento.Administrativos" required>
+          </div>
+          <div class="row">
+            <label style="float: left;">Otros espacios</label>
+            <input class="form-control m-1" type="number" placeholder="Ingrese la cantidad de otros espacios"
+              [(ngModel)]="estacionamiento.Otros" required>
+          </div>
+          <div class="row">
+            <label style="float: left;">Tipo</label>
+            <select class="form-control m-1" name="Tipo Estacionamiento" [(ngModel)]="estacionamiento.Tipo" (change)="change($event)">
+              <option value="Propio">Propio</option>
+              <option value="Alquilado">Alquilado</option>
+            </select>
+          </div>
+          <div class="row">
+            <label style="float: left;">Número de telefono (opcional)</label>
+            <input class="form-control m-1" type="number" placeholder="Ingrese el número del estacionamiento"
+              [(ngModel)]="estacionamiento.Numero" id="telefono">
+          </div>
+          <div class="row">
+            <label style="float: left;">Nombre del propietario (opcional)</label>
+            <input class="form-control m-1" type="text" placeholder="Ingrese el nombre del propietario"
+              [(ngModel)]="estacionamiento.Propietario" id="owner">
+          </div>
+          <div class="row">
+            <label style="float: left;">Inicio de Contrato (opcional)</label>
+            <input class="form-control m-1" type="date" placeholder="Ingrese la fecha de inicio del contrato"
+              [(ngModel)]="estacionamiento.InicioContrato" id="startC">
+          </div>
+          <div class="row">
+            <label style="float: left;">Fin de Contrato (opcional)</label>
+            <input class="form-control m-1" type="date" placeholder="Ingrese la fecha de fin del contrato"
+              [(ngModel)]="estacionamiento.FinContrato" id="endC">
+          </div>
+          <div class="row">
+            <button class="btn btn-primary btn-block m-1" (click)=Registrar()> Crear Estacionamiento </button>
+          </div>     
       </div>
     </div>
-  
-    <router-outlet></router-outlet>
   </div>
-
+</body>

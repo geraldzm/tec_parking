@@ -3,8 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 35vw;
     height: 100vh;
+    margin-top: 12%;
 }
 
 /*Esto le da el estilo al header*/

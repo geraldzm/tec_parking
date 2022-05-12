@@ -52,7 +52,6 @@ Agregar(){
 }
 
 Editar(id : any){
-
   console.log(id);
   this.router.navigate(['/payrollEditarFuncionario']);
 }

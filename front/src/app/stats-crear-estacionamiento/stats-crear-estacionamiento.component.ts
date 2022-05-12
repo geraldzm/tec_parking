@@ -35,6 +35,8 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
 
   async Registrar() {
     
+    console.log(this.estacionamiento);
+    
     const api = new CallAPI(this.router);
     const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.estacionamiento}});
 
@@ -43,5 +45,21 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
     } 
 
   }
+
+change(event: any) {
+
+  if (event.target.value == "Propio"){
+    
+    document.getElementById('telefono')?.setAttribute("disabled","disabled");
+    document.getElementById('owner')?.setAttribute("disabled","disabled");
+    document.getElementById('startC')?.setAttribute("disabled","disabled");
+    document.getElementById('endC')?.setAttribute("disabled","disabled");
+  }else{
+    document.getElementById('telefono')?.removeAttribute("disabled");
+    document.getElementById('owner')?.removeAttribute("disabled");
+    document.getElementById('startC')?.removeAttribute("disabled");
+    document.getElementById('endC')?.removeAttribute("disabled");
+  }
+}
 
 }

@@ -26,9 +26,9 @@ export class UserController {
                 rj("email is empty");
                 return;
             }
-
+            
             const user = await this.rep.getUserByEmail(email);
-            console.log(user);
+            
             if(!user) {
                 rj("No user found"); // reject 
             } else {
@@ -87,7 +87,7 @@ export class UserController {
             }
 
             //verify role
-            else if (user.role != "Admin" && user.role != "Funcionario"){
+            else if (user.role != "admin" && user.role != "funcionario"){
                 rj("Role incorrect");
             }
 
