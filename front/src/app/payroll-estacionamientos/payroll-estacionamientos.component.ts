@@ -17,6 +17,10 @@ dtOptions: DataTables.Settings = {};
 dtTrigger = new Subject<any>();
 data: any;
 
+delete = {
+  idparking: '',
+}
+
 constructor(private http: HttpClient, private router: Router) { 
 }
 
@@ -52,12 +56,25 @@ ngOnDestroy(): void {
 Agregar(){
   this.router.navigate(['/statsCrearEstacionamientos']);
 }
+
+
 Editar(){
   this.router.navigate(['/statsEditarEstacionamientos']);
   console.log("Hola");
 }
 
-Eliminar(){
+
+
+async Eliminar(id: any){
+
+  this.delete.idparking = id;
+  const api = new CallAPI(this.router);
+  const data = await api.callAPI({ url:environment.deleteParking, method: "DELETE", body: this.delete});
+
+  if(data.status === 200) {
+    return;
+  } 
+  console.log("wrong password or email");
   console.log("Adios");
 }
 

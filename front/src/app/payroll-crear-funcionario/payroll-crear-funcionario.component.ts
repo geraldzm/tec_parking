@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PayrollCrearFuncionarioComponent implements OnInit {
   constructor() { }
 
+  //user
   funcionario = {
 
     idNumber: '',

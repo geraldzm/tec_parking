@@ -40,6 +40,7 @@ export class StatsEditarEstacionamientoComponent implements OnInit {
   }
 
   Editar(){
+    
     console.log(this.estacionamiento.Edificio);
   }
 

@@ -20,7 +20,7 @@ data: any;
 constructor(private http: HttpClient, private router: Router) { 
 }
 
-ngOnInit(): void {
+async ngOnInit() {
 
   this.dtOptions = {
     pagingType: 'full_numbers',
@@ -34,8 +34,11 @@ ngOnInit(): void {
 
   const api = new CallAPI(this.router);
   this.data = api.callAPI({ url:environment.allParkinLots }).then((data) => {
-    
-    this.data = data.response;
+  this.data = data.response;
+  this.dtTrigger.next(data.response);
+
+  console.log(data.response);
+
   });
 
 

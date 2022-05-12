@@ -9,6 +9,7 @@ export const environment = {
   logout: "auth/logout",
   register: "auth/register",
   reportWeek: "report/timezones",
+  deleteParking: "parkingAdmin/delete",
   createParkingLot: "parkingAdmin/parkinglot",
   allParkinLots: "parking/list",
   employees: "report/employees",
