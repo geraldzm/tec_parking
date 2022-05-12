@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { CallAPI } from '../utils/api'
+import as from '../utils/areas'
+
 
 @Component({
   selector: 'app-payroll-crear-funcionario',
@@ -10,6 +12,8 @@ import { CallAPI } from '../utils/api'
 })
 export class PayrollCrearFuncionarioComponent implements OnInit {
   constructor(private router: Router) { }
+
+  areas: any;
 
   //user
   user = {
@@ -25,21 +29,35 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
     secondEmail: '',
     email: '',
     name: '',
-    useSecondEmailAsFavorite: '',
+    useSecondEmailAsFavorite: true,
   }
 
   ngOnInit(): void {
     //this.estacionamiento.Nombre = '';
+
+    this.areas = as.areas;
   }
 
   async Registrar() {
-    console.log(this.user.area);
+
     const api = new CallAPI(this.router);
     const data = await api.callAPI({ url: environment.register, method: "POST", body: { user: this.user } });
 
     if (data.status === 200) {
-      console.log("parkinglot created");
+      console.log("user created");
     }
 
+  }
+
+  changeSecondEmail(event: any) {
+    if (event.target.value === "true") this.user.useSecondEmailAsFavorite = true;
+    else this.user.useSecondEmailAsFavorite = false; 
+  }
+
+
+  changeArea(event: any){
+    var area = event.target.value.split(',');
+    this.user.area.code = area[0];
+    this.user.area.name = area[1];
   }
 }
