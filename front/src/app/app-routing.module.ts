@@ -17,6 +17,7 @@ import { PayrollEditarFuncionarioComponent } from './payroll-editar-funcionario/
 import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
+{path:'',redirectTo:'login', pathMatch: 'full' },
 {path: 'login', component: LoginComponent, pathMatch: 'full'},
 {path: 'home', component: HomeComponent, pathMatch: 'full'},
 {path: 'payroll', component: PayrollComponent, pathMatch: 'full'},
@@ -26,13 +27,14 @@ const routes: Routes = [
 {path: 'statsEstacionamientos', component: StatsEstacionamientosComponent, pathMatch: 'full'},
 {path: 'statsFuncionarios', component: StatsFuncionariosComponent, pathMatch: 'full'},
 {path: 'statsCrearEstacionamientos', component: StatsCrearEstacionamientoComponent, pathMatch: 'full'},
-{path: 'statsEditarEstacionamientos', component: StatsEditarEstacionamientoComponent, pathMatch: 'full'},
+{path: 'statsEditarEstacionamientos/:id', component: StatsEditarEstacionamientoComponent, pathMatch: 'full'},
 {path: 'payrollEstacionamientos', component: PayrollEstacionamientosComponent, pathMatch: 'full'},
 {path: 'payrollFuncionarios', component: PayrollFuncionariosComponent, pathMatch: 'full'},
 {path: 'payrollCrearFuncionario', component: PayrollCrearFuncionarioComponent, pathMatch: 'full'},
-{path: 'payrollEditarFuncionario', component: PayrollEditarFuncionarioComponent, pathMatch: 'full'},
+{path: 'payrollEditarFuncionario/:id', component: PayrollEditarFuncionarioComponent, pathMatch: 'full'},
 {path: 'perfil', component: PerfilComponent, pathMatch: 'full'},
 ];
+
 
 export const app_routing = RouterModule.forRoot(routes);
 

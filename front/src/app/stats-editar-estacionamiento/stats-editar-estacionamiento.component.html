@@ -13,43 +13,63 @@
       <div class="card-body p-4">
   
         <label style="float: left;">Edificio</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del edificio"[(ngModel)]="estacionamiento.Edificio">
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del edificio"
+        [(ngModel)]="parkinglot.building">
   
         <label style="float: left;">Nombre</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre"[(ngModel)]="estacionamiento.Nombre">
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre"
+        [(ngModel)]="parkinglot.name">
 
         <label style="float: left;">Espacios discapacitados</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"[(ngModel)]="estacionamiento.Discapacitados">
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de discapacitados"
+        [(ngModel)]="parkinglot.disabledSpaces">
 
         <label style="float: left;">Espacios vehiculos Tec</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"[(ngModel)]="estacionamiento.Vehiculos">
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios de vehiculos del Tec"
+        [(ngModel)]="parkinglot.vehiclesSpaces">
 
         <label style="float: left;">Espacios administrativos</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios administrativos"[(ngModel)]="estacionamiento.Administrativos">
+        <input class="form-control m-2" type="number" placeholder="Ingrese los espacios administrativos"
+        [(ngModel)]="parkinglot.administrativeSpaces">
         
         <label style="float: left;">Otros espacios</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese la cantidad de otros espacios"[(ngModel)]="estacionamiento.Otros">
+        <input class="form-control m-2" type="number" placeholder="Ingrese la cantidad de otros espacios"
+        [(ngModel)]="parkinglot.othersSpaces">
 
-        <label style="float: left;">Tipo</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el tipo de estacionamiento"[(ngModel)]="estacionamiento.Tipo">
+        <label style="float: left;">Hora de Entrada </label>
+        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese la Hora de Entrada" 
+        [(ngModel)]="parkinglot.schedule.startHour">
+        
+        <label style="float: left;">Hora de Salida (opcional)</label>
+        <input class="form-control m-1" type="datetime-local" placeholder="Ingrese la Hora de Salida"
+          [(ngModel)]="parkinglot.schedule.endHour">
+
+          <label style="float: left;">Tipo</label>
+          <select class="form-control m-1" name="Tipo Estacionamiento" [(ngModel)]="parkinglot.type" (change)="change($event)">
+            <option value="Propio">Propio</option>
+            <option value="Alquilado">Alquilado</option>
+          </select>
 
         <label style="float: left;">Número</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el número del estacionamiento"[(ngModel)]="estacionamiento.Numero">
+        <input class="form-control m-2" type="number" placeholder="Ingrese el número del estacionamiento"
+        [(ngModel)]="parkinglot.phone" id="telefono">
 
         <label style="float: left;">Propietario</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del propietario"[(ngModel)]="estacionamiento.Propietario">
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del propietario"
+        [(ngModel)]="parkinglot.ownerName" id="owner">
 
         <label style="float: left;">Inicio de Contrato</label>
-        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de inicio del contrato"[(ngModel)]="estacionamiento.InicioContrato">
+        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de inicio del contrato"
+        [(ngModel)]="parkinglot.startContract" id="startC">
 
         <label style="float: left;">Fin de Contrato</label>
-        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de fin del contrato"[(ngModel)]="estacionamiento.FinContrato">
+        <input class="form-control m-2" type="date" placeholder="Ingrese la fecha de fin del contrato"
+        [(ngModel)]="parkinglot.endContract" id="endC">
   
         <button class="btn btn-primary btn-block m-4"(click) = Editar()> Editar Estacionamiento </button>
 
-        <label>Volver al menú de Inicio <a [routerLink]="['/home']">Inicio</a></label>
+        <label *ngIf='edit'>!Se ha registrado con exito!</label>
       </div>
     </div>
   
-    <router-outlet></router-outlet>
   </div>

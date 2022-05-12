@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CallAPI } from '../utils/api';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-stats-editar-estacionamiento',
@@ -7,40 +13,90 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatsEditarEstacionamientoComponent implements OnInit {
 
-  constructor() { }
 
-  estacionamiento = {
+  private id: string | undefined;
 
-    Edificio: '',
-    Nombre: '',
-    Discapacitados: '',
-    Vehiculos: '',
-    Administrativos: '',
-    Otros: '',
-    Tipo: '',
-    Numero: '',
-    Propietario: '',
-    InicioContrato: '',
-    FinContrato: '',
+  constructor(private _Activatedroute: ActivatedRoute, private router: Router) {
+  }
+
+  public edit = false;
+
+  parkinglot = {
+    building: '',
+    name: '',
+    disabledSpaces: '',
+    vehiclesSpaces: '',
+    administrativeSpaces: '',
+    othersSpaces: '',
+    schedule: {
+      startHour: '',
+      endHour: ''
+    },
+    type: '',
+    phone: '',
+    ownerName: '',
+    startContract: '',
+    endContract: '',
   }
 
   ngOnInit(): void {
-    this.estacionamiento.Edificio = 'Casa verde';
-    this.estacionamiento.Nombre = 'Casa verde';
-    this.estacionamiento.Discapacitados = '10';
-    this.estacionamiento.Vehiculos = '50';
-    this.estacionamiento.Administrativos = '50';
-    this.estacionamiento.Otros = '20';
-    this.estacionamiento.Tipo = 'Principal';
-    this.estacionamiento.Numero = '70540001';
-    this.estacionamiento.Propietario = 'Tec';
-    this.estacionamiento.InicioContrato = '11/05/2010';
-    this.estacionamiento.FinContrato = 'Null';
+    this._Activatedroute.paramMap.subscribe(params => {
+      const rs = params.get('id');
+      if (!rs) {
+        return;
+      }
+      const parkinglot = JSON.parse(rs);
+      this.id = parkinglot.id;
+      this.parkinglot.building = parkinglot.building;
+      this.parkinglot.name = parkinglot.name;
+      this.parkinglot.disabledSpaces = parkinglot.disabledSpaces;
+      this.parkinglot.vehiclesSpaces = parkinglot.vehiclesSpaces;
+      this.parkinglot.administrativeSpaces = parkinglot.administrativeSpaces;
+      this.parkinglot.othersSpaces = parkinglot.othersSpaces;
+      this.parkinglot.schedule = parkinglot.schedule;
+      this.parkinglot.type = parkinglot.type;
+      this.parkinglot.phone = parkinglot.phone;
+      this.parkinglot.ownerName = parkinglot.ownerName;
+      this.parkinglot.startContract = parkinglot.startContract;
+      this.parkinglot.endContract = parkinglot.endContract;
+
+
+
+    });
 
   }
 
-  Editar(){
-    console.log(this.estacionamiento.Edificio);
+  async Editar() {
+    const body = {
+      parkinglot: {
+        id: this.id, ...this.parkinglot
+
+      }
+    }
+
+    const api = new CallAPI(this.router);
+    const data = await api.callAPI({ url: environment.updateParking, method: "POST", body: body });
+
+    if (data.status === 200) {
+      this.router.navigate(['/payrollEstacionamientos']);
+    }
+
+  }
+
+  change(event: any) {
+
+    if (event.target.value == "Propio"){
+      
+      document.getElementById('telefono')?.setAttribute("disabled","disabled");
+      document.getElementById('owner')?.setAttribute("disabled","disabled");
+      document.getElementById('startC')?.setAttribute("disabled","disabled");
+      document.getElementById('endC')?.setAttribute("disabled","disabled");
+    }else{
+      document.getElementById('telefono')?.removeAttribute("disabled");
+      document.getElementById('owner')?.removeAttribute("disabled");
+      document.getElementById('startC')?.removeAttribute("disabled");
+      document.getElementById('endC')?.removeAttribute("disabled");
+    }
   }
 
 }

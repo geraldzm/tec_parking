@@ -6,7 +6,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="header">
   <h1>Funcionarios</h1>
-</div>>
+</div>
 
 <body>
   <div class="container2 mt - 2">
@@ -20,7 +20,6 @@
           <th>Nombre</th>
           <th>Correo</th>
           <th>Correo Secundario</th>
-          <th>Correo secundario favorito</th>
           <th>Teléfono</th>
           <th>Id</th>
           <th>Area</th>
@@ -32,16 +31,19 @@
       <tbody>
         <!--Aqui van los datos que van dentro de la columna de arriba, en el orden de arriba-->
         <tr *ngFor="let e of data">
-          <td>{{e.employee_name}} </td>
-          <td>{{e.employee_salary}}</td>
-          <td>{{e.employee_age}}</td>
-          <td>{{e.employee_age}}</td>
-          <td>{{e.employee_age}}</td>
-          <td>{{e.employee_age}}</td>
-          <td>{{e.employee_age}}</td>
-          <td>{{e.employee_age}}</td>
-          <td><button class="btn btn-warning btn-sm m-4" (click)="Editar(e.employee_name)"> Editar </button></td>
-          <td><button class="btn btn-danger btn-sm m-4" (click)="Eliminar(e.employee_name)"> Eliminar </button></td>
+          <td>{{e.name}} </td>
+          <td>{{e.email}}</td>
+          <td>{{e.secondEmail}}</td>
+          <td>{{e.phone}}</td>
+          <td>{{e.idNumber}}</td>
+          <td> <strong>Cod: </strong>  {{e.area.code}} <br>
+            <strong>Nombre: </strong>  {{e.area.name}} </td>
+          <td><tr *ngFor="let p of e.plates">
+              {{p}}
+            </tr>
+          </td>
+          <td><button class="btn btn-warning btn-sm m-4" (click)="Editar(e)"> Editar </button></td>
+          <td><button class="btn btn-danger btn-sm m-4" (click)="Eliminar(e.id)"> Eliminar </button></td>
         </tr>
       </tbody>
     </table>

@@ -13,35 +13,58 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  public created = false;
 
-  estacionamiento = {
 
-    Edificio: '',
-    Nombre: '',
-    Discapacitados: '',
-    Vehiculos: '',
-    Administrativos: '',
-    Otros: '',
-    Tipo: '',
-    Numero: '',
-    Propietario: '',
-    InicioContrato: '',
-    FinContrato: '',
+  parkinglot = {
+    building: '',
+    name: '',
+    disabledSpaces: '',
+    vehiclesSpaces: '',
+    administrativeSpaces: '',
+    othersSpaces: '',
+    schedule: {
+      startHour:'',
+      endHour:''
+    },
+    type: '',
+    phone: '',
+    ownerName: '',
+    startContract: '',
+    endContract: '',
   }
 
   ngOnInit(): void {
-    //this.estacionamiento.Nombre = '';
   }
 
   async Registrar() {
     
+    console.log(this.parkinglot);
+    
     const api = new CallAPI(this.router);
-    const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.estacionamiento}});
+    const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.parkinglot}});
 
     if(data.status === 200 ) {
       console.log("parkinglot created");
+      this.created = true;
     } 
 
   }
+
+change(event: any) {
+
+  if (event.target.value == "Propio"){
+    
+    document.getElementById('telefono')?.setAttribute("disabled","disabled");
+    document.getElementById('owner')?.setAttribute("disabled","disabled");
+    document.getElementById('startC')?.setAttribute("disabled","disabled");
+    document.getElementById('endC')?.setAttribute("disabled","disabled");
+  }else{
+    document.getElementById('telefono')?.removeAttribute("disabled");
+    document.getElementById('owner')?.removeAttribute("disabled");
+    document.getElementById('startC')?.removeAttribute("disabled");
+    document.getElementById('endC')?.removeAttribute("disabled");
+  }
+}
 
 }

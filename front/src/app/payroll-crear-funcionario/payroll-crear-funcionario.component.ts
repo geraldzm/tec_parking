@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { CallAPI } from '../utils/api'
 
 @Component({
   selector: 'app-payroll-crear-funcionario',
@@ -6,14 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payroll-crear-funcionario.component.css']
 })
 export class PayrollCrearFuncionarioComponent implements OnInit {
-  constructor() { }
+  constructor(private router: Router) { }
 
-  funcionario = {
+  //user
+  user = {
 
     idNumber: '',
     role: '',
-    areaName: '',
-    areaCode: '',
+    area: {
+      name: '',
+      code: ''
+    },
     phone: '',
     password: '',
     secondEmail: '',
@@ -26,8 +32,14 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
     //this.estacionamiento.Nombre = '';
   }
 
-  Registrar(){
-    console.log(this.funcionario.name);
-  }
+  async Registrar() {
+    console.log(this.user.area);
+    const api = new CallAPI(this.router);
+    const data = await api.callAPI({ url: environment.register, method: "POST", body: { user: this.user } });
 
+    if (data.status === 200) {
+      console.log("parkinglot created");
+    }
+
+  }
 }

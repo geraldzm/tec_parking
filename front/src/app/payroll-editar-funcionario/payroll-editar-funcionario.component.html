@@ -13,34 +13,44 @@
       <div class="card-body p-4">
   
         <label style="float: left;">Número Id</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el Id del funcionario"[(ngModel)]="funcionario.idNumber" required>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el Id del funcionario"
+        [(ngModel)]="user.idNumber" required>
   
         <label style="float: left;">Rol</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese rol del funcionario"[(ngModel)]="funcionario.role"  required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese rol del funcionario"
+        [(ngModel)]="user.role"  required>
 
         <label style="float: left;">Nombre del area</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del area"[(ngModel)]="funcionario.areaName" required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del area"
+        [(ngModel)]="user.area.name" required>
 
         <label style="float: left;">Codigo del area</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el codigo del area"[(ngModel)]="funcionario.areaCode" required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el codigo del area"
+        [(ngModel)]="user.area.code" required>
 
         <label style="float: left;">Teléfono</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el teléfono del fncionario"[(ngModel)]="funcionario.phone" required>
+        <input class="form-control m-2" type="number" placeholder="Ingrese el teléfono del fncionario"
+        [(ngModel)]="user.phone" required>
         
         <label style="float: left;">Contraseña</label>
-        <input class="form-control m-2" type="password" placeholder="Ingrese la contraseña"[(ngModel)]="funcionario.password" required>
+        <input class="form-control m-2" type="password" placeholder="Ingrese la contraseña"
+        [(ngModel)]="user.password" required>
 
         <label style="float: left;">Correo secundario</label>
-        <input class="form-control m-2" type="email" placeholder="Ingrese el correo secundario"[(ngModel)]="funcionario.secondEmail" required>
+        <input class="form-control m-2" type="email" placeholder="Ingrese el correo secundario"
+        [(ngModel)]="user.secondEmail" required>
 
         <label style="float: left;">Correo</label>
-        <input class="form-control m-2" type="email" placeholder="Ingrese el correo principal"[(ngModel)]="funcionario.email" required>
+        <input class="form-control m-2" type="email" placeholder="Ingrese el correo principal"
+        [(ngModel)]="user.email" required>
 
         <label style="float: left;">Nombre</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del funcionario"[(ngModel)]="funcionario.name" required>
+        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del funcionario"
+        [(ngModel)]="user.name" required>
 
         <label style="float: left;">Usar el correo secundario como favorito</label>
-        <input class="form-control m-2" type="text" placeholder="Correo secundario como favorito"[(ngModel)]="funcionario.useSecondEmailAsFavorite" required>
+        <input class="form-control m-2" type="text" placeholder="Correo secundario como favorito"
+        [(ngModel)]="user.useSecondEmailAsFavorite" required>
   
         <button class="btn btn-primary btn-block m-4" (click) = Editar() > Editar Funcionario</button>
 

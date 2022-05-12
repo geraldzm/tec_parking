@@ -16,6 +16,10 @@ export class StatsFuncionariosComponent implements  OnDestroy, OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject<any>();
   data: any;
+
+  public dataa = [
+    {employee_name : 'hola'},
+  ]
   
   constructor(private http: HttpClient, private router: Router) { 
   }
@@ -31,12 +35,13 @@ export class StatsFuncionariosComponent implements  OnDestroy, OnInit {
       processing: true
     };
 
+    
     const api = new CallAPI(this.router);
     api.callAPI({ url:environment.employees }).then((data) => {
-      
-      console.log("Funcionarios");
-      console.log(data.response);
-      
+
+    this.data = data.response;
+    this.dtTrigger.next(data.response);
+    
     });
   
   }

@@ -17,6 +17,10 @@ dtOptions: DataTables.Settings = {};
 dtTrigger = new Subject<any>();
 data: any;
 
+delete = {
+  userId :''
+}
+
 constructor(private http: HttpClient, private router: Router) { 
 }
 
@@ -33,8 +37,9 @@ ngOnInit(): void {
   const api = new CallAPI(this.router);
   api.callAPI({ url:environment.employees }).then((data) => {
     
-    console.log("Funcionarios");
-    console.log(data.response);
+    //console.log("Funcionarios");
+    //console.log(data.response);
+  this.data = data.response;
     
   });
 
@@ -52,14 +57,20 @@ Agregar(){
 }
 
 Editar(id : any){
-
-  console.log(id);
-  this.router.navigate(['/payrollEditarFuncionario']);
+  this.router.navigate(['/statsEditarFuncionarios/' + JSON.stringify(id)]);
 }
 
-Eliminar(id : any){
-  console.log(id);
-  this.router.navigate(['/payrollCrearFuncionario']);
+async Eliminar(id : any){
+  
+  this.delete.userId = id;
+
+  const api = new CallAPI(this.router);
+  const data = await api.callAPI({ url:environment.deleteUser, method: "DELETE", body: this.delete});
+
+  if(data.status === 200) {
+    window.location.reload();
+  } 
+  
 }
 
 }
