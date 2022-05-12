@@ -17,6 +17,7 @@ import { PayrollEditarFuncionarioComponent } from './payroll-editar-funcionario/
 import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
+{path:'',redirectTo:'login', pathMatch: 'full' },
 {path: 'login', component: LoginComponent, pathMatch: 'full'},
 {path: 'home', component: HomeComponent, pathMatch: 'full'},
 {path: 'payroll', component: PayrollComponent, pathMatch: 'full'},
@@ -33,6 +34,7 @@ const routes: Routes = [
 {path: 'payrollEditarFuncionario', component: PayrollEditarFuncionarioComponent, pathMatch: 'full'},
 {path: 'perfil', component: PerfilComponent, pathMatch: 'full'},
 ];
+
 
 export const app_routing = RouterModule.forRoot(routes);
 

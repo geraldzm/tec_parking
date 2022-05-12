@@ -13,6 +13,8 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  public created = false;
+
 
   estacionamiento = {
 
@@ -42,6 +44,7 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
 
     if(data.status === 200 ) {
       console.log("parkinglot created");
+      this.created = true;
     } 
 
   }

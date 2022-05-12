@@ -33,10 +33,9 @@ ngOnInit(): void {
 
 
   const api = new CallAPI(this.router);
-  api.callAPI({ url:environment.allParkinLots }).then((data) => {
+  this.data = api.callAPI({ url:environment.allParkinLots }).then((data) => {
     
-    console.log("Parkinglot data");
-    console.log(data.response);
+    this.data = data.response;
   });
 
 

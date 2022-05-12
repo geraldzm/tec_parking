@@ -11,7 +11,6 @@
       <div class="card-header">
         <b>Registrar Estacionamiento</b>
       </div>
-      <router-outlet></router-outlet>
       <div class="card-body p-4">
           <div class="row">
             <label style="float: left;">Edificio</label>
@@ -73,6 +72,9 @@
           <div class="row">
             <button class="btn btn-primary btn-block m-1" (click)=Registrar()> Crear Estacionamiento </button>
           </div>     
+
+<<<!--      <label *ngIf='created'>!Se ha registrado con exito! <a [routerLink]="['/payrollEstacionamientos']">Volver</a></label>-->  
+        
       </div>
     </div>
   </div>

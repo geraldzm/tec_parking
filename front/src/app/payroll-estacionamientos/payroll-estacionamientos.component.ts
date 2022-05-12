@@ -38,6 +38,7 @@ ngOnInit(): void {
     
     console.log("Parkinglot data");
     console.log(data.response);
+    this.data = data.response;
   });
 
   
