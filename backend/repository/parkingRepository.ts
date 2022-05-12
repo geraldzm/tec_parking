@@ -38,7 +38,7 @@ export class ParkingRep {
             .get()
             .then((rs: any) => rs.docs.map((doc: any) => ({
                 id: doc.id,
-                ...doc.data(),
+                ...doc.data()
             })));
     }
 

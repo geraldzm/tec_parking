@@ -19,7 +19,23 @@ export class ParkingController {
     //List all parkinglots
     public listAll() : Promise<any> 
     {
-        return this.rep.getAllSpaces();
+
+        return new Promise(async (rs, rj) => {
+        
+            var data = await this.rep.getAllSpaces();
+
+            for (var i in data){
+                data[i].schedule.startHour = (new Date(data[i].schedule.startHour.seconds * 1000)).toLocaleTimeString();
+                data[i].schedule.endHour = (new Date(data[i].schedule.endHour.seconds * 1000)).toLocaleTimeString();
+        
+                if ( data[i].startContract){
+                    data[i].startContract = (new Date(data[i].startContract.seconds * 1000)).toDateString();
+                    data[i].endContract = (new Date(data[i].endContract.seconds * 1000)).toDateString();
+                }
+            }
+            rs(data);
+        });
+
     }
 
 
@@ -91,14 +107,20 @@ export class ParkingController {
                         rj("It does not have all the data"); //reject
                         return;
                     }
-
+                    
                     else if (typeof(parkinglot.phone) != 'number' || typeof(parkinglot.ownerName) != 'string'
-                            || !(parkinglot.startContract instanceof Date) || !(parkinglot.endContract instanceof Date)){
+                            || typeof(parkinglot.startContract) != 'string' || typeof(parkinglot.endContract) != 'string'){
                         rj("A field is incorrect"); //reject
                         return;
                     }
 
+                    parkinglot.startContract = new Date(parkinglot.startContract);
+                    parkinglot.endContract = new Date(parkinglot.endContract);
                 }
+
+                //Set correct format to the schedule
+                parkinglot.schedule.startHour = new Date(parkinglot.schedule.startHour);
+                parkinglot.schedule.endHour = new Date(parkinglot.schedule.endHour);
                 parkinglot.active = true;
                 rs(this.rep.createParkingLot(parkinglot));   
             }            
