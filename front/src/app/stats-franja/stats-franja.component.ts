@@ -33,29 +33,29 @@ export class StatsFranjaComponent implements OnInit {
     console.log("franja horaria");
     console.log(data);
 
-    // // reportWeek
-    // const data = await callAPI({ url:environment.reportWeek });
+    const week = data.response;
+    const days = Object.keys(week);
 
-    // if(data.status === 200) {
-    //   console.log("data: " + JSON.stringify(data))
-    //   return;
-    // }
-      
-    // const colors = ["red", "yellow", "yellowgreen", "green"];
 
-    // for (var h = 0; h < 24; h++) {
-    //     const childDay = this.document.createElement("div");
-    //     childDay.setAttribute("id", "day");
-    //     for (var d = 0; d < 7; d++) {
-    //         const child = this.document.createElement("div");
-    //         child.setAttribute("id", "hour");
-    //         child.setAttribute("class", "grid-item");
-    //         console.log(colors[Math.floor(Math.random() * colors.length)]);
-    //         child.setAttribute('style', `background-color: ${colors[Math.floor(Math.random() * colors.length)]}`);
-    //         child.innerHTML = h+"";
-    //         graph.appendChild(child);
-    //     }
-    // }
+    for(let i = 0; i < 24; i += 0.5) {
+
+      for(let d in days) {
+        const day = days[d];
+
+        const child = this.document.createElement("div");
+        child.setAttribute("id", "hour");
+        const style = `background-color: ${week[day][i+'']['color']}; text-align: center; font-size: 10px;`;
+
+        child.setAttribute('style', style);
+        const hour = Math.floor(i);
+        const minutes = i > Math.floor(i) ? 30: 0;
+
+        child.innerHTML = hour + ":" + (minutes === 0 ? "00": minutes);
+        graph.appendChild(child);
+
+      }
+
+    }
 
   }
   

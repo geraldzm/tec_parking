@@ -52,11 +52,12 @@ body{
 }
 .grid-container {
     padding-top: 20px;
-    padding-left: 25%;
-    grid-gap: 0 10px;
+    padding-left: 30%;
+    padding-right: 30%;
+    grid-gap: 0 6px;
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
-    max-width: 50%;
+    max-width: 100%;
 }
 
 .grid-item {
@@ -66,5 +67,9 @@ body{
 }
 
 #day {
-    text-align: center;
+  text-align: center;
+  background-color: rgb(3, 82, 185);
+  color: white;
+  border: 1px solid black;
+
 }

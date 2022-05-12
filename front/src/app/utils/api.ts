@@ -13,6 +13,7 @@ function getToken():string {
   
 export async function removeAuthToken() {
     window.localStorage.setItem("authToken", '');
+    window.localStorage.setItem("user", '');
 }
   
 export function getUser():any {

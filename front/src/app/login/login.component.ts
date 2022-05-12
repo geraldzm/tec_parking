@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   async Ingresar(){
-    console.log(this.usuario);
 
     const api = new CallAPI(this.router);
     const data = await api.callAPI({ url:environment.login, method: "POST", body: this.usuario, withAuth:false});
