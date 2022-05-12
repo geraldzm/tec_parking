@@ -119,8 +119,17 @@ export class ParkingController {
                 }
 
                 //Set correct format to the schedule
-                parkinglot.schedule.startHour = new Date(parkinglot.schedule.startHour);
-                parkinglot.schedule.endHour = new Date(parkinglot.schedule.endHour);
+                var date = new Date();
+
+                date.setHours((parkinglot.schedule.startHour.split(':'))[0]);
+                date.setMinutes((parkinglot.schedule.startHour.split(':'))[1]);
+                parkinglot.schedule.startHour = date;
+
+                date = new Date();
+                date.setHours((parkinglot.schedule.endHour.split(':'))[0]);
+                date.setMinutes((parkinglot.schedule.endHour.split(':'))[1]);
+                parkinglot.schedule.endHour = date;
+                
                 parkinglot.active = true;
                 rs(this.rep.createParkingLot(parkinglot));   
             }            

@@ -54,25 +54,25 @@
                 <th>Horario</th>
                 <td>
             <tr *ngFor="let l of user.schedule.lunes">
-                <strong>Lunes: </strong> {{l}} <br>
+                <strong>Lunes: </strong> {{l.start}} - {{l.end}} <br>
             </tr>
             <tr *ngFor="let k of user.schedule.martes">
-                <strong>Martes: </strong> {{k}} <br>
+                <strong>Martes: </strong> {{k.start}} - {{k.end}} <br>
             </tr>
             <tr *ngFor="let m of user.schedule.miercoles">
-                <strong>Miercoles: </strong> {{m}} <br>
+                <strong>Miercoles: </strong> {{m.start}} - {{m.end}} <br>
             </tr>
             <tr *ngFor="let j of user.schedule.jueves">
-                <strong>Jueves: </strong> {{j}} <br>
+                <strong>Jueves: </strong> {{j.start}} - {{j.end}} <br>
             </tr>
             <tr *ngFor="let v of user.schedule.viernes">
-                <strong>Viernes: </strong> {{v}} <br>
+                <strong>Viernes: </strong> {{v.start}} - {{v.end}}<br>
             </tr>
             <tr *ngFor="let s of user.schedule.sabado">
-                <strong>Sabado: </strong> {{s}} <br>
+                <strong>Sabado: </strong> {{s.start}} - {{s.end}} <br>
             </tr>
             <tr *ngFor="let d of user.schedule.domingo">
-                <strong>Domingo: </strong> {{d}} <br></td>
+                <strong>Domingo: </strong> {{d.start}} - {{d.end}} <br></td>
             </tr>
         </thead>
     </table>
