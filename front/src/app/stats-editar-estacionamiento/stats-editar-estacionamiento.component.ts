@@ -36,9 +36,12 @@ export class StatsEditarEstacionamientoComponent implements OnInit {
 
         if(data.status === 200) {
           this.parkinglot = data.response;
+
+          this.parkinglot.startContract = null;
+          this.parkinglot.endContract = null;
           this.id = data.response.id;
         } 
-          
+        
         console.log(this.parkinglot);
       });
     });

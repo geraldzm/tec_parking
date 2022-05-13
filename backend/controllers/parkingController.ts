@@ -114,8 +114,8 @@ export class ParkingController {
                         return;
                     }
 
-                    parkinglot.startContract = new Date(parkinglot.startContract);
-                    parkinglot.endContract = new Date(parkinglot.endContract);
+                    parkinglot.startContract = this.addOneDay(parkinglot.startContract);
+                    parkinglot.endContract = this.addOneDay(parkinglot.endContract);
                 }
 
                 this.setScheduleCorrectFormat(parkinglot);
@@ -126,29 +126,13 @@ export class ParkingController {
         });
     }
 
-
-    private setScheduleCorrectFormat(parkinglot : any){
-
-        //Set correct format to the schedule
-        var date = new Date();
-
-        date.setHours((parkinglot.schedule.startHour.split(':'))[0]);
-        date.setMinutes((parkinglot.schedule.startHour.split(':'))[1]);
-        parkinglot.schedule.startHour = date;
-
-        date = new Date();
-        date.setHours((parkinglot.schedule.endHour.split(':'))[0]);
-        date.setMinutes((parkinglot.schedule.endHour.split(':'))[1]);
-        parkinglot.schedule.endHour = date;
-    }
-
     /**
      * Controller Method to update a parkinglot
      * @param {Object} parkinglot { parkinglot }
      */
     public updateParking(parkinglot : any) : Promise<any>
     {
-        
+        console.log(parkinglot);
         return new Promise(async (rs, rj) => {
             
             if (!parkinglot || !parkinglot.id){
@@ -174,19 +158,21 @@ export class ParkingController {
                 parkinglot.othersSpaces = parkinglot.othersSpaces ? parkinglot.othersSpaces : oldParking.othersSpaces;
                 this.setScheduleCorrectFormat(parkinglot);
 
-                /* Falta validar
-                type: '',    
-                phone: '',
-                ownerName: '',
-                startContract: '',
-                endContract: '',
-                */
-
+                if (parkinglot.type == "Propio"){
+                    parkinglot.phone = null;
+                    parkinglot.ownerName = "";
+                    parkinglot.startContract = null;
+                    parkinglot.endContract = null;
+                } else{
+                    parkinglot.phone = parkinglot.phone ? parkinglot.phone : oldParking.phone;
+                    parkinglot.ownerName = parkinglot.ownerName !== '' ? parkinglot.ownerName : oldParking.ownerName;
+                    parkinglot.startContract = parkinglot.startContract ? this.addOneDay(parkinglot.startContract) : oldParking.startContract;
+                    parkinglot.endContract = parkinglot.endContract ? this.addOneDay(parkinglot.endContract) : oldParking.endContract;
+                }
                 rs(this.rep.updateParkingLot(parkinglot, idParking));
             }
         });
     }
-
 
     /**
      * Controller Method to delete a parkinglot
@@ -210,5 +196,36 @@ export class ParkingController {
                 rs(result);
             }
         });
+    }
+
+    /**
+     * Set the correct format for the schedules
+     * @param parkinglot any
+     */
+    private setScheduleCorrectFormat(parkinglot : any){
+
+        //Set correct format to the schedule
+        var date = new Date();
+
+        date.setHours((parkinglot.schedule.startHour.split(':'))[0]);
+        date.setMinutes((parkinglot.schedule.startHour.split(':'))[1]);
+        parkinglot.schedule.startHour = date;
+
+        date = new Date();
+        date.setHours((parkinglot.schedule.endHour.split(':'))[0]);
+        date.setMinutes((parkinglot.schedule.endHour.split(':'))[1]);
+        parkinglot.schedule.endHour = date;
+    }
+
+
+    /**
+     * Add one day for dates
+     * @param date 
+     * @returns corect date
+     */
+    private addOneDay(date : any) : Date {
+        var newDate = new Date(date);
+        newDate.setDate(newDate.getDate()+1);
+        return newDate;
     }
 }
