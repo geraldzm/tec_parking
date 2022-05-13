@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://localhost:57219/api",
+  apiURL: "http://localhost:61538/api",
   login: "auth/login",
   logout: "auth/logout",
   register: "auth/register",
@@ -15,7 +15,8 @@ export const environment = {
   createParkingLot: "parkingAdmin/parkinglot",
   allParkinLots: "parking/list",
   employees: "report/employees",
-  employeeById : "report/employee?id="
+  employeeById : "report/employee?id=",
+  parkingById : "report/parkinglot?id="
 };
 
 /*

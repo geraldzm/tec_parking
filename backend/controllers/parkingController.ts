@@ -118,17 +118,7 @@ export class ParkingController {
                     parkinglot.endContract = new Date(parkinglot.endContract);
                 }
 
-                //Set correct format to the schedule
-                var date = new Date();
-
-                date.setHours((parkinglot.schedule.startHour.split(':'))[0]);
-                date.setMinutes((parkinglot.schedule.startHour.split(':'))[1]);
-                parkinglot.schedule.startHour = date;
-
-                date = new Date();
-                date.setHours((parkinglot.schedule.endHour.split(':'))[0]);
-                date.setMinutes((parkinglot.schedule.endHour.split(':'))[1]);
-                parkinglot.schedule.endHour = date;
+                this.setScheduleCorrectFormat(parkinglot);
                 
                 parkinglot.active = true;
                 rs(this.rep.createParkingLot(parkinglot));   
@@ -137,19 +127,64 @@ export class ParkingController {
     }
 
 
+    private setScheduleCorrectFormat(parkinglot : any){
+
+        //Set correct format to the schedule
+        var date = new Date();
+
+        date.setHours((parkinglot.schedule.startHour.split(':'))[0]);
+        date.setMinutes((parkinglot.schedule.startHour.split(':'))[1]);
+        parkinglot.schedule.startHour = date;
+
+        date = new Date();
+        date.setHours((parkinglot.schedule.endHour.split(':'))[0]);
+        date.setMinutes((parkinglot.schedule.endHour.split(':'))[1]);
+        parkinglot.schedule.endHour = date;
+    }
+
     /**
      * Controller Method to update a parkinglot
      * @param {Object} parkinglot { parkinglot }
      */
     public updateParking(parkinglot : any) : Promise<any>
     {
-        //validar
-
-        //save the parking key, and removes it from parking lot
-        const idParking = parkinglot.id;
-        delete parkinglot.id;
         
-        return this.rep.updateParkingLot(parkinglot, idParking);
+        return new Promise(async (rs, rj) => {
+            
+            if (!parkinglot || !parkinglot.id){
+                rj("Error Empty parameter"); //reject
+            }
+            else{
+                
+                //save the parking key, and removes it from parking lot
+                const idParking = parkinglot.id;
+                delete parkinglot.id;
+
+                const oldParking = await this.rep.getParkingById(idParking);
+                if(!oldParking) {
+                    rj("No parkinglot found"); // reject 
+                }
+                
+                //Checks an set the correct values for the update
+                parkinglot.building = parkinglot.building !=='' ? parkinglot.building : oldParking.building;
+                parkinglot.name = parkinglot.name !==''  ? parkinglot.name : oldParking.name;
+                parkinglot.disabledSpaces = parkinglot.disabledSpaces ? parkinglot.disabledSpaces : oldParking.disabledSpaces;
+                parkinglot.vehiclesSpaces = parkinglot.vehiclesSpaces ? parkinglot.vehiclesSpaces : oldParking.vehiclesSpaces;
+                parkinglot.administrativeSpaces = parkinglot.administrativeSpaces ? parkinglot.administrativeSpaces : oldParking.administrativeSpaces;
+                parkinglot.othersSpaces = parkinglot.othersSpaces ? parkinglot.othersSpaces : oldParking.othersSpaces;
+                this.setScheduleCorrectFormat(parkinglot);
+
+                /* Falta validar
+                type: '',    
+                phone: '',
+                ownerName: '',
+                startContract: '',
+                endContract: '',
+                */
+
+                rs(this.rep.updateParkingLot(parkinglot, idParking));
+            }
+        });
     }
 
 

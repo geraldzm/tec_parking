@@ -21,56 +21,34 @@ export class StatsEditarEstacionamientoComponent implements OnInit {
 
   public edit = false;
 
-  parkinglot = {
-    building: '',
-    name: '',
-    disabledSpaces: '',
-    vehiclesSpaces: '',
-    administrativeSpaces: '',
-    othersSpaces: '',
-    schedule: {
-      startHour: '',
-      endHour: ''
-    },
-    type: '',
-    phone: '',
-    ownerName: '',
-    startContract: '',
-    endContract: '',
-  }
+  public parkinglot : any;
 
   ngOnInit(): void {
     this._Activatedroute.paramMap.subscribe(params => {
+      
       const rs = params.get('id');
       if (!rs) {
         return;
       }
-      const parkinglot = JSON.parse(rs);
-      this.id = parkinglot.id;
-      this.parkinglot.building = parkinglot.building;
-      this.parkinglot.name = parkinglot.name;
-      this.parkinglot.disabledSpaces = parkinglot.disabledSpaces;
-      this.parkinglot.vehiclesSpaces = parkinglot.vehiclesSpaces;
-      this.parkinglot.administrativeSpaces = parkinglot.administrativeSpaces;
-      this.parkinglot.othersSpaces = parkinglot.othersSpaces;
-      this.parkinglot.schedule = parkinglot.schedule;
-      this.parkinglot.type = parkinglot.type;
-      this.parkinglot.phone = parkinglot.phone;
-      this.parkinglot.ownerName = parkinglot.ownerName;
-      this.parkinglot.startContract = parkinglot.startContract;
-      this.parkinglot.endContract = parkinglot.endContract;
+  
+      const api = new CallAPI(this.router);
+      api.callAPI({ url:environment.parkingById +JSON.parse(rs).id, method: "GET", withAuth:true}).then((data) => {
 
-
-
+        if(data.status === 200) {
+          this.parkinglot = data.response;
+          this.id = data.response.id;
+        } 
+          
+        console.log(this.parkinglot);
+      });
     });
-
   }
 
   async Editar() {
+    
     const body = {
       parkinglot: {
         id: this.id, ...this.parkinglot
-
       }
     }
 
@@ -80,6 +58,8 @@ export class StatsEditarEstacionamientoComponent implements OnInit {
     if (data.status === 200) {
       this.router.navigate(['/payrollEstacionamientos']);
     }
+
+    //console.log(this.parkinglot);
 
   }
 

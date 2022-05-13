@@ -37,11 +37,11 @@
         [(ngModel)]="parkinglot.othersSpaces">
 
         <label style="float: left;">Hora de Entrada </label>
-        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese la Hora de Entrada" 
+        <input class="form-control m-2" type="time" placeholder="Ingrese la Hora de Entrada" 
         [(ngModel)]="parkinglot.schedule.startHour">
         
         <label style="float: left;">Hora de Salida (opcional)</label>
-        <input class="form-control m-1" type="datetime-local" placeholder="Ingrese la Hora de Salida"
+        <input class="form-control m-1" type="time" placeholder="Ingrese la Hora de Salida"
           [(ngModel)]="parkinglot.schedule.endHour">
 
           <label style="float: left;">Tipo</label>

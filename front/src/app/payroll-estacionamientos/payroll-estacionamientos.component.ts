@@ -58,9 +58,8 @@ Agregar(){
 }
 
 
-Editar(id: any){
-  this.router.navigate(['/statsEditarEstacionamientos/' + JSON.stringify(id)]);
-  console.log("Hola");
+Editar(ID: any){
+  this.router.navigate(['/statsEditarEstacionamientos/' + JSON.stringify({id: ID})]);
 }
 
 

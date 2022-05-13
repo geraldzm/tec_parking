@@ -40,9 +40,19 @@ export class ReportController {
                 
                 const result = await this.parkingRep.getParkingById(parkingId);
                 
-                 if (!result){
-                     rj("No parkinglot found")
-                 }
+                if (!result){
+                    rj("No parkinglot found")
+                }
+
+                //Set the correct format for the schedule and contracts' limits
+                result.schedule.startHour = (new Date(result.schedule.startHour.seconds * 1000)).toLocaleTimeString();
+                result.schedule.endHour = (new Date(result.schedule.endHour.seconds * 1000)).toLocaleTimeString();
+         
+                if (result.type == "Alquilado"){
+                    result.startContract = (new Date(result.startContract.seconds * 1000)).toLocaleDateString();
+                    result.endContract = (new Date(result.endContract.seconds * 1000)).toLocaleDateString();
+                }
+
                  rs(result);
              }
          });
