@@ -3,33 +3,31 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="header">
     <h1>ParTec</h1> 
-</div>>
+</div>
 <div class= "container">
     <div class="card text-center">
       <div class="card-header">
         <b>Editar Funcionario</b> 
       </div>
-      <router-outlet></router-outlet>
       <div class="card-body p-4">
   
         <label style="float: left;">Número Id</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el Id del funcionario"
+        <input class="form-control m-2" type="text" placeholder="Ingrese el Id del funcionario"
         [(ngModel)]="user.idNumber" required>
   
         <label style="float: left;">Rol</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese rol del funcionario"
-        [(ngModel)]="user.role"  required>
+        <select class="form-control m-2" placeholder="Rol" name="Rol" [(ngModel)]="user.role"  required>
+          <option value="admin">Admin</option>
+          <option value="funcionario">Funcionario</option>
+        </select>
 
-        <label style="float: left;">Nombre del area</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del area"
-        [(ngModel)]="user.area.name" required>
-
-        <label style="float: left;">Codigo del area</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el codigo del area"
-        [(ngModel)]="user.area.code" required>
+        <label style="float: left;">Area</label>
+        <select class="form-control m-2" placeholder="Area" name="Area" (change)="changeArea($event)" required>
+          <option *ngFor="let a of areas" [value]=[a.code,a.name] ><strong>{{a.code}}: </strong>{{a.name}}</option>
+        </select>
 
         <label style="float: left;">Teléfono</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el teléfono del fncionario"
+        <input class="form-control m-2" type="number" placeholder="Ingrese el teléfono del funcionario"
         [(ngModel)]="user.phone" required>
         
         <label style="float: left;">Contraseña</label>
@@ -49,8 +47,10 @@
         [(ngModel)]="user.name" required>
 
         <label style="float: left;">Usar el correo secundario como favorito</label>
-        <input class="form-control m-2" type="text" placeholder="Correo secundario como favorito"
-        [(ngModel)]="user.useSecondEmailAsFavorite" required>
+        <select class="form-control m-2" placeholder="Correo secundario como favorito" name="User Correo Secundario" (change)="changeSecondEmail($event)">
+          <option value="true">Sí</option>
+          <option value="false">No</option>
+        </select>
   
         <button class="btn btn-primary btn-block m-4" (click) = Editar() > Editar Funcionario</button>
 

@@ -59,4 +59,17 @@ app.put("/update", (req, res, next) => {
     });
 });
 
+// endpoint: localhost:port/api/auth/edit
+app.put("/edit", (req, res, next) => {
+    
+    UserController.getInstance().editUser(req.body["user"])
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        console.log(err);
+        res.sendStatus(500); // internal error
+    });
+});
+
 export { app as userAuthRouter };

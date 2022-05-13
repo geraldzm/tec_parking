@@ -42,7 +42,7 @@ export class StatsEditarEstacionamientoComponent implements OnInit {
           this.id = data.response.id;
         } 
         
-        console.log(this.parkinglot);
+        //console.log(this.parkinglot);
       });
     });
   }

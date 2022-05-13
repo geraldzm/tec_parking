@@ -57,7 +57,7 @@ Agregar(){
 }
 
 Editar(id : any){
-  this.router.navigate(['/statsEditarFuncionarios/' + JSON.stringify(id)]);
+  this.router.navigate(['/payrollEditarFuncionario/' + JSON.stringify({id: id})]);
 }
 
 async Eliminar(id : any){

@@ -149,4 +149,22 @@ export class UserRep {
         })));
     }
 
+    public editUserInfo(user : any) : Promise <any>{
+
+        return db.collection('Users')
+        .doc(user.id)
+        .update({
+            idNumber : user.idNumber,
+            role : user.role,
+            area : user.area,
+            phone : user.phone,
+            password : user.password,
+            secondEmail : user.secondEmail,
+            email : user.email,
+            name : user.name,
+            useSecondEmailAsFavorite : user.useSecondEmailAsFavorite
+        })
+        .then((rs:any) => rs)
+        .catch((error : any) => error);	 
+    }
 }

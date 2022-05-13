@@ -46,7 +46,6 @@ export class UserController {
                     scopes.push("parkinglots");
                 }
 
-
                 const authToken = createToken({ sub: user.id, email: user.email, name: user.name, scopes: scopes });
 
                 rs( { token: authToken, user: { email: user.email, name: user.name, role: user.role  } } );
@@ -177,6 +176,54 @@ export class UserController {
                     rs(this.rep.updateUserInfo(user, userId));
                 }
             }
+        });
+    }
+
+    public editUser(user : any) : Promise<any>
+    {
+        return new Promise(async (rs, rj) => {
+        
+            console.log(user);
+
+            const oldUserDB = await this.rep.getUserById(user.id);
+
+            //Checks the main email
+            if (user.email !== ""){
+
+                //Verify emails structures
+                if (!user.email.includes('@')){
+                    rj("Malformed email structure");
+                    return;
+                } 
+            
+                //Verify institutional email
+                else if (user.email.split("@")[1] != "itcr.ac.cr" && user.email.split("@")[1] != "tec.ac.cr"){
+                    rj("Need an institutional email for the main email");
+                    return;
+                }
+                
+                var tmpUser = await this.rep.getUserByEmail(user.email);
+
+                //Verify if it's valid email
+                if (tmpUser && user.id !== tmpUser.id){
+                    rj("The email has already been registered previously");
+                    return;
+                }
+            } 
+            else user.email = oldUserDB.email;
+            
+            //verify role
+            if (user.role != "admin" && user.role != "funcionario"){
+                rj("Role incorrect");
+            }
+
+            user.idNumber = user.idNumber !== "" ? user.idNumber : oldUserDB.idNumber;
+            user.phone = user.phone ? user.phone : oldUserDB.phone;
+            user.secondEmail = user.secondEmail !== "" ? user.secondEmail : oldUserDB.secondEmail;
+            user.name = user.name !== "" ? user.name : oldUserDB.name;
+            user.password = user.password !== "" ? toSha256(user.password) : oldUserDB.password;
+
+            rs(this.rep.editUserInfo(user));
         });
     }
 }
