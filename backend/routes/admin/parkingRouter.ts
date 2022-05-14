@@ -1,11 +1,11 @@
 import * as express from 'express';
-import { ParkingController } from '../controllers'
-import { status } from '../utils/http';
+import { ParkingController } from '../../controllers'
+import { status } from '../../utils/http';
 
 const app = express();
 
 
-// endpoint: localhost:port/api/parkingAdmin/parkinglot
+// endpoint: localhost:port/api/admin/parking/parkinglot
 app.post("/parkinglot", (req, res, next) => {
 
     console.log(JSON.stringify(req.body));
@@ -21,7 +21,7 @@ app.post("/parkinglot", (req, res, next) => {
 });
 
 
-// endpoint: localhost:port/api/parkingAdmin/delete
+// endpoint: localhost:port/api/admin/parking/delete
 app.delete("/delete", (req, res, next) => {
 
     ParkingController.getInstance().deleteParking(req.body["idparking"])
@@ -35,7 +35,7 @@ app.delete("/delete", (req, res, next) => {
 });
 
 
-// endpoint: localhost:port/api/parkingAdmin/update
+// endpoint: localhost:port/api/admin/parking/update
 app.post("/update", (req, res, next) => {
 
     ParkingController.getInstance().updateParking(req.body["parkinglot"])
@@ -48,4 +48,4 @@ app.post("/update", (req, res, next) => {
     });
 });
 
-export { app as parkingRouterAdmin };
+export { app as parkingRouter };

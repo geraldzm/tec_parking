@@ -32,3 +32,8 @@ export const parkingLotScopes = (req: any, rs: any, next: NextFunction) => {
     req.scopesRequired = ["parkinglots"];
     next();
 };
+
+export const editUsersScopes = (req: any, rs: any, next: NextFunction) => {
+    req.scopesRequired = ["editUsers"];
+    next();
+};

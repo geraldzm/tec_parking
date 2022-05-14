@@ -1,7 +1,7 @@
 import * as express from 'express';
 import morgan = require("morgan");
 import Routes from './routes/routes'
-
+const cors = require('cors');
 
 class App {
 
@@ -16,6 +16,7 @@ class App {
     // Configure Express middleware.
     private middleware(): void {
         this.express.use(morgan('dev'));
+        this.express.use(cors());
         this.express.use(express.json());//bodyParser deprecated
         this.express.use(express.urlencoded({ extended: false }));
     }

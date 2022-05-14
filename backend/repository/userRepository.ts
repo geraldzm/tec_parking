@@ -126,15 +126,16 @@ export class UserRep {
     */
     public updateUserInfo(user : any, userId : string): Promise<any> {
         
+        console.log("user");
+        console.log(user);
+
         return db.collection('Users')
         .doc(userId)
         .update({
             plates : user.plates,
             secondEmail : user.secondEmail,
             schedule : user.schedule
-        })
-        .then((rs:any) => rs)
-        .catch((error : any) => error);	
+        });
     }
 
 

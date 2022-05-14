@@ -1,11 +1,10 @@
 import * as express from 'express';
-import { parkingRouterAdmin } from './parkingRouterAdmin';
-import { parkingRouter } from './parkingRouter';
-import { userAuthRouter } from './userAuthRouter';
+import { authRouter } from './authRouter';
+import AdminRouter from './admin/routes'
 import { tokenMiddlewareValidation } from '../middleware/middlewareAuth';
-import { middlewareValidateScopes, reportsScopes, parkingLotScopes } from '../middleware/middlewareScopes';
-import { reportRouter } from './reportRouter';
-const cors = require('cors');
+import { parkingRouter } from './parkingRouter';
+import { userRouter } from './userRouter';
+
 
 class Routes {
 
@@ -13,23 +12,19 @@ class Routes {
 
     constructor() {
         this.express = express();
-
-        this.middleware();
         this.routes();
     }
 
-    // Configure Express middleware.
-    private middleware(): void {
-        this.express.use(cors());
-        this.express.use(express.json());
-        this.express.use(express.urlencoded({ extended: false }));
-    }
-
     private routes(): void {
+        // admin routes (only admins)
+        this.express.use('/admin', tokenMiddlewareValidation, AdminRouter);
+
+        // open routes (any logged user can access them)
         this.express.use('/parking', tokenMiddlewareValidation, parkingRouter); 
-        this.express.use('/parkingAdmin', tokenMiddlewareValidation, parkingLotScopes, middlewareValidateScopes, parkingRouterAdmin); // protected route
-        this.express.use('/report', tokenMiddlewareValidation, reportsScopes, middlewareValidateScopes, reportRouter); // protected route
-        this.express.use('/auth', userAuthRouter);
+        this.express.use('/user', tokenMiddlewareValidation, userRouter); 
+
+        //public rutes (anyone can access them)
+        this.express.use('/auth', authRouter);
     }
 }
 

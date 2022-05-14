@@ -1,15 +1,12 @@
 import * as express from 'express';
-import { ReportController } from '../controllers'
+import { ReportController } from '../../controllers'
 
 const app = express();
 
 
-
-// endpoint: localhost:port/api/report/parkinglots
+// endpoint: localhost:port/api/admin/report/parkinglots
 app.get("/parkinglots", (req, res, next) => {
 
-    console.log("hit /parkinglots");
-    
     ReportController.getInstance().listAllParkings()
     .then((data : any)=>{
         res.json(data);
@@ -21,7 +18,7 @@ app.get("/parkinglots", (req, res, next) => {
 });
 
 
-// endpoint: localhost:port/api/report/parkinglot?id
+// endpoint: localhost:port/api/admin/report/parkinglot?id
 app.get("/parkinglot?:id", (req, res, next) => {
 
     ReportController.getInstance().getParkingByID(String(req.query.id))
@@ -35,7 +32,7 @@ app.get("/parkinglot?:id", (req, res, next) => {
 });
 
 
-// endpoint: localhost:port/api/report/employees
+// endpoint: localhost:port/api/admin/report/employees
 app.get("/employees", (req, res, next) => {
 
     ReportController.getInstance().listAllEmployees()
@@ -48,7 +45,7 @@ app.get("/employees", (req, res, next) => {
     });
 });
 
-// endpoint: localhost:port/api/report/employee?:id
+// endpoint: localhost:port/api/admin/report/employee?:id
 app.get("/employee?:id", (req, res, next) => {
     
     ReportController.getInstance().getEmployeeByID(String(req.query.id))
@@ -62,7 +59,7 @@ app.get("/employee?:id", (req, res, next) => {
 });
 
 
-// endpoint: localhost:port/api/report/employee/idnumber?:idNumber
+// endpoint: localhost:port/api/admin/report/employee/idnumber?:idNumber
 app.get("/employee/idnumber?:idNumber", (req, res, next) => {
     
     ReportController.getInstance().getEmployeeByIDNumber(String(req.query.idNumber))
@@ -75,7 +72,7 @@ app.get("/employee/idnumber?:idNumber", (req, res, next) => {
     });
 });
 
-// endpoint: localhost:port/api/report/employee/email?:email
+// endpoint: localhost:port/api/admin/report/employee/email?:email
 app.get("/employee/email?:email", (req, res, next) => {
     
     ReportController.getInstance().getEmployeeByEmail(String(req.query.email))
@@ -88,7 +85,7 @@ app.get("/employee/email?:email", (req, res, next) => {
     });
 });
 
-// endpoint: localhost:port/api/report/timeZones
+// endpoint: localhost:port/api/admin/report/timeZones
 app.get("/timezones", (req, res, next) => {
 
     ReportController.getInstance().getTimeZones()
