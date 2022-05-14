@@ -19,6 +19,7 @@ export const environment = {
   employees: "admin/report/employees",
   employeeById : "admin/report/employee?id=",
   employeeByEmail : "admin/report/employee/email?email=",
+  userInfo : "user/info",
   parkingById : "admin/report/parkinglot?id="
 };
 

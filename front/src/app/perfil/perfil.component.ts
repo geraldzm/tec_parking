@@ -17,8 +17,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     const api = new CallAPI(this.router);
-    api.callAPI({ url:environment.employeeByEmail +getUser().email, method: "GET", withAuth:true}).then((data) => {
-
+    api.callAPI({ url:environment.userInfo}).then((data) => {
       if(data.status === 200) {
         this.user = data.response;
         console.log(data.response);
