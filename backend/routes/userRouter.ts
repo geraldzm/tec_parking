@@ -18,4 +18,19 @@ app.put("/update", (req:any, res, next) => {
     });
 });
 
+// endpoint: localhost:port/api/user/info
+app.get("/info", (req:any, res, next) => {
+    
+    console.log("here");
+    UserController.getInstance().getUserInfoByID(String(req.userId))
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        console.log(err);
+        res.sendStatus(status.INTERNAL_ERROR); // internal error
+    });
+});
+
+
 export { app as userRouter };

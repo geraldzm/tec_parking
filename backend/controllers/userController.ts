@@ -1,5 +1,6 @@
 import { UserRep } from '../repository';
 import { toSha256, createToken } from '../utils/auth'
+import { setCorrectFormatSchedule } from '../utils/common';
 import { validateEmail } from '../utils/validations'
 
 export class UserController {
@@ -251,4 +252,19 @@ export class UserController {
             return rs(this.rep.editUserInfo(user));
         });
     }
+
+    public getUserInfoByID(userId : string) : Promise<any> 
+    {
+        return new Promise(async (rs, rj) => {
+
+            const result = await this.rep.getUserById(userId);
+
+            if (!result) {
+                rj("No user found");
+            }
+
+            setCorrectFormatSchedule(result.schedule);
+            rs(result);
+        });
+    }   
 }
