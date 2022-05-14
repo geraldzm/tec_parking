@@ -28,13 +28,14 @@ export class PerfilComponent implements OnInit {
 
   Update(){
 
+    console.log(this.user);
     const api = new CallAPI(this.router);
-    api.callAPI({ url:environment.updateUser, method: "PUT", body: {user: this.user, userId: this.user.id},
-                 withAuth:true}).then((data) => {
-
+    api.callAPI({ url:environment.updateUser, method: "PUT", body: {user: this.user}}).then((data) => {
       if(data.status === 200) {
         window.location.reload();
-      }             
+      } else {
+        console.log("Error updating profile");
+      }
     });
   }
 

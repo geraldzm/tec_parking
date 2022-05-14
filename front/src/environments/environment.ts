@@ -4,22 +4,22 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://localhost:58830/api",
+  apiURL: "http://localhost:5000/api",
   login: "auth/login",
   logout: "auth/logout",
-  register: "auth/register",
-  deleteUser : "auth/delete",
-  editUser : "auth/edit",
-  updateUser : "auth/update",
-  reportWeek: "report/timezones",
-  deleteParking: "parkingAdmin/delete",
-  updateParking: "parkingAdmin/update",
-  createParkingLot: "parkingAdmin/parkinglot",
+  register: "admin/user/register",
+  deleteUser : "admin/user/delete",
+  editUser : "admin/user/edit",
+  updateUser : "user/update",
+  reportWeek: "admin/report/timeZones",
+  deleteParking: "admin/parking/delete",
+  updateParking: "admin/parking/update",
+  createParkingLot: "admin/parking/parkinglot",
   allParkinLots: "parking/list",
-  employees: "report/employees",
-  employeeById : "report/employee?id=",
-  employeeByEmail : "report/employee/email?email=",
-  parkingById : "report/parkinglot?id="
+  employees: "admin/report/employees",
+  employeeById : "admin/report/employee?id=",
+  employeeByEmail : "admin/report/employee/email?email=",
+  parkingById : "admin/report/parkinglot?id="
 };
 
 /*
