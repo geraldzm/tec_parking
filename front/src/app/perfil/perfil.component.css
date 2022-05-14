@@ -7,6 +7,12 @@
     height: 100vh;
 }
 
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*Esto le da el estilo al header*/
 .header{
     display: flex;

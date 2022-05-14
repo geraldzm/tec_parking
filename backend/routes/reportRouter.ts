@@ -75,6 +75,19 @@ app.get("/employee/idnumber?:idNumber", (req, res, next) => {
     });
 });
 
+// endpoint: localhost:port/api/report/employee/email?:email
+app.get("/employee/email?:email", (req, res, next) => {
+    
+    ReportController.getInstance().getEmployeeByEmail(String(req.query.email))
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        console.log(err);
+        res.sendStatus(500); // internal error
+    });
+});
+
 // endpoint: localhost:port/api/report/timeZones
 app.get("/timezones", (req, res, next) => {
 

@@ -171,7 +171,7 @@ export class UserController {
                 else{
                     user.plates = user.plates ? user.plates : userDB.plates;
                     user.secondEmail = user.secondEmail ? user.secondEmail : userDB.secondEmail;
-                    user.schedule = user.schedule ? user.schedule : userDB.schedule;
+                    this.setScheduleCorrectFormat(user.schedule);
 
                     rs(this.rep.updateUserInfo(user, userId));
                 }
@@ -179,6 +179,38 @@ export class UserController {
         });
     }
 
+
+    /**
+    * Set the correct format for schedules
+    * @param schedule 
+    */
+    private setScheduleCorrectFormat(schedule : any) : void{
+
+        //var days = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+
+        for (var i in schedule){
+
+            for(var j in schedule[i]){
+                
+                //Set correct format to the schedule
+                var date = new Date();
+
+                date.setHours((schedule[i][j].start.split(':'))[0]);
+                date.setMinutes((schedule[i][j].start.split(':'))[1]);
+                schedule[i][j].start = date;
+
+                date = new Date();
+                date.setHours((schedule[i][j].end.split(':'))[0]);
+                date.setMinutes((schedule[i][j].end.split(':'))[1]);
+                schedule[i][j].end = date;
+            }
+        }
+    }
+
+    /**
+    * Method to edit users basic information
+    * @param user 
+    */
     public editUser(user : any) : Promise<any>
     {
         return new Promise(async (rs, rj) => {

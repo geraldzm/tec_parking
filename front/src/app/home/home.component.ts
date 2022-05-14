@@ -44,8 +44,4 @@ export class HomeComponent implements OnInit {
   Perfil(){
     this.router.navigate(['/perfil']);
   }
-
-
-
-
 }

@@ -1,36 +1,138 @@
 <router-outlet></router-outlet>
 <!DOCTYPE html>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="header">
-    <h1>ParTec</h1> 
-</div>
-<div class= "container">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<body>
+  <div class="header">
+    <h1>ParTec</h1>
+  </div>
+  <br>
+  <div class="form">
     <div class="card text-center">
       <div class="card-header">
-        <b>Editar</b> 
+        <b>Editar</b>
       </div>
-      <router-outlet></router-outlet>
       <div class="card-body p-4">
-  
-        <label style="float: left;">Número Id</label>
-        <input class="form-control m-2" type="number" placeholder="Ingrese el Id del funcionario"[(ngModel)]="perfil.id">
-  
-        <label style="float: left;">Placa(s)</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese sus placas separadas por comas"[(ngModel)]="perfil.plates">
-
-        <label style="float: left;">Correo secundario</label>
-        <input class="form-control m-2" type="email" placeholder="Ingrese el correo secundario"[(ngModel)]="perfil.secondEmail">
-
-        <label style="float: left;">Inicio de horario</label>
-        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese el inicio de su horario"[(ngModel)]="perfil.scheduleStart">
-
-        <label style="float: left;">Fin de horario</label>
-        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese el fin de su horario"[(ngModel)]="perfil.scheduleEnd">
-  
-        <button class="btn btn-primary btn-block m-4" (click) = Update() > Actualizar perfil</button>
-
+        <label>Correo secundario</label>
+        <input class="form-control" style="margin-bottom: 2%;" type="email" placeholder="Ingrese el correo secundario">
+        <div class="form" style="margin-bottom: 2%;">
+          <form class="row g-3">
+            <div class="col-auto">
+              <select id="day" class="form-control">
+                <option value="domingo">Domingo</option>
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sabado">Sábado</option>
+              </select>
+              <label>Día</label>
+            </div>
+            <div class="col-auto">
+              <input type="time" class="form-control" id="start" placeholder="Entrada">
+              <label>Entrada</label>
+            </div>
+            <div class="col-auto">
+              <input type="time" class="form-control" id="end" placeholder="Salida">
+              <label>Salida</label>
+            </div>
+            <div class="col-auto">
+              <button (click)=addTime() class="btn btn-secondary mb-3">Agregar Franja</button>
+            </div>
+          </form>
+        </div>
+        <div class="form">
+          <form class="row g-3">
+            <div class="col-auto">
+              <input type="text" class="form-control" id="plate" placeholder="Placa">
+            </div>
+            <div class="col-auto">
+              <button (click)=addPlate() class="btn btn-secondary mb-3">Agregar Placa</button>
+            </div>
+          </form>
+        </div>
+        <button class="btn btn-success btn-block" (click)=Update()> Actualizar perfil</button>
         <label>Volver al menú de Inicio <a [routerLink]="['/payroll']">Inicio</a></label>
       </div>
     </div>
-    <router-outlet></router-outlet>
   </div>
+  <br>
+  <h2 class="form" style="color: blue;"> Placas</h2>
+  <div class="form">
+  <table class="table table-bordered" style="width: 20%; text-align: center;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Placa</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of user.plates">
+        <td>{{p}}</td>
+        <td><button (click)=removePlate(p) class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+  <h2 class="form" style="color: orange;">Horario</h2>
+  <div class="form">
+  <table class="table table-bordered" style="width: 60%; text-align: center;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Día</th>
+        <th scope="col">Entrada</th>
+        <th scope="col">Salida</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of user.schedule.domingo">
+        <th scope="row">Domingo</th>
+        <td>{{d.start}}</td>
+        <td>{{d.end}}</td>
+        <td><button (click)="removeTime('domingo', d)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+      <tr *ngFor="let l of user.schedule.lunes">
+        <th scope="row">Lunes</th>
+        <td>{{l.start}}</td>
+        <td>{{l.end}}</td>
+        <td><button (click)="removeTime('lunes', l)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+      <tr *ngFor="let m of user.schedule.martes">
+        <th scope="row">Martes</th>
+        <td>{{m.start}}</td>
+        <td>{{m.end}}</td>
+        <td><button (click)="removeTime('martes', m)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+      <tr *ngFor="let m of user.schedule.miercoles">
+        <th scope="row">Miércoles</th>
+        <td>{{m.start}}</td>
+        <td>{{m.end}}</td>
+        <td><button (click)="removeTime('miercoles', m)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+      <tr *ngFor="let j of user.schedule.jueves">
+        <th scope="row">Jueves</th>
+        <td>{{j.start}}</td>
+        <td>{{j.end}}</td>
+        <td><button (click)="removeTime('jueves', j)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+      <tr *ngFor="let v of user.schedule.viernes">
+        <th scope="row">Viernes</th>
+        <td>{{v.start}}</td>
+        <td>{{v.end}}</td>
+        <td><button (click)="removeTime('viernes', v)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+      <tr *ngFor="let s of user.schedule.sabado">
+        <th scope="row">Sábado</th>
+        <td>{{s.start}}</td>
+        <td>{{s.end}}</td>
+        <td><button (click)="removeTime('sabado', s)" class="btn btn-danger mb-3">Borrar</button></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</body>
