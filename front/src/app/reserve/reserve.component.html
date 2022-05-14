@@ -22,7 +22,7 @@
         <input class="form-control m-2" type="datetime-local" placeholder="Ingrese su fecha de registro"[(ngModel)]="reserva.FechaRegistro">
 
         
-        <button class="btn btn-primary btn-block m-4" > Reservar </button>
+        <button class="btn btn-primary btn-block m-4" (click)= Reservar()> Reservar </button>
 
         <label><a [routerLink]="['/home']">Volver</a></label>
       </div>

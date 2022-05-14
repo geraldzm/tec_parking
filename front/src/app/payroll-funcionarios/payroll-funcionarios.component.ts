@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { CallAPI, getUser } from '../utils/api'
 import { environment } from '../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payroll-funcionarios',
@@ -69,7 +70,15 @@ async Eliminar(id : any){
 
   if(data.status === 200) {
     window.location.reload();
-  } 
+    Swal.fire(
+      "Se ha eliminado el funcionario"
+    )
+  }
+  else{
+    Swal.fire(
+      "Ocurrió un error inesperado, intente nuevaente"
+    )
+  }
   
 }
 

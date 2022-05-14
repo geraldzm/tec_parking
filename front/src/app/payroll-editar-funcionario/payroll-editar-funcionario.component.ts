@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import as from '../utils/areas'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payroll-editar-funcionario',
@@ -51,7 +52,15 @@ export class PayrollEditarFuncionarioComponent implements OnInit {
       const data = await api.callAPI({ url: environment.editUser, method: "PUT", body: body });
   
       if (data.status === 200) {
+        Swal.fire(
+          "Se han guardado los cambios"
+        )
         this.router.navigate(['/payrollFuncionarios']);
+      }
+      else{
+        Swal.fire(
+          "Ocurrió un problema inesperado, intente nuevamente"
+        )
       }
   }
 

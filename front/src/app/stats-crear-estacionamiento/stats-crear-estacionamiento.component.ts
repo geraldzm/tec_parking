@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { environment } from '../../environments/environment';
 import { CallAPI } from '../utils/api'
 
@@ -45,9 +46,17 @@ export class StatsCrearEstacionamientoComponent implements OnInit {
     const data = await api.callAPI({ url:environment.createParkingLot, method: "POST", body: {parkinglot: this.parkinglot}});
 
     if(data.status === 200 ) {
+      Swal.fire(
+        "El estacionamiento se registró correctamente"
+      )
       console.log("parkinglot created");
       this.created = true;
     } 
+    else{
+      Swal.fire(
+        "Ocurrió un error inesperado, intente nuevamente"
+      )
+    }
 
   }
 

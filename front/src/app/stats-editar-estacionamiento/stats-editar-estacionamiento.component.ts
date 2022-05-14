@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-stats-editar-estacionamiento',
@@ -59,7 +60,15 @@ export class StatsEditarEstacionamientoComponent implements OnInit {
     const data = await api.callAPI({ url: environment.updateParking, method: "POST", body: body });
 
     if (data.status === 200) {
+      Swal.fire(
+        "Se guardaron los cambios"
+      )
       this.router.navigate(['/payrollEstacionamientos']);
+    }
+    else{
+      Swal.fire(
+        "Ocurrió un error inesperado, intente nuevamente"
+      )
     }
 
     //console.log(this.parkinglot);
