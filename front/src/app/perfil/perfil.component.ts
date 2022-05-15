@@ -32,7 +32,6 @@ export class PerfilComponent implements OnInit {
     const api = new CallAPI(this.router);
     api.callAPI({ url:environment.updateUser, method: "PUT", body: {user: this.user}}).then((data) => {
       if(data.status === 200) {
-        window.location.reload();
         Swal.fire(
           "Se guardaron todos los cambios"
         )
@@ -41,6 +40,7 @@ export class PerfilComponent implements OnInit {
           "Ocurrió un problema inesperado, intente nuevamente"
         )
       }
+      window.location.reload();
     });
   }
 
