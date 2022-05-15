@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CallAPI, getUser } from '../utils/api'
 import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -31,10 +32,15 @@ export class PerfilComponent implements OnInit {
     const api = new CallAPI(this.router);
     api.callAPI({ url:environment.updateUser, method: "PUT", body: {user: this.user}}).then((data) => {
       if(data.status === 200) {
-        window.location.reload();
+        Swal.fire(
+          "Se guardaron todos los cambios"
+        )
       } else {
-        console.log("Error updating profile");
+        Swal.fire(
+          "Ocurrió un problema inesperado, intente nuevamente"
+        )
       }
+      window.location.reload();
     });
   }
 

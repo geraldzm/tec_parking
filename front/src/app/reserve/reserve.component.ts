@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reserve',
@@ -17,6 +18,12 @@ export class ReserveComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  Reservar(){
+    Swal.fire(
+      "Aun no se puede reservar :("
+    )
   }
 
 }

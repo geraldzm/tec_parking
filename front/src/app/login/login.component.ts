@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CallAPI, saveToken, removeAuthToken} from '../utils/api'
 import { environment } from '../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
       return;
     } 
     console.log("wrong password or email");
+    Swal.fire(
+      "Ingrese un correo y contraseña válidos"
+    )
   }
-  
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { environment } from '../../environments/environment';
 import { CallAPI } from '../utils/api'
 import as from '../utils/areas'
@@ -36,6 +37,7 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
     //this.estacionamiento.Nombre = '';
 
     this.areas = as.areas;
+    this.user.area = this.areas[0];
   }
 
   async Registrar() {
@@ -44,7 +46,15 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
     const data = await api.callAPI({ url: environment.register, method: "POST", body: { user: this.user } });
 
     if (data.status === 200) {
+      Swal.fire(
+        "Se ha registrado el funcionario correctamente"
+      )
       console.log("user created");
+    }
+    else{
+      Swal.fire(
+        "Ocurrió un problema inesperado, intente nuevamente"
+      )
     }
 
   }
