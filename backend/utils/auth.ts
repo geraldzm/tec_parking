@@ -1,7 +1,7 @@
-import * as Base64url from 'crypto-js/enc-base64url';
-import * as Utf8 from 'crypto-js/enc-utf8';
-import * as hmacSHA256 from 'crypto-js/hmac-sha256';
-import * as sha256  from 'crypto-js/sha256';
+const Base64url = require('crypto-js/enc-base64url');
+const Utf8 = require('crypto-js/enc-utf8');
+const hmacSHA256 = require('crypto-js/hmac-sha256');
+const sha256 = require('crypto-js/sha256');
 
 export const alg = "HS256", typ = "JWT";
 

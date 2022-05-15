@@ -2,12 +2,15 @@
     "name": "backend",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "dist/index",
+    "typings": "dist/index",
     "scripts": {
+        "postinstall": "npm install typescript && tsc",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "tsc index.ts && node index.js",
+        "start": "tsc && node dist/index.js",
         "dev": "nodemon src/index.ts"
     },
+    "engines": { "node": "v14.17.2" },
     "keywords": [],
     "author": "",
     "license": "ISC",
