@@ -4,10 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+    	"postinstall": "tsc",
+    	"deploy": "git add . && git commit -m Heroku && git push heroku main",
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "tsc index.ts && node index.js",
         "dev": "nodemon src/index.ts"
     },
+    "engines": { "node": "v14.17.2" },
     "keywords": [],
     "author": "",
     "license": "ISC",
