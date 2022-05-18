@@ -10,4 +10,5 @@ export function validateEmail(email: string): any {
     if (email.split("@")[1] !== "itcr.ac.cr" && email.split("@")[1] !== "tec.ac.cr") 
         return { ok: false, error: "Need an institutional email for the main email"}
 
+    return {ok: true, error: ''};
 }

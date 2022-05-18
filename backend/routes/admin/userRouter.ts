@@ -37,10 +37,10 @@ app.put("/edit", (req:any, res, next) => {
         res.sendStatus(status.UNAUTHORIZED); // internal error
         return;
     }
-    
-    UserController.getInstance().editUser(req.body["userId"], req.body["user"])
-    .then((data : any)=>{
-        res.json(data);
+
+    UserController.getInstance().editUser(req.body["user"])
+    .then(()=>{
+        res.sendStatus(status.OK);
     })
     .catch((err: any)=>{
         console.error(err);

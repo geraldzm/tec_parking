@@ -206,11 +206,11 @@ export class UserController {
     * Method to update the information of a user (admins only)
     * @param user 
     */
-    public editUser(userId: string, user : any) : Promise<any>
+    public editUser( user : any) : Promise<any>
     {
         return new Promise(async (rs, rj) => {
 
-            const oldUserDB = await this.rep.getUserById(userId);
+            const oldUserDB = await this.rep.getUserById(user.id);
             if(oldUserDB === null ) {
                 rj("No user found");
                 return;
