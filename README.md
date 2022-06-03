@@ -2,7 +2,7 @@
 Proyecto 1, Diseño
 
 
-## ENDPOINTS
+## ENDPOINTS # deprecated
 
 ## USER
 
