@@ -12,16 +12,27 @@
       <router-outlet></router-outlet>
       <div class="card-body p-4">
   
-        <label style="float: left;">Nombre Completo</label>
-        <input class="form-control m-2" type="text" placeholder="Ingrese el nombre del estacionamiento"[(ngModel)]="reserva.Edificio">
+        <label style="float: left;">Entrada</label>
+        <input class="form-control m-2" type="datetime-local" 
+        placeholder="Ingrese la fecha de inicio de la reserva"[(ngModel)]="reserva.start">
   
-        <label style="float: left;">Ubicacion</label>
-        <input class="form-control m-2" type="email" placeholder="Ingrese la ubicacion"[(ngModel)]="reserva.Correo">
+        <label style="float: left;">Salida</label>
+        <input class="form-control m-2" type="datetime-local" 
+        placeholder="Ingrese la fecha de fin de la reserva"[(ngModel)]="reserva.end">
 
-        <label style="float: left;">Fecha de Reserva</label>
-        <input class="form-control m-2" type="datetime-local" placeholder="Ingrese su fecha de registro"[(ngModel)]="reserva.FechaRegistro">
+        <label style="float: left;">Placa</label>
+        <select class="form-control m-2" placeholder="Seleccione su placa"
+        [(ngModel)]="reserva.plate">
+          <option *ngFor="let p of user.plates" value="p">{{p}}</option>
+        </select>
 
-        
+        <label style="float: left;">Estacionamiento</label>
+        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el estacionamiento"
+        [(ngModel)]="reserva.parkingLotId">
+          <option *ngFor="let p of parkinglots" value="p.name">{{p.name}}</option>
+        </select>
+
+   
         <button class="btn btn-primary btn-block m-4" (click)= Reservar()> Reservar </button>
 
         <label><a [routerLink]="['/home']">Volver</a></label>
