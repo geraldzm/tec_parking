@@ -56,6 +56,12 @@ export class ReservationController {
                 return;
             }
 
+            //Checks parkinglot schedule 
+            else if (!this.checkTimeZoneParking(reservation, parking.schedule)){
+                rj("Parkinglot is closed"); // reject
+                return;
+            }
+
             //Correct plate
             else if (!user.plates.includes(reservation.plate)) {
                 rj("Incorrect plate"); // reject
@@ -87,13 +93,32 @@ export class ReservationController {
             schedule[day][i].start = new Date(schedule[day][i].start.seconds * 1000);
             schedule[day][i].end = new Date(schedule[day][i].end.seconds * 1000);
 
-            schedule[day][i].start.setDate(reservation.start.getDate());
-            schedule[day][i].end.setDate(reservation.start.getDate());
+            schedule[day][i].start.setFullYear(reservation.start.getFullYear(), reservation.start.getMonth(), reservation.start.getDate());
+            schedule[day][i].end.setFullYear(reservation.end.getFullYear(), reservation.end.getMonth(), reservation.end.getDate());
 
-            if (reservation.start.getTime() < schedule[day][i].end.getTime() && schedule[day][i].start.getTime() <= reservation.end.getTime()) {
+            if (reservation.start.getTime() >= schedule[day][i].start.getTime() && reservation.start.getTime() < reservation.end.getTime()
+             && reservation.end.getTime() <= schedule[day][i].end.getTime()){
                 return true;
             }
         }
+        return false;
+    }
+
+    private checkTimeZoneParking(reservation: any, schedule: any): Boolean {
+
+        schedule.startHour = new Date(schedule.startHour.seconds * 1000);
+        schedule.endHour = new Date(schedule.endHour.seconds * 1000)
+        schedule.startHour.setFullYear(reservation.start.getFullYear(), reservation.start.getMonth(), reservation.start.getDate());
+        schedule.endHour.setFullYear(reservation.end.getFullYear(), reservation.end.getMonth(), reservation.end.getDate());
+
+        console.log(schedule.startHour.getTime(), reservation.start.getTime());
+        console.log(schedule.endHour.getTime(), reservation.end.getTime());
+
+        if (reservation.start.getTime() >= schedule.startHour.getTime() && reservation.end.getTime() <= schedule.endHour.getTime() &&
+            reservation.start.getTime() < reservation.end.getTime()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -104,7 +129,7 @@ export class ReservationController {
             var reservationNumber = 0;
 
             reservations.forEach(function (r: any) {
-                if (reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 <= reservation.end.getTime())
+                if (reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 < reservation.end.getTime())
                     reservationNumber++;
             });
 
@@ -125,7 +150,7 @@ export class ReservationController {
                 if (r.date && (new Date(r.date.seconds * 1000)).toDateString() == reservation.start.toDateString())
                     reservationNumber++;
 
-                else if (!r.date && reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 <= reservation.end.getTime())
+                else if (!r.date && reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 < reservation.end.getTime())
                     reservationNumber++;
             });
 

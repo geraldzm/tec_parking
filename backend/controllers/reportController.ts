@@ -271,15 +271,18 @@ export class ReportController {
         var endRange = new Date(beginRange.getTime() + 30*60000);
        
         //Update the date for the hour
-        start.setDate(beginRange.getDate());
-        end.setDate(beginRange.getDate());
-        
+        start.setFullYear(beginRange.getFullYear(),beginRange.getMonth(), beginRange.getDate());
+        end.setFullYear(endRange.getFullYear(),endRange.getMonth(), endRange.getDate());
+
+        if (start.getTime() < endRange.getTime() && beginRange.getTime() <= end.getTime())
+            time["value"] += 1;
+            /*
         if (beginRange.getTime() > start.getTime() && beginRange.getTime() < end.getTime()) {
             time["value"] += 1;
         }
         else if (endRange.getTime() > start.getTime() && endRange.getTime() < end.getTime()) {
             time["value"] += 1;
-        }
+        }*/
     }
 
 

@@ -207,13 +207,11 @@ export class ParkingController {
         //Set correct format to the schedule
         var date = new Date();
 
-        date.setHours((parkinglot.schedule.startHour.split(':'))[0]);
-        date.setMinutes((parkinglot.schedule.startHour.split(':'))[1]);
+        date.setHours((parkinglot.schedule.startHour.split(':'))[0], (parkinglot.schedule.startHour.split(':'))[1], 0);
         parkinglot.schedule.startHour = date;
 
         date = new Date();
-        date.setHours((parkinglot.schedule.endHour.split(':'))[0]);
-        date.setMinutes((parkinglot.schedule.endHour.split(':'))[1]);
+        date.setHours((parkinglot.schedule.endHour.split(':'))[0], (parkinglot.schedule.endHour.split(':'))[1], 0);
         parkinglot.schedule.endHour = date;
     }
 
