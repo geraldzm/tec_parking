@@ -11,14 +11,10 @@
       </div>
       <router-outlet></router-outlet>
       <div class="card-body p-4">
-  
-        <label style="float: left;">Entrada</label>
-        <input class="form-control m-2" type="datetime-local" 
-        placeholder="Ingrese la fecha de inicio de la reserva"[(ngModel)]="reserva.start">
-  
-        <label style="float: left;">Salida</label>
-        <input class="form-control m-2" type="datetime-local" 
-        placeholder="Ingrese la fecha de fin de la reserva"[(ngModel)]="reserva.end">
+    
+        <label style="float: left;">Fecha</label>
+        <input class="form-control m-2" type="date" 
+        placeholder="Ingrese la fecha de fin de la reserva"[(ngModel)]="reserva.date">
 
         <label style="float: left;">Placa</label>
         <select class="form-control m-2" placeholder="Seleccione su placa"

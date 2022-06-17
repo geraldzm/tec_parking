@@ -168,4 +168,16 @@ export class UserRep {
         .then((rs:any) => rs)
         .catch((error : any) => error);	 
     }
+
+    /*
+    public setDisabled(): Promise<any> {
+
+        return db.collection("Users").get().then(function(querySnapshot : any) {
+            querySnapshot.forEach(function(doc : any) {
+                doc.ref.update({
+                    disabled: false
+                });
+            });
+        });
+    }*/
 }

@@ -8,8 +8,8 @@ export function setCorrectFormatSchedule(schedule : any) {
 
     for (var i in days){
         for (var j in schedule[days[i]]){
-            schedule[days[i]][j].start = (new Date(schedule[days[i]][j].start * 1000)).toLocaleTimeString();
-            schedule[days[i]][j].end = (new Date(schedule[days[i]][j].end * 1000)).toLocaleTimeString();
+            schedule[days[i]][j].start = (new Date(schedule[days[i]][j].start.seconds * 1000 )).toLocaleTimeString();
+            schedule[days[i]][j].end = (new Date(schedule[days[i]][j].end.seconds * 1000)).toLocaleTimeString();
         }
     }
 }
