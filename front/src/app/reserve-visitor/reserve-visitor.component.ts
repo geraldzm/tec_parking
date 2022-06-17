@@ -40,7 +40,7 @@ export class ReserveVisitorComponent implements OnInit {
       }             
     });
     this.parkinglots = api.callAPI({ url:environment.allParkinLots }).then((data) => {
-    this.parkinglots = data.response;
+    this.parkinglots = data.response.filter((p: { type: string; }) => p.type == 'Alquilado');
     });
   }
 
