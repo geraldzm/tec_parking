@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { StatsComponent } from './stats/stats.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { ReserveLeadershipComponent } from './reserve-leadership/reserve-leadership.component';
+import { ReserveVisitorComponent } from './reserve-visitor/reserve-visitor.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { DataTablesModule } from "angular-datatables";
 import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
@@ -37,6 +38,7 @@ import { StatsFuncionarioDetalleComponent } from './stats-funcionario-detalle/st
     StatsComponent,
     ReserveComponent,
     ReserveLeadershipComponent,
+    ReserveVisitorComponent,
     PayrollComponent,
     StatsFranjaComponent,
     StatsEstacionamientosComponent,

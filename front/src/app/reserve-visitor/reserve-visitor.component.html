@@ -1,0 +1,56 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>Reserva ParTec</h1> 
+</div>
+<div class= "container">
+    <div class="card text-center">
+      <div class="card-header">
+        <b>Reserva</b> 
+      </div>
+      <router-outlet></router-outlet>
+      <div class="card-body p-4">
+        
+        <label style="float: left;">Nombre de la Visita</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese el nombre de la visita"[(ngModel)]="reserva.visitorName">
+
+        <label style="float: left;">Identificación de la Visita</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese la identificación de la visita"[(ngModel)]="reserva.visitorId">
+
+        <label style="float: left;">Razón de la Visita</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese la razón de la visita"[(ngModel)]="reserva.reason">
+
+        <label style="float: left;">Lugar Que Visita</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese el lugar hacia donde va"[(ngModel)]="reserva.place">
+
+        <label style="float: left;">Entrada</label>
+        <input class="form-control m-2" type="datetime-local" 
+        placeholder="Ingrese la fecha de inicio de la reserva"[(ngModel)]="reserva.start">
+  
+        <label style="float: left;">Salida</label>
+        <input class="form-control m-2" type="datetime-local" 
+        placeholder="Ingrese la fecha de fin de la reserva"[(ngModel)]="reserva.end">
+
+        <label style="float: left;">Placa del Vehículo</label>
+        <input class="form-control m-2" type="text"
+        placeholder="Ingrese la placa del auto"[(ngModel)]="reserva.plate">
+
+        <label style="float: left;">Estacionamiento</label>
+        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el estacionamiento"
+        [(ngModel)]="reserva.parkinglotId">
+          <option *ngFor="let p of parkinglots" value={{p.id}}>{{p.name}}</option>
+        </select>
+   
+        <button class="btn btn-primary btn-block m-4" (click)= Reservar()> Reservar </button>
+
+        <label><a [routerLink]="['/home']">Volver</a></label>
+      </div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>

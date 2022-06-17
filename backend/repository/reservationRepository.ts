@@ -20,11 +20,12 @@ export class ReservationRep {
 
 
     //List reservations of a type from 'Reservation' collection in firebase db
-    public getReservationsByType(type: string): Promise<any> {
+    public getReservationsByTypeByParking(type: string, parkinglotId: string): Promise<any> {
 
         return db.collection('Reservations')
             .where('active', '==', true)
             .where('type', '==', type)
+            .where('parkinglotId', '==', parkinglotId)
             .get()
             .then((rs: any) => rs.docs.map((doc: any) => ({
                 id: doc.id,

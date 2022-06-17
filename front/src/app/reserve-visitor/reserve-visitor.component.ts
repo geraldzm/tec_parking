@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 import { CallAPI } from '../utils/api';
 
 @Component({
-  selector: 'app-reserve-leadership',
-  templateUrl: './reserve-leadership.component.html',
-  styleUrls: ['./reserve-leadership.component.css']
+  selector: 'app-reserve-visitor',
+  templateUrl: './reserve-visitor.component.html',
+  styleUrls: ['./reserve-visitor.component.css']
 })
-export class ReserveLeadershipComponent implements OnInit {
+export class ReserveVisitorComponent implements OnInit {
 
   constructor(private router: Router) { }
 
@@ -19,8 +19,13 @@ export class ReserveLeadershipComponent implements OnInit {
 
   //Aqui esta el form de reserva.
   reserva = {
+    visitorName: '',
+    visitorId: '',
+    reason: '',
+    place: '',
     userId: '',
-    date: '',
+    start: '',
+    end: '',
     plate: '',
     parkinglotId: ''
   }
@@ -44,14 +49,13 @@ export class ReserveLeadershipComponent implements OnInit {
     console.log(this.reserva);
     
     const api = new CallAPI(this.router);
-    const data = await api.callAPI({url:environment.createLeadershipReserve, method: "POST", body: {reservation: this.reserva}});
+    const data = await api.callAPI({url:environment.createVisitorReserve, method: "POST", body: {reservation: this.reserva}});
 
     if(data.status === 200 ) {
       Swal.fire(
         "La reserva se registró correctamente"
       )
-    } 
-    else{
+    } else{
       Swal.fire(
         "Ocurrió un error, intente nuevamente"
       )

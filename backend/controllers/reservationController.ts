@@ -57,7 +57,7 @@ export class ReservationController {
             }
 
             //Checks parkinglot schedule 
-            else if (!this.checkTimeZoneParking(reservation, parking.schedule)){
+            else if (!this.checkTimeZoneParking(reservation, parking.schedule)) {
                 rj("Parkinglot is closed"); // reject
                 return;
             }
@@ -74,7 +74,7 @@ export class ReservationController {
                 rs(this.checkSpacesDisabledFunctionary(parking.disabledSpaces, reservation));
             } else {
                 reservation.type = 'Funcionario';
-                rs(this.checkSpacesFunctionary(parking.othersSpaces, reservation));
+                rs(this.checkSpacesFunctionaryAndVisitor(parking.othersSpaces, reservation));
             }
         });
     }
@@ -97,7 +97,7 @@ export class ReservationController {
             schedule[day][i].end.setFullYear(reservation.end.getFullYear(), reservation.end.getMonth(), reservation.end.getDate());
 
             if (reservation.start.getTime() >= schedule[day][i].start.getTime() && reservation.start.getTime() < reservation.end.getTime()
-             && reservation.end.getTime() <= schedule[day][i].end.getTime()){
+                && reservation.end.getTime() <= schedule[day][i].end.getTime()) {
                 return true;
             }
         }
@@ -111,9 +111,6 @@ export class ReservationController {
         schedule.startHour.setFullYear(reservation.start.getFullYear(), reservation.start.getMonth(), reservation.start.getDate());
         schedule.endHour.setFullYear(reservation.end.getFullYear(), reservation.end.getMonth(), reservation.end.getDate());
 
-        console.log(schedule.startHour.getTime(), reservation.start.getTime());
-        console.log(schedule.endHour.getTime(), reservation.end.getTime());
-
         if (reservation.start.getTime() >= schedule.startHour.getTime() && reservation.end.getTime() <= schedule.endHour.getTime() &&
             reservation.start.getTime() < reservation.end.getTime()) {
             return true;
@@ -122,11 +119,18 @@ export class ReservationController {
         return false;
     }
 
-    private checkSpacesFunctionary(availableSpaces: number, reservation: any): Promise<any> {
+    private checkSpacesFunctionaryAndVisitor(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
-            var reservations = await this.reservationRep.getReservationsByType(reservation.type);
+            var reservations = await this.reservationRep.getReservationsByTypeByParking('Funcionario', reservation.parkinglotId);
             var reservationNumber = 0;
+
+            reservations.forEach(function (r: any) {
+                if (reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 < reservation.end.getTime())
+                    reservationNumber++;
+            });
+
+            reservations = await this.reservationRep.getReservationsByTypeByParking('Visitante', reservation.parkinglotId);
 
             reservations.forEach(function (r: any) {
                 if (reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 < reservation.end.getTime())
@@ -142,7 +146,7 @@ export class ReservationController {
     private checkSpacesDisabledFunctionary(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
-            var reservations = await this.reservationRep.getReservationsByType(reservation.type);
+            var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
             var reservationNumber = 0;
 
             reservations.forEach(function (r: any) {
@@ -231,14 +235,13 @@ export class ReservationController {
     private checkSpacesLeadership(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
-            var reservations = await this.reservationRep.getReservationsByType(reservation.type);
+            var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
             var reservationNumber = 0;
 
             reservations.forEach(function (r: any) {
                 if (reservation.date.toDateString() == (new Date(r.date.seconds * 1000)).toDateString())
                     reservationNumber++;
-            }
-            );
+            });
             if (availableSpaces > reservationNumber) rs(this.reservationRep.createReservation(reservation));
             else rj("There are no spaces available"); // reject
         });
@@ -247,7 +250,7 @@ export class ReservationController {
     private checkSpacesDisabledLeadership(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
-            var reservations = await this.reservationRep.getReservationsByType(reservation.type);
+            var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
             var reservationNumber1 = 0;
             var reservationNumber2 = 0;
 
@@ -276,6 +279,61 @@ export class ReservationController {
                 reservationNumber1 = 0;
             }
             rs(this.reservationRep.createReservation(reservation));
+        });
+    }
+
+    /**
+    * Create a new reservation for a visitor
+    * @param {Object} reservation { reservation }
+    */
+    public createVisitorReservation(reservation: any): Promise<any> {
+
+        return new Promise(async (rs, rj) => {
+
+            //Verify that has all the necessary data
+            if (!reservation.visitorName || !reservation.visitorId || !reservation.reason || !reservation.place
+                || !reservation.userId || !reservation.start || !reservation.end || !reservation.plate
+                || !reservation.parkinglotId) {
+                rj("It does not have all the data"); //reject
+                return;
+            }
+
+            //verify types
+            else if (typeof (reservation.visitorName) != 'string' || typeof (reservation.visitorId) != 'string'
+                || typeof (reservation.reason) != 'string' || typeof (reservation.place) != 'string'
+                || typeof (reservation.userId) != 'string' || typeof (reservation.start) != 'string'
+                || typeof (reservation.end) != 'string' || typeof (reservation.plate) != 'string'
+                || typeof (reservation.parkinglotId) != 'string') {
+                rj("A field is incorrect");
+                return;
+            }
+
+            reservation.start = new Date(reservation.start);
+            reservation.end = new Date(reservation.end);
+            reservation.active = true;
+            reservation.type = 'Visitante';
+
+            //get user and parking and checks if exists
+            const user = await this.userRep.getUserById(reservation.userId);
+            const parking = await this.parkingRep.getParkingById(reservation.parkinglotId);
+
+            if (!user || !parking) {
+                rj("No user or parkinglot found"); // reject
+                return;
+            }
+
+            //Checks parkinglot schedule 
+            else if (!this.checkTimeZoneParking(reservation, parking.schedule)) {
+                rj("Parkinglot is closed"); // reject
+                return;
+            }
+
+            //Check if parkinglot is private
+            else if (parking.type != 'Alquilado') {
+                rj("Parkinglot is not private"); // reject
+                return;
+            }
+            rs(this.checkSpacesFunctionaryAndVisitor(parking.othersSpaces, reservation));
         });
     }
 }

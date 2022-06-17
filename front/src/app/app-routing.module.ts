@@ -6,6 +6,7 @@ import { PayrollComponent } from './payroll/payroll.component';
 import { StatsComponent } from './stats/stats.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { ReserveLeadershipComponent } from './reserve-leadership/reserve-leadership.component';
+import { ReserveVisitorComponent } from './reserve-visitor/reserve-visitor.component';
 import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
 import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-estacionamientos.component';
 import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
 {path: 'payroll', component: PayrollComponent, pathMatch: 'full'},
 {path: 'reserve', component: ReserveComponent, pathMatch: 'full'},
 {path: 'reserveleadership', component: ReserveLeadershipComponent, pathMatch: 'full'},
+{path: 'reservevisitor', component: ReserveVisitorComponent, pathMatch: 'full'},
 {path: 'stats', component: StatsComponent, pathMatch: 'full'},
 {path: 'statsFranja', component: StatsFranjaComponent, pathMatch: 'full'},
 {path: 'statsEstacionamientos', component: StatsEstacionamientosComponent, pathMatch: 'full'},

@@ -22,7 +22,8 @@ export const environment = {
   userInfo : "user/info",
   parkingById : "admin/report/parkinglot?id=",
   createFunctionaryReserve : "reservation/functionary",
-  createLeadershipReserve : "reservation/leadership"
+  createLeadershipReserve : "reservation/leadership",
+  createVisitorReserve : "reservation/visitor"
 };
 
 /*

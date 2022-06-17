@@ -49,7 +49,7 @@ export class ReserveComponent implements OnInit {
 
     if(data.status === 200 ) {
       Swal.fire(
-        "El estacionamiento se registró correctamente"
+        "La reserva se registró correctamente"
       )
     } 
     else{
