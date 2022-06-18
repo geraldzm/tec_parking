@@ -16,9 +16,17 @@
         [(ngModel)]="user.idNumber" required>
   
         <label style="float: left;">Rol</label>
-        <select class="form-control m-2" placeholder="Rol" name="Rol" [(ngModel)]="user.role"  required>
+        <select class="form-control m-2" placeholder="Rol" name="Rol" [(ngModel)]="user.role"  (change)="changeRol($event)">
           <option value="admin">Admin</option>
           <option value="funcionario">Funcionario</option>
+        </select>
+
+        <label style="float: left;">Perfil de Usuario</label>
+        <select class="form-control m-2" placeholder="Perfil de Usuario" name="Perfil" [(ngModel)]="user.profile" (change)="changeProfile($event)" id="profile">
+          <option value="admin">Admin</option>
+          <option value="estandar">Estandar</option>
+          <option value="jefatura">Jefatura</option>
+          <option value="operador">Operador de Estacionamiento</option>
         </select>
 
         <label style="float: left;">Area</label>
@@ -51,7 +59,19 @@
           <option value="true">Sí</option>
           <option value="false">No</option>
         </select>
-  
+        
+        <label style="float: left;">Persona Discapacitada</label>
+        <select class="form-control m-2" placeholder="Persona Discapacitada" name="Persona Discapacitada" (change)="changeDisabledPerson($event)">
+          <option value="false">No</option>
+          <option value="true">Sí</option>
+        </select>
+        
+        <label style="float: left;">Estacionamiento (Usuarios Operadores)</label>
+        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el estacionamiento" id="parkinglot"
+        [(ngModel)]="user.parkinglotId">
+          <option *ngFor="let p of parkinglots" value={{p.id}}>{{p.name}}</option>
+        </select>
+
         <button class="btn btn-primary btn-block m-4" (click) = Editar() > Editar Funcionario</button>
 
         <label>Volver al menú de Inicio <a [routerLink]="['/payroll']">Inicio</a></label>

@@ -95,7 +95,10 @@ export class UserRep {
             role: user.role,
             active: user.active,
             schedule: user.schedule,
-            plates: user.plates
+            plates: user.plates,
+            profile : user.profile,
+            disabled : user.disabled,
+            parkinglotId : user.parkinglotId
         })
         .then((rs:any) => {
             console.log('user saved: ' + rs);
@@ -163,7 +166,10 @@ export class UserRep {
             secondEmail : user.secondEmail,
             email : user.email,
             name : user.name,
-            useSecondEmailAsFavorite : user.useSecondEmailAsFavorite
+            useSecondEmailAsFavorite : user.useSecondEmailAsFavorite,
+            profile : user.profile,
+            disabled : user.disabled,
+            parkinglotId : user.parkinglotId
         })
         .then((rs:any) => rs)
         .catch((error : any) => error);	 

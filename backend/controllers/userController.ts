@@ -69,7 +69,7 @@ export class UserController {
             //Verify that has all the necessary data
             if (!user.name || !user.email  || !user.secondEmail  || !user.phone || !user.idNumber
                 || user.useSecondEmailAsFavorite == undefined  || !user.area || !user.password 
-                || !user.role){
+                || !user.role || !user.profile || user.disabled == undefined){
                 rj("It does not have all the data"); //reject
             }
 
@@ -78,7 +78,8 @@ export class UserController {
                 || typeof(user.secondEmail) != 'string' || typeof(user.phone) != 'number' 
                 || typeof(user.idNumber) != 'string'|| typeof(user.useSecondEmailAsFavorite) != 'boolean' 
                 || typeof(user.area) != 'object' || typeof(user.password) != 'string'
-                || typeof(user.role) != 'string'){
+                || typeof(user.role) != 'string' || typeof(user.profile) != 'string'
+                || typeof(user.disabled) != 'boolean'){
 
                 rj ("A field is incorrect")
             }
@@ -90,6 +91,12 @@ export class UserController {
 
             //verify role
             else if (user.role != "admin" && user.role != "funcionario"){
+                rj("Role incorrect");
+            }
+
+            //verify profile
+            else if (user.profile != "admin" && user.profile != "estandar" && user.profile != "jefatura"
+                    && user.profile != "operador"){
                 rj("Role incorrect");
             }
 

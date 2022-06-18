@@ -15,6 +15,7 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
   constructor(private router: Router) { }
 
   areas: any;
+  parkinglots : any;
 
   //user
   user = {
@@ -31,6 +32,9 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
     email: '',
     name: '',
     useSecondEmailAsFavorite: true,
+    profile: '',
+    disabled: false,
+    parkinglotId: ''
   }
 
   ngOnInit(): void {
@@ -38,6 +42,11 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
 
     this.areas = as.areas;
     this.user.area = this.areas[0];
+
+    const api = new CallAPI(this.router);
+    this.parkinglots = api.callAPI({ url:environment.allParkinLots }).then((data) => {
+    this.parkinglots = data.response;
+    });
   }
 
   async Registrar() {
@@ -64,10 +73,37 @@ export class PayrollCrearFuncionarioComponent implements OnInit {
     else this.user.useSecondEmailAsFavorite = false; 
   }
 
+  changeDisabledPerson(event: any) {
+    if (event.target.value === "true") this.user.disabled = true;
+    else this.user.disabled = false; 
+  }
 
   changeArea(event: any){
     var area = event.target.value.split(',');
     this.user.area.code = area[0];
     this.user.area.name = area[1];
   }
+
+  changeRol(event: any) {
+
+    if (event.target.value == "admin"){
+      
+      document.getElementById('profile')?.setAttribute("disabled","disabled");
+      document.getElementById('parkinglot')?.setAttribute("disabled","disabled");
+      this.user.profile = 'admin';
+      this.user.parkinglotId = '';
+    }else{
+      document.getElementById('profile')?.removeAttribute("disabled");
+    }
+  }
+
+  changeProfile(event: any) {
+    if (event.target.value === "operador") {
+      document.getElementById('parkinglot')?.removeAttribute("disabled");
+    }else{
+      document.getElementById('parkinglot')?.setAttribute("disabled","disabled");
+      this.user.parkinglotId = '';
+    }
+  }
+
 }
