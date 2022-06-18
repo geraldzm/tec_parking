@@ -378,4 +378,20 @@ export class ReservationController {
             else rj("There are no spaces available"); // reject
         });
     }
+
+    /**
+    * Get all reservations for an user
+    * @param {Object} userId { userId }
+    */
+    public getReservationsByUser(userId: string): Promise<any> {
+
+        return new Promise(async (rs, rj) => {
+
+            var reservations = await this.reservationRep.getReservationsByUser(userId);
+            for (var i = 0; i<reservations.length; i++){
+                reservations[i].parkinglot = await this.parkingRep.getParkingById(reservations[i].parkinglotId);
+            }
+            rs(reservations);
+        });
+    }
 }

@@ -32,4 +32,29 @@ export class ReservationRep {
                 ...doc.data()
             })));
     }
+
+    //Delete logic for a reservation
+    public deleteReservation(reservationId: string): Promise<any> {
+        
+        return db.collection('Reservations')
+        .doc(reservationId)
+        .update({
+            active : false
+        })
+        .then((rs:any) => rs)
+        .catch((error : any) => error);	
+    }
+
+    //List reservations from 'Reservation' collection in firebase db by user
+    public getReservationsByUser(userId: string): Promise<any> {
+
+        return db.collection('Reservations')
+            .where('active', '==', true)
+            .where('userId', '==', userId)
+            .get()
+            .then((rs: any) => rs.docs.map((doc: any) => ({
+                id: doc.id,
+                ...doc.data()
+        })));
+    }
 }

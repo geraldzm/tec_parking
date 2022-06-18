@@ -62,4 +62,17 @@ app.post("/officialvehicle", (req, res) => {
     });
 });
 
+
+// endpoint: localhost:port/api/reservation/listbyuser?userId=
+app.get("/listbyuser?:userId", (req, res) => {
+    
+    ReservationController.getInstance().getReservationsByUser(String(req.query.userId))
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        res.sendStatus(500); // internal error
+    });
+});
+
 export { app as reservationRouter };
