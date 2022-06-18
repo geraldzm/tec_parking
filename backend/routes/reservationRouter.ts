@@ -63,14 +63,29 @@ app.post("/officialvehicle", (req, res) => {
 });
 
 
-// endpoint: localhost:port/api/reservation/listbyuser?userId=
-app.get("/listbyuser?:userId", (req, res) => {
+// endpoint: localhost:port/api/reservation/liststandarprofile?userId=
+app.get("/liststandarprofile?:userId", (req, res) => {
     
-    ReservationController.getInstance().getReservationsByUser(String(req.query.userId))
+    ReservationController.getInstance().getReservationsStandarProfile(String(req.query.userId))
     .then((data : any)=>{
         res.json(data);
     })
     .catch((err: any)=>{
+        res.sendStatus(500); // internal error
+    });
+});
+
+
+// endpoint: localhost:port/api/reservation/deletereservation
+app.delete("/deletereservation", (req, res) => {
+
+    ReservationController.getInstance().deleteReservation(req.body["reservationId"])
+    .then((data : any)=>{
+        console.log("Reservation deleted");
+        res.sendStatus(200);
+    })
+    .catch((err: any)=>{
+        console.log(err);
         res.sendStatus(500); // internal error
     });
 });

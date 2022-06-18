@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-
+  user : any;
 
   constructor(private router: Router) { }
 
@@ -21,12 +21,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-  const user = getUser();
+  this.user = getUser();
+  
   //Aqui es donde verificamos si el usuario puede ver o no ver los botones
-  if(user.role == 'admin' || user.role == 'Admin'){
+  if(this.user.role == 'admin' || this.user.role == 'Admin'){
     this.isAdmin = true;
   }
-  console.log("user: " + user.email + " " + user.name + " " + user.role);  
+  console.log("user: " + this.user.email + " " + this.user.name + " " + this.user.role + " " + this.user.profile);  
   }
 
   Consultar(){
@@ -34,7 +35,14 @@ export class HomeComponent implements OnInit {
   }
 
   Reservar(){
-    this.router.navigate(['/reserve']);
+    if (this.isAdmin || this.user.profile == 'estandar'){
+      this.router.navigate(['/reserve']);
+    }else if (this.user.profile == 'jefatura'){
+      this.router.navigate(['/reserveleadership']);
+    }
+    else if (this.user.profile == 'operador'){
+      this.router.navigate(['/reserveofficialvehicle']);
+    }
   }
 
   Planilla(){
@@ -43,6 +51,17 @@ export class HomeComponent implements OnInit {
 
   Perfil(){
     this.router.navigate(['/perfil']);
+  }
+
+  Historial(){
+    if (this.isAdmin || this.user.profile == 'estandar'){
+      this.router.navigate(['/reservehistorystandarprofile']);
+    }else if (this.user.profile == 'jefatura'){
+      
+    }
+    else if (this.user.profile == 'operador'){
+      
+    }
   }
 
   logout(){

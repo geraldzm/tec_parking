@@ -24,7 +24,9 @@ export const environment = {
   createFunctionaryReserve : "reservation/functionary",
   createLeadershipReserve : "reservation/leadership",
   createVisitorReserve : "reservation/visitor",
-  createOfficialVehicleReserve : "reservation/officialvehicle"
+  createOfficialVehicleReserve : "reservation/officialvehicle",
+  reservesByUser : "reservation/liststandarprofile?userId=",
+  deleteReserve: "reservation/deletereservation"
 };
 
 /*

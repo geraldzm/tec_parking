@@ -380,18 +380,48 @@ export class ReservationController {
     }
 
     /**
-    * Get all reservations for an user
+    * Get all reservations for an user standar profile
     * @param {Object} userId { userId }
     */
-    public getReservationsByUser(userId: string): Promise<any> {
+    public getReservationsStandarProfile(userId: string): Promise<any> {
 
         return new Promise(async (rs, rj) => {
 
+            const today = new Date();
+
             var reservations = await this.reservationRep.getReservationsByUser(userId);
-            for (var i = 0; i<reservations.length; i++){
+
+            reservations = reservations.filter(function (item: any) {
+                return item.start != undefined && item.type != "Visitante";
+            });
+            reservations.sort(function(a:any,b:any){return b.start.seconds - a.start.seconds;});
+            for (var i = 0; i < reservations.length; i++) {
                 reservations[i].parkinglot = await this.parkingRep.getParkingById(reservations[i].parkinglotId);
+
+                if (reservations[i].start.seconds * 1000 > today.getTime()) {
+                    reservations[i].mod = true;
+                }
+                reservations[i].start = (new Date(reservations[i].start.seconds * 1000)).toLocaleDateString() + ' ' + (new Date(reservations[i].start.seconds * 1000)).toLocaleTimeString();
+                reservations[i].end = (new Date(reservations[i].end.seconds * 1000)).toLocaleDateString() + ' ' + (new Date(reservations[i].end.seconds * 1000)).toLocaleTimeString();
             }
             rs(reservations);
+        });
+    }
+
+
+    /**
+    * Delete a reservation
+    * @param {Object} reservationId { reservationId }
+    */
+     public deleteReservation(reservationId: string): Promise<any> {
+        
+        return new Promise(async (rs, rj) => {
+
+            if (!reservationId || reservationId == ''){
+                rj("Incorrect id reservation");
+                return;
+            }
+            rs(this.reservationRep.deleteReservation(reservationId));
         });
     }
 }

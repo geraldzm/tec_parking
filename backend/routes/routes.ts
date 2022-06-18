@@ -26,7 +26,7 @@ class Routes {
         //public rutes (anyone can access them)
         this.express.use('/auth', authRouter);
         
-        this.express.use('/reservation', reservationRouter);
+        this.express.use('/reservation', tokenMiddlewareValidation, reservationRouter);
     }
 }
 

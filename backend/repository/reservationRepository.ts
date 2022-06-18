@@ -47,7 +47,6 @@ export class ReservationRep {
 
     //List reservations from 'Reservation' collection in firebase db by user
     public getReservationsByUser(userId: string): Promise<any> {
-
         return db.collection('Reservations')
             .where('active', '==', true)
             .where('userId', '==', userId)

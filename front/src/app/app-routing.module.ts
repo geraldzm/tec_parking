@@ -8,6 +8,7 @@ import { ReserveComponent } from './reserve/reserve.component';
 import { ReserveLeadershipComponent } from './reserve-leadership/reserve-leadership.component';
 import { ReserveOfficialVehicleComponent } from './reserve-officialvehicle/reserve-officialvehicle.component';
 import { ReserveVisitorComponent } from './reserve-visitor/reserve-visitor.component';
+import { ReserveHistoryComponent } from './reserve-history/reserve-history.component';
 import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
 import { StatsEstacionamientosComponent } from './stats-estacionamientos/stats-estacionamientos.component';
 import { StatsFuncionariosComponent } from './stats-funcionarios/stats-funcionarios.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
 {path: 'reserveleadership', component: ReserveLeadershipComponent, pathMatch: 'full'},
 {path: 'reservevisitor', component: ReserveVisitorComponent, pathMatch: 'full'},
 {path: 'reserveofficialvehicle', component: ReserveOfficialVehicleComponent, pathMatch: 'full'},
+{path: 'reservehistorystandarprofile', component: ReserveHistoryComponent, pathMatch: 'full'},
 {path: 'stats', component: StatsComponent, pathMatch: 'full'},
 {path: 'statsFranja', component: StatsFranjaComponent, pathMatch: 'full'},
 {path: 'statsEstacionamientos', component: StatsEstacionamientosComponent, pathMatch: 'full'},
