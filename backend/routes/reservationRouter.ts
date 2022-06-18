@@ -47,4 +47,19 @@ app.post("/visitor", (req, res) => {
     });
 });
 
+
+// endpoint: localhost:port/api/reservation/officialvehicle
+app.post("/officialvehicle", (req, res) => {
+
+    ReservationController.getInstance().createOfficialVehicleReservation(req.body["reservation"])
+    .then((data : any)=>{
+        console.log("Reservation created");
+        res.sendStatus(200);
+    })
+    .catch((err: any)=>{
+        console.log(err);
+        res.sendStatus(500); // internal error
+    });
+});
+
 export { app as reservationRouter };

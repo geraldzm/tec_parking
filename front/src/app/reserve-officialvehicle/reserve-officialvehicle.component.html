@@ -1,0 +1,46 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>Reserva ParTec</h1> 
+</div>
+<div class= "container">
+    <div class="card text-center">
+      <div class="card-header">
+        <b>Reserva</b> 
+      </div>
+      <router-outlet></router-outlet>
+      <div class="card-body p-4">
+  
+        <label style="float: left;">Modelo</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese el modelo del vehículo"[(ngModel)]="reserva.carModel">
+
+        <label style="float: left;">Color del Vehículo</label>
+        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el color"
+        [(ngModel)]="reserva.carColor">
+          <option *ngFor="let c of colors" value={{c}}>{{c}}</option>
+        </select>
+
+        <label style="float: left;">Placa</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese la placa del vehículo"[(ngModel)]="reserva.plate">
+
+        <label style="float: left;">Chófer</label>
+        <input class="form-control m-2" type="text" 
+        placeholder="Ingrese el Chófer del vehículo"[(ngModel)]="reserva.driver">
+
+        <label style="float: left;">Estacionamiento</label>
+        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el estacionamiento"
+        [(ngModel)]="reserva.parkinglotId">
+          <option *ngFor="let p of parkinglots" value={{p.id}}>{{p.name}}</option>
+        </select>
+   
+        <button class="btn btn-primary btn-block m-4" (click)= Reservar()> Reservar </button>
+
+        <label><a [routerLink]="['/home']">Volver</a></label>
+      </div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </div>

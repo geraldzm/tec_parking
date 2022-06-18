@@ -283,7 +283,7 @@ export class ReservationController {
     }
 
     /**
-    * Create a new reservation for a visitor
+    * Create a new reservation for a visitor person
     * @param {Object} reservation { reservation }
     */
     public createVisitorReservation(reservation: any): Promise<any> {
@@ -334,6 +334,48 @@ export class ReservationController {
                 return;
             }
             rs(this.checkSpacesFunctionaryAndVisitor(parking.othersSpaces, reservation));
+        });
+    }
+
+    /**
+    * Create a new reservation for a official vehicle
+    * @param {Object} reservation { reservation }
+    */
+    public createOfficialVehicleReservation(reservation: any): Promise<any> {
+
+        return new Promise(async (rs, rj) => {
+
+            //Verify that has all the necessary data
+            if (!reservation.userId || !reservation.parkinglotId || !reservation.plate || !reservation.carModel
+                || !reservation.carColor || !reservation.driver) {
+                rj("It does not have all the data"); //reject
+                return;
+            }
+
+            //verify types
+            else if (typeof (reservation.userId) != 'string' || typeof (reservation.parkinglotId) != 'string'
+                || typeof (reservation.carModel) != 'string' || typeof (reservation.plate) != 'string'
+                || typeof (reservation.carColor) != 'string' || typeof (reservation.driver) != 'string') {
+                rj("A field is incorrect");
+                return;
+            }
+
+            reservation.active = true;
+            reservation.type = 'Vehiculo Oficial';
+
+            //get user and parking and checks if exists
+            const user = await this.userRep.getUserById(reservation.userId);
+            const parking = await this.parkingRep.getParkingById(reservation.parkinglotId);
+
+            if (!user || !parking) {
+                rj("No user or parkinglot found"); // reject
+                return;
+            }
+
+            var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
+
+            if (parking.vehiclesSpaces > reservations.length) rs(this.reservationRep.createReservation(reservation));
+            else rj("There are no spaces available"); // reject
         });
     }
 }

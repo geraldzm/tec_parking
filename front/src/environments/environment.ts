@@ -23,7 +23,8 @@ export const environment = {
   parkingById : "admin/report/parkinglot?id=",
   createFunctionaryReserve : "reservation/functionary",
   createLeadershipReserve : "reservation/leadership",
-  createVisitorReserve : "reservation/visitor"
+  createVisitorReserve : "reservation/visitor",
+  createOfficialVehicleReserve : "reservation/officialvehicle"
 };
 
 /*
