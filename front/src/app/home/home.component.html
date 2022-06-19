@@ -21,9 +21,9 @@
         <button class="btn btn-primary btn-lg m-4" *ngIf="this.isAdmin" (click) = Consultar()> Consultas</button>
         <button class="btn btn-primary btn-lg m-4" (click) = Reservar()> Reservar </button>
         <button class="btn btn-primary btn-lg m-4" (click) = Historial()> Historial de Reservas </button>
+        <button class="btn btn-primary btn-lg m-4" (click) = Visitante() style="display:none" id="visitantes"> Visitantes</button>
         <button class="btn btn-primary btn-lg m-4" *ngIf="this.isAdmin" (click) = Planilla()> Planilla </button>
-        <button class="btn btn-primary btn-lg m-4" (click) = Perfil()> Perfil </button>
-  
+        <button class="btn btn-primary btn-lg m-4" (click) = Perfil()> Perfil </button>  
       </div>
     </div>
   </div>

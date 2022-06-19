@@ -80,14 +80,21 @@ export class ReservationController {
     }
 
 
+    //Validate if the standard user's scheduled reservation matches their time zone
     private checkTimeZone(reservation: any, schedule: any): Boolean {
 
+        //Cast data
         reservation.start = new Date(reservation.start);
         reservation.end = new Date(reservation.end);
 
+        //Get day
         var days = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
         var day = days[new Date(reservation.start).getDay()]
 
+        if (!schedule[day])
+            return false;
+
+        //Loop through the user's time zones on that day and check if anything matches
         for (var i = 0; i < schedule[day].length; i++) {
 
             schedule[day][i].start = new Date(schedule[day][i].start.seconds * 1000);
@@ -104,8 +111,10 @@ export class ReservationController {
         return false;
     }
 
+    //Check if reservation is whitin the parkinglot schedule
     private checkTimeZoneParking(reservation: any, schedule: any): Boolean {
 
+        //Cast and set correct dates to do the comparison
         schedule.startHour = new Date(schedule.startHour.seconds * 1000);
         schedule.endHour = new Date(schedule.endHour.seconds * 1000)
         schedule.startHour.setFullYear(reservation.start.getFullYear(), reservation.start.getMonth(), reservation.start.getDate());
@@ -119,33 +128,40 @@ export class ReservationController {
         return false;
     }
 
+    //Validate if there are available spaces "othersSpaces" at the time of reservation 
     private checkSpacesFunctionaryAndVisitor(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
+            //Consult the reservation for Funcionario type and parking
             var reservations = await this.reservationRep.getReservationsByTypeByParking('Funcionario', reservation.parkinglotId);
             var reservationNumber = 0;
 
+            //Check if exists an overlap between reservation shedule and each reservations in the query
             reservations.forEach(function (r: any) {
                 if (reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 < reservation.end.getTime())
                     reservationNumber++;
             });
 
+            //Consult the reservation for Visitante type and parking
             reservations = await this.reservationRep.getReservationsByTypeByParking('Visitante', reservation.parkinglotId);
 
+            //Check if exists an overlap between reservation shedule and each reservations in the query
             reservations.forEach(function (r: any) {
                 if (reservation.start.getTime() < r.end.seconds * 1000 && r.start.seconds * 1000 < reservation.end.getTime())
                     reservationNumber++;
             });
 
+            //Only if availableSpaces is bigger than reservationNumber, the reserve is made
             if (availableSpaces > reservationNumber) rs(this.reservationRep.createReservation(reservation));
             else rj("There are no spaces available"); // reject
         });
     }
 
-
+    //Validate if there are available spaces "disabledSpaces" at the time of reservation 
     private checkSpacesDisabledFunctionary(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
-
+            
+            //Consult the reservation for Discapacitado type and parking
             var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
             var reservationNumber = 0;
 
@@ -158,6 +174,7 @@ export class ReservationController {
                     reservationNumber++;
             });
 
+            //Only if availableSpaces is bigger than reservationNumber, the reserve is made
             if (availableSpaces > reservationNumber) rs(this.reservationRep.createReservation(reservation));
             else rj("There are no spaces available"); // reject
         });
@@ -217,24 +234,28 @@ export class ReservationController {
         });
     }
 
+    //Check day restriction for leaderships
     private checkDayLeadership(reservation: any, schedule: any): Boolean {
 
+        //Cast and set correct format for reserve date
         reservation.date = new Date(reservation.date);
         reservation.date.setDate(reservation.date.getDate() + 1);
 
         var days = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
         var day = days[reservation.date.getDay()];
 
-        if (schedule[day].length > 0)
+        //Makes the comparison
+        if (schedule[day] && schedule[day].length > 0)
             return true;
 
         return false;
     }
 
-
+    //Validate if there are available spaces "administrativeSpaces" at the time of reservation 
     private checkSpacesLeadership(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
+            //Consult the reservation for Jefatura type and parking
             var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
             var reservationNumber = 0;
 
@@ -242,18 +263,23 @@ export class ReservationController {
                 if (reservation.date.toDateString() == (new Date(r.date.seconds * 1000)).toDateString())
                     reservationNumber++;
             });
+
+            //Only if availableSpaces is bigger than reservationNumber, the reserve is made
             if (availableSpaces > reservationNumber) rs(this.reservationRep.createReservation(reservation));
             else rj("There are no spaces available"); // reject
         });
     }
 
+    //Validate if there are available spaces "disabledSpaces" at the time of reservation 
     private checkSpacesDisabledLeadership(availableSpaces: number, reservation: any): Promise<any> {
         return new Promise(async (rs, rj) => {
 
+            //Consult the reservation for Discapacitado type and parking
             var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
             var reservationNumber1 = 0;
             var reservationNumber2 = 0;
 
+            //loop through disabled leaderships, who book all day
             for (var i = 0; i < reservations.length; i++) {
 
                 if (reservations[i].date && (new Date(reservations[i].date.seconds * 1000)).toDateString() == reservation.date.toDateString()) {
@@ -261,6 +287,7 @@ export class ReservationController {
                 }
             }
 
+            //loop through disabled standar users
             for (var i = 0; i < reservations.length; i++) {
 
                 if (!reservations[i].date && (new Date(reservations[i].start.seconds * 1000)).toDateString() == reservation.date.toDateString()) {
@@ -272,6 +299,8 @@ export class ReservationController {
                         }
                     }
                 }
+
+                //If there aren't enough availables spaces, the program sends a reject
                 if (availableSpaces <= reservationNumber1 + reservationNumber2) {
                     rj("There are no spaces available"); // reject
                     return;
@@ -374,6 +403,7 @@ export class ReservationController {
 
             var reservations = await this.reservationRep.getReservationsByTypeByParking(reservation.type, reservation.parkinglotId);
 
+            //Here check if there are enough available spaces
             if (parking.vehiclesSpaces > reservations.length) rs(this.reservationRep.createReservation(reservation));
             else rj("There are no spaces available"); // reject
         });
@@ -389,12 +419,16 @@ export class ReservationController {
 
             const today = new Date();
 
+            //get the reservations of a standar user according to userId
             var reservations = await this.reservationRep.getReservationsByUser(userId);
 
+            //Make a filter and sort this array, descending by its datetimes
             reservations = reservations.filter(function (item: any) {
                 return item.start != undefined && item.type != "Visitante";
             });
-            reservations.sort(function(a:any,b:any){return b.start.seconds - a.start.seconds;});
+            reservations.sort(function (a: any, b: any) { return b.start.seconds - a.start.seconds; });
+            
+            //Simulate an inner join to get all the neccesary data for this query
             for (var i = 0; i < reservations.length; i++) {
                 reservations[i].parkinglot = await this.parkingRep.getParkingById(reservations[i].parkinglotId);
 
@@ -410,14 +444,105 @@ export class ReservationController {
 
 
     /**
+     * Get all reservations of type Vehiculo Oficial
+     * @param {Object} userId { userId }
+     */
+    public getReservationsOfficialVehicles(userId: string): Promise<any> {
+
+        return new Promise(async (rs, rj) => {
+
+            //Get the reservation and makes a filter
+            var reservations = await this.reservationRep.getReservationsByUser(userId);
+            reservations = reservations.filter(function (item: any) {
+                return item.type == 'Vehiculo Oficial';
+            });
+
+            //Simulate an inner join to get all the neccesary data for this query
+            const parkinglot = await this.parkingRep.getParkingById(reservations[0].parkinglotId);
+            reservations.forEach(function (r: any) {
+                r.parkinglot = parkinglot;
+            });
+
+            rs(reservations);
+        });
+    }
+
+
+    /**
+    * Get all reservations for an user leadership profile
+    * @param {Object} userId { userId }
+    */
+    public getReservationsLeadershipProfile(userId: string): Promise<any> {
+
+        return new Promise(async (rs, rj) => {
+
+            const today = new Date();
+
+            //get the reservations of a standar user according to userId
+            var reservations = await this.reservationRep.getReservationsByUser(userId);
+
+            //Make a filter and sort this array, descending by its datetimes
+            reservations = reservations.filter(function (item: any) {
+                return item.date != undefined && item.type != "Visitante";
+            });
+            reservations.sort(function (a: any, b: any) { return b.date.seconds - a.date.seconds; });
+
+            //Simulate an inner join to get all the neccesary data for this query
+            for (var i = 0; i < reservations.length; i++) {
+                reservations[i].parkinglot = await this.parkingRep.getParkingById(reservations[i].parkinglotId);
+
+                if (reservations[i].date.seconds * 1000 > today.getTime()) {
+                    reservations[i].mod = true;
+                }
+                reservations[i].date = (new Date(reservations[i].date.seconds * 1000)).toLocaleDateString();
+            }
+            rs(reservations);
+        });
+    }
+
+    /**
+    * Get all visitors reservations for an user
+    * @param {Object} userId { userId }
+    */
+    public getReservationsVisitors(userId: string): Promise<any> {
+
+        return new Promise(async (rs, rj) => {
+
+            const today = new Date();
+
+            //Get the reservations
+            var reservations = await this.reservationRep.getReservationsByUser(userId);
+
+            //Make a filter and sort this array, descending by its datetimes
+            reservations = reservations.filter(function (item: any) {
+                return item.start != undefined && item.type == "Visitante";
+            });
+            reservations.sort(function (a: any, b: any) { return b.start.seconds - a.start.seconds; });
+
+            //Simulate an inner join to get all the neccesary data for this query
+            for (var i = 0; i < reservations.length; i++) {
+                reservations[i].parkinglot = await this.parkingRep.getParkingById(reservations[i].parkinglotId);
+
+                if (reservations[i].start.seconds * 1000 > today.getTime()) {
+                    reservations[i].mod = true;
+                }
+                reservations[i].start = (new Date(reservations[i].start.seconds * 1000)).toLocaleDateString() + ' ' + (new Date(reservations[i].start.seconds * 1000)).toLocaleTimeString();
+                reservations[i].end = (new Date(reservations[i].end.seconds * 1000)).toLocaleDateString() + ' ' + (new Date(reservations[i].end.seconds * 1000)).toLocaleTimeString();
+            }
+            rs(reservations);
+        });
+    }
+
+    /**
     * Delete a reservation
     * @param {Object} reservationId { reservationId }
     */
-     public deleteReservation(reservationId: string): Promise<any> {
-        
+    public deleteReservation(reservationId: string): Promise<any> {
+
         return new Promise(async (rs, rj) => {
 
-            if (!reservationId || reservationId == ''){
+            //Validate data
+            if (!reservationId || reservationId == '') {
                 rj("Incorrect id reservation");
                 return;
             }

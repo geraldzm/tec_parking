@@ -35,6 +35,7 @@ export class ReserveOfficialVehicleComponent implements OnInit {
         this.user = data.response;
         //console.log(data.response);
         this.reserva.userId = this.user.id;
+        this.reserva.parkinglotId = this.user.parkinglotId;
       }             
     });
     this.parkinglots = api.callAPI({ url:environment.allParkinLots }).then((data) => {

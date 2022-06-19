@@ -7,11 +7,11 @@ import { environment } from '../../environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-reserve-history',
-  templateUrl: './reserve-history.component.html',
-  styleUrls: ['./reserve-history.component.css']
+  selector: 'app-reserve-history-visitor',
+  templateUrl: './reserve-history-visitor.component.html',
+  styleUrls: ['./reserve-history-visitor.component.css']
 })
-export class ReserveHistoryComponent implements OnDestroy,OnInit {
+export class ReserveHistoryVisitorComponent implements OnDestroy,OnInit {
 
 //Dan formato a la tabla
 dtOptions: DataTables.Settings = {};
@@ -37,16 +37,12 @@ async ngOnInit(): Promise<any> {
 
   this.user = (await api.callAPI({ url:environment.userInfo})).response;
   //console.log(this.user);
-  this.data = (await api.callAPI({ url:environment.reservesByStandarUser+this.user.id, method: "GET"})).response;
+  this.data = (await api.callAPI({ url:environment.reservesVisitors+this.user.id, method: "GET"})).response;
   
 }
 
 ngOnDestroy(): void {
   this.dtTrigger.unsubscribe();
-}
-
-Editar(id : any){
-  //this.router.navigate(['/payrollEditarFuncionario/' + JSON.stringify({id: id})]);
 }
 
 async Eliminar(id : any){
@@ -65,6 +61,10 @@ async Eliminar(id : any){
       "Ocurrió un error inesperado, intente nuevaente"
     )
   }
-  
 }
+
+Reservar(){
+    this.router.navigate(['/reservevisitor']);
+}
+
 }

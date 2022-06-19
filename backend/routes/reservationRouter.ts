@@ -76,6 +76,43 @@ app.get("/liststandarprofile?:userId", (req, res) => {
 });
 
 
+// endpoint: localhost:port/api/reservation/listofficialvehicles?userId=
+app.get("/listofficialvehicles?:userId", (req, res) => {
+    
+    ReservationController.getInstance().getReservationsOfficialVehicles(String(req.query.userId))
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        res.sendStatus(500); // internal error
+    });
+});
+
+// endpoint: localhost:port/api/reservation/listleadershipprofile?userId=
+app.get("/listleadershipprofile?:userId", (req, res) => {
+    
+    ReservationController.getInstance().getReservationsLeadershipProfile(String(req.query.userId))
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        res.sendStatus(500); // internal error
+    });
+});
+
+
+// endpoint: localhost:port/api/reservation/listvisitors?userId=
+app.get("/listvisitors?:userId", (req, res) => {
+    
+    ReservationController.getInstance().getReservationsVisitors(String(req.query.userId))
+    .then((data : any)=>{
+        res.json(data);
+    })
+    .catch((err: any)=>{
+        res.sendStatus(500); // internal error
+    });
+});
+
 // endpoint: localhost:port/api/reservation/deletereservation
 app.delete("/deletereservation", (req, res) => {
 

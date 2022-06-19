@@ -7,11 +7,11 @@ import { environment } from '../../environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-reserve-history',
-  templateUrl: './reserve-history.component.html',
-  styleUrls: ['./reserve-history.component.css']
+  selector: 'app-reserve-history-officialvehicle',
+  templateUrl: './reserve-history-officialvehicle.component.html',
+  styleUrls: ['./reserve-history-officialvehicle.component.css']
 })
-export class ReserveHistoryComponent implements OnDestroy,OnInit {
+export class ReserveHistoryOfficialVehicleComponent implements OnDestroy,OnInit {
 
 //Dan formato a la tabla
 dtOptions: DataTables.Settings = {};
@@ -36,17 +36,11 @@ async ngOnInit(): Promise<any> {
   const api = new CallAPI(this.router);
 
   this.user = (await api.callAPI({ url:environment.userInfo})).response;
-  //console.log(this.user);
-  this.data = (await api.callAPI({ url:environment.reservesByStandarUser+this.user.id, method: "GET"})).response;
-  
+  this.data = (await api.callAPI({ url:environment.reservesByOfficialVehicle+this.user.id, method: "GET"})).response;
 }
 
 ngOnDestroy(): void {
   this.dtTrigger.unsubscribe();
-}
-
-Editar(id : any){
-  //this.router.navigate(['/payrollEditarFuncionario/' + JSON.stringify({id: id})]);
 }
 
 async Eliminar(id : any){
@@ -57,7 +51,7 @@ async Eliminar(id : any){
   if(data.status === 200) {
     window.location.reload();
     Swal.fire(
-      "Se ha eliminado la reserva"
+      "Se ha eliminado el vehículo"
     )
   }
   else{
@@ -65,6 +59,5 @@ async Eliminar(id : any){
       "Ocurrió un error inesperado, intente nuevaente"
     )
   }
-  
 }
 }

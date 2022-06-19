@@ -25,7 +25,10 @@ export const environment = {
   createLeadershipReserve : "reservation/leadership",
   createVisitorReserve : "reservation/visitor",
   createOfficialVehicleReserve : "reservation/officialvehicle",
-  reservesByUser : "reservation/liststandarprofile?userId=",
+  reservesByStandarUser : "reservation/liststandarprofile?userId=",
+  reservesByOfficialVehicle : "reservation/listofficialvehicles?userId=",
+  reservesByLeadershipUser: "reservation/listleadershipprofile?userId=",
+  reservesVisitors: "reservation/listvisitors?userId=",
   deleteReserve: "reservation/deletereservation"
 };
 

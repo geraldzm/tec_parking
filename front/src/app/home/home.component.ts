@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   if(this.user.role == 'admin' || this.user.role == 'Admin'){
     this.isAdmin = true;
   }
+  this.HabilitarBotones();
   console.log("user: " + this.user.email + " " + this.user.name + " " + this.user.role + " " + this.user.profile);  
   }
 
@@ -57,10 +58,25 @@ export class HomeComponent implements OnInit {
     if (this.isAdmin || this.user.profile == 'estandar'){
       this.router.navigate(['/reservehistorystandarprofile']);
     }else if (this.user.profile == 'jefatura'){
-      
+      this.router.navigate(['/reservehistoryleadershipprofile']);
     }
     else if (this.user.profile == 'operador'){
-      
+      this.router.navigate(['/reservehistoryofficialvehicles']);
+    }
+  }
+
+
+  Visitante(){
+    this.router.navigate(['/reservehistoryvisitor']);
+  }
+
+  HabilitarBotones(){
+    
+    if (this.isAdmin || this.user.profile == 'jefatura'){
+      var input = document.getElementById('visitantes') as HTMLInputElement | null;
+      if (input){
+        input.style.display = 'inline';
+      }
     }
   }
 

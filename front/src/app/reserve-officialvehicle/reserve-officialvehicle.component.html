@@ -31,7 +31,7 @@
         placeholder="Ingrese el Chófer del vehículo"[(ngModel)]="reserva.driver">
 
         <label style="float: left;">Estacionamiento</label>
-        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el estacionamiento"
+        <select class="form-control m-2" type="datetime-local" placeholder="Seleccione el estacionamiento" disabled
         [(ngModel)]="reserva.parkinglotId">
           <option *ngFor="let p of parkinglots" value={{p.id}}>{{p.name}}</option>
         </select>
