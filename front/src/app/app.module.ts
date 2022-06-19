@@ -18,6 +18,7 @@ import { ReserveHistoryComponent } from './reserve-history/reserve-history.compo
 import { ReserveHistoryOfficialVehicleComponent } from './reserve-history-officialvehicle/reserve-history-officialvehicle.component';
 import { ReserveHistoryLeadershipComponent } from './reserve-history-leadership/reserve-history-leadership.component';
 import { ReserveHistoryVisitorComponent } from './reserve-history-visitor/reserve-history-visitor.component';
+import { StatOperadorComponent } from './stat-operador/stat-operador.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { DataTablesModule } from "angular-datatables";
 import { StatsFranjaComponent } from './stats-franja/stats-franja.component';
@@ -49,6 +50,7 @@ import { StatsFuncionarioDetalleComponent } from './stats-funcionario-detalle/st
     ReserveHistoryOfficialVehicleComponent,
     ReserveHistoryLeadershipComponent,
     ReserveHistoryVisitorComponent,
+    StatOperadorComponent,
     PayrollComponent,
     StatsFranjaComponent,
     StatsEstacionamientosComponent,

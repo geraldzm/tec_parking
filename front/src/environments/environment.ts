@@ -29,7 +29,8 @@ export const environment = {
   reservesByOfficialVehicle : "reservation/listofficialvehicles?userId=",
   reservesByLeadershipUser: "reservation/listleadershipprofile?userId=",
   reservesVisitors: "reservation/listvisitors?userId=",
-  deleteReserve: "reservation/deletereservation"
+  deleteReserve: "reservation/deletereservation",
+  parkingDetailsOperator: "report/parkingdetails?parkinglotId="
 };
 
 /*

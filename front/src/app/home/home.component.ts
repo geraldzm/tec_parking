@@ -78,10 +78,20 @@ export class HomeComponent implements OnInit {
         input.style.display = 'inline';
       }
     }
+    if (this.user.profile == 'operador'){
+      var input = document.getElementById('operador') as HTMLInputElement | null;
+      if (input){
+        input.style.display = 'inline';
+      }
+    }
   }
 
   logout(){
     this.router.navigate(['/login']);
+  }
+
+  ConsultaOperador(){
+    this.router.navigate(['/statOperador']);
   }
 
 }

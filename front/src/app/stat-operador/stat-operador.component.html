@@ -1,0 +1,103 @@
+<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html>
+
+</html>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="header">
+    <h1>Detalle Estacionamiento Operador</h1>
+</div>
+
+<body>
+    <br>
+    <div class="form">
+        <div class="card text-center">
+            <div class="card-header">
+                <b>Filtrar Por Rango</b>
+            </div>
+            <div class="card-body p-4">
+                <div class="form" style="margin-bottom: 2%;">
+                        <div class="col-auto">
+                            <input class="form-control" type="datetime-local" [(ngModel)]="filter.start">
+                            <label>Entrada</label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-control" type="datetime-local"[(ngModel)]="filter.end">
+                            <label>Salida</label>
+                        </div>
+                        <div class="col-auto">
+                            <button (click)= Filtrar() class="btn btn-secondary mb-3">Filtrar Por Rango</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+    <div class="container mt-2">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+            class="table table-bordered table-sm row-border hover">
+            <thead>
+                <tr>
+                    <th>Ubicación</th>
+                    <td> {{parking.building}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <td> {{parking.name}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Discapacitados</th>
+                    <td> {{parking.disabledSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Discapacitados Ocupados</th>
+                    <td> {{parking.busyDisabledSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Jefatura</th>
+                    <td> {{parking.administrativeSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Jefatura Ocupados</th>
+                    <td> {{parking.busyAdministrativeSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Vehiculos Oficiales</th>
+                    <td> {{parking.vehiclesSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Vehiculos Oficiales Ocupados</th>
+                    <td> {{parking.busyVehiclesSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Funcionarios Estandar y Visitantes</th>
+                    <td> {{parking.othersSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Espacios para Funcionarios Estandar y Visitantes Ocupados</th>
+                    <td> {{parking.busyOthersSpaces}}</td>
+                </tr>
+                <tr>
+                    <th>Horario de Apertura</th>
+                    <td> {{parking.schedule.startHour}}</td>
+                </tr>
+                <tr>
+                    <th>Horario de Salida</th>
+                    <td> {{parking.schedule.endHour}}</td>
+                </tr>
+                <tr>
+                    <th>Tipo</th>
+                    <td> {{parking.type}}</td>
+                </tr>
+                <tr>
+                    <th>Teléfono</th>
+                    <td> {{parking.phone}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre Propietario</th>
+                    <td> {{parking.ownerName}}</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>

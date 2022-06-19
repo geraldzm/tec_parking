@@ -5,6 +5,7 @@ import { tokenMiddlewareValidation } from '../middleware/middlewareAuth';
 import { parkingRouter } from './parkingRouter';
 import { userRouter } from './userRouter';
 import { reservationRouter } from './reservationRouter';
+import { reportUserRouter } from './reportUsersRouter';
 
 class Routes {
 
@@ -27,6 +28,7 @@ class Routes {
         this.express.use('/auth', authRouter);
         
         this.express.use('/reservation', tokenMiddlewareValidation, reservationRouter);
+        this.express.use('/report', tokenMiddlewareValidation, reportUserRouter);
     }
 }
 
