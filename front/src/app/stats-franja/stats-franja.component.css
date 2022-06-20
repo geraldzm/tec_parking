@@ -19,6 +19,20 @@
     color: white;
 }
 
+.div-1 {
+  background-color:  #048304;
+}
+.div-2 {
+  background-color:  #9bcb33;
+}
+.div-3 {
+  background-color:  #fbfb04;
+}
+.div-4 {
+  background-color:  #ff0d0d;
+}
+
+
 ul {
     list-style-type: none;
     margin: 0;
